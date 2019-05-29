@@ -95,9 +95,9 @@
                         <div class="btn" style="border-radius: 10px">&gt;&gt;</div>
                     </div>
                 </li>
-                <li class="mouth1"><span class="one"><a href="RetrievePassword.jsp">忘记密码</a> </span><span class="one"
+                <li class="mouth1"><span class="one"><a href="/retrievePassword">忘记密码</a> </span><span class="one"
                                                                                                           style="margin-left: 200px;"><a
-                        href="register.jsp">注册</a> </span></li>
+                        href="/register">注册</a> </span></li>
                 <li class="dl"><input type="button" value="登录" onclick="yanzheng()"></li>
             </ul>
         </div>
