@@ -81,7 +81,7 @@
 <div class="index-banner">
     <div class="index-banner1">
         <ul>
-            <li><a href="">首页</a></li>
+            <li><a href="index">首页</a></li>
             <li><a href="clxjmain">丛林</a></li>
             <li><a href="JungleList">闲居</a></li>
             <li><a href="ConEntryPage.jsp">忏悔</a></li>

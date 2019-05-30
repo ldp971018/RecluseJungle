@@ -57,32 +57,30 @@ function Allregister(){
         <div class="gjcl">
             <div class="lbttj">
                 <div class="tj-top">
-                    <span id="gn" <c:if test="${citytype ==true}"> class="gnxjac"</c:if> <c:if test="${citytype ==null}"> class="gnxjac"</c:if> onclick="gn()">国内闲居</span ><span id="gj" <c:if test="${citytype ==true}"> class="gnxjac"</c:if> onclick="gj()">国际闲居</span>
+                    <span id="gn" <c:if test="${clxjmain.type1 ==true}"> class="gnxjac"</c:if> <c:if test="${clxjmain.type1 ==null}"> class="gnxjac"</c:if> onclick="gn()">国内闲居</span ><span id="gj" <c:if test="${clxjmain.type1 ==false}"> class="gnxjac"</c:if> onclick="gj()">国际闲居</span>
                 </div> 
                 <div class="tj-bottom">
-                    <div <c:if test="${citytype ==true}">class="xj"</c:if><c:if test="${citytype ==false}">class="xj none"</c:if> <c:if test="${citytype ==null}"> class="xj"</c:if>>
+                    <div <c:if test="${clxjmain.type1 ==true}">class="xj"</c:if><c:if test="${clxjmain.type1 ==false}">class="xj none"</c:if> <c:if test="${clxjmain.type1 ==null}"> class="xj"</c:if>>
                      <form action="selectJungle" method="post" onsubmit="getCity('10',ones)">
-                         <input type="hidden" id="type1" name="type1" value="1"><%--设置国内外--%>
-                         <input type="hidden" name="type2" value="0"><%--闲居--%>
+                         <input type="hidden" id="type1" name="type1" <c:if test="${clxjmain.type1 ==true}"> value="true"</c:if> <c:if test="${clxjmain.type1 ==null}"> value="true"</c:if> <c:if test="${clxjmain.type1 ==false}"> value="false"</c:if>  ><%--设置国内外--%>
+                         <input type="hidden" name="type2" value="false"><%--闲居--%>
                         <table>
                             <tr>
                                 <td>目的地</td>
-                                <td class="sec "><input type="text"  <c:if test="${cityzw!=null }">value="${cityzw }"</c:if>  <c:if test="${citypy!=null }"> data-wholename="${citypy }"</c:if><c:if test="${citypy==null }"> data-wholename=""</c:if> placeholder="请输入城市名" id="ones"></td>
-                                			<input type="hidden" name="clxjmain.belong_city" id="city10" <c:if test="${cityzw!=null }">value="${cityzw }"</c:if>> 
-                                        	<input type="hidden" name="clxjmain.type1" value="true"/>
-                                        	<input type="hidden" name="clxjmain.type2" value="false"/>
+                                <td class="sec "><input type="text"  <c:if test="${clxjmain.belongCity!=null }">value="${clxjmain.belongCity }"</c:if>  <c:if test="${citypy!=null }"> data-wholename="${citypy }"</c:if><c:if test="${citypy==null }"> data-wholename=""</c:if> placeholder="请输入城市名" id="ones"></td>
+                                			<input type="hidden" name="clxjmain.belong_city" id="city10" <c:if test="${clxjmain.belongCity!=null }">value="${clxjmain.belongCity }"</c:if>>
                             </tr>
                             <tr>
                                 <td>入住</td>
-                                <td><p><input name="createtime" class="laydate-icon" id="demo1" <c:if test="${startTime !=null}">value="${startTime }"</c:if><c:if test="${startTime ==null}">value="2018-2-3"</c:if> >
+                                <td><p><input name="createtime" class="laydate-icon" id="demo1" <c:if test="${clxjmain.createtime !=null}">value="${clxjmain.createtime }"</c:if><c:if test="${clxjmain.createtime ==null}">value="2018-02-03"</c:if> >
                                 </p>
 
-                                    <p>退房<input name="endTime" class="laydate-icon" id="demo2" <c:if test="${endTime !=null}">value="${endTime }"</c:if><c:if test="${endTime ==null}">value="2019-1-1"</c:if>>
+                                    <p>退房<input name="endTime" class="laydate-icon" id="demo2" <c:if test="${endTime !=null}">value="${endTime }"</c:if><c:if test="${endTime ==null}">value="2019-01-01"</c:if>>
                                     </p></td>
                             </tr>
                             <tr>  
                                 <td>关键词</td>
-                                <td class="sec"><input type="text" name="name"   <c:if test="${cityname==null }">placeholder="请输入地标/商圈/景点"</c:if> <c:if test="${cityname!=null }">value="${cityname }"</c:if> id="gnxjkey" ></td>
+                                <td class="sec"><input type="text" name="name"   <c:if test="${clxjmain.name==null }">placeholder="请输入地标/商圈/景点"</c:if> <c:if test="${clxjmain.name!=null }">value="${clxjmain.name }"</c:if> id="gnxjkey" ></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -100,10 +98,10 @@ function Allregister(){
 <c:forEach items="${JungleList}" var="x">
     <div class="lby-xy">
         <div class="lby-left">
-            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${x.id}"><img width="296" height="188" src=${clxjBackurl }${x.firstImgMin }></a>
+            <a href="JungleDetails?id=${x.id}"><img width="296" height="188" src=${clxjBackurl }${x.firstImgMin }></a>
         </div>
         <div class="lby-right">
-            <p class="title"><a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${x.id}">${x.name }</a></p>
+            <p class="title"><a href="JungleDetails?id=${x.id}">${x.name }</a></p>
             <p class="con">${x.introduction }</p>
             <p class="address">位  置:${x.address }</p>
         </div>
@@ -119,7 +117,7 @@ function Allregister(){
                 </p>
                 <p class="yd">
                     <span class="mony">${x.price }<i>/晚</i></span>
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${x.id}"><span class="dj">预定</span></a>
+                    <a href="JungleDetails?id=${x.id}"><span class="dj">预定</span></a>
                 </p>
             </div>
         </div>
@@ -144,14 +142,14 @@ function Allregister(){
     function gn() {
         var arr=document.getElementById("gn");
         var arr1=document.getElementById("gj");
-        document.getElementById("type1").value=1;
+        document.getElementById("type1").value='true';
         arr.classList.add("gnxjac");
         arr1.classList.remove("gnxjac");
     }
     function gj() {
         var arr=document.getElementById("gn");
         var arr1=document.getElementById("gj");
-        document.getElementById("type1").value=0;
+        document.getElementById("type1").value='false';
         arr.classList.remove("gnxjac");
         arr1.classList.add("gnxjac");
     }

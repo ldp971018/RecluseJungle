@@ -58,21 +58,21 @@
         <div class="nTab">
             <div class="TabTitle">
                 <ul id="myTab">
-                    <li class="active normal"><p class="selected1"></p>丛林</li>
-                    <li class=" normal"><p class="selected0"></p>闲居</li>
+                    <li id="leftCL" class="active normal" onclick="leftCL()"><p class="selected1"></p>丛林</li>
+                    <li id="leftXJ" class=" normal" onclick="leftXJ()"><p class="selected0"></p>闲居</li>
 
                 </ul>
             </div>
             <div class="TabContent">
-                <div class="myTab_Content">
+                <div id="rightCL" class="myTab_Content">
                     <div class="lbttj">
                         <div class="tj-top">
-                            <span class="gnxjac">国内丛林</span><span>国际丛林</span>
+                            <span id="gncl"  class="gnxjac" onclick="gncl()">国内丛林</span><span id="gjcl"  onclick="gjcl()">国际丛林</span>
                         </div>
                         <div class="tj-bottom tj-bottom2">
                             <div class="xj">
                                 <!-- 国内丛林 -->
-                                <form action="<%=path %>/clxjmain!selClOfPage.action" method="post"
+                                <form action="selectCL" method="post"
                                       onsubmit="getCity('11',yyqx)">
                                     <table>
                                         <tr>
@@ -80,8 +80,8 @@
                                             <td class="sec"><input type="text" placeholder="请输入城市名" id="yyqx"
                                                                    data-wholename=""></td>
                                             <input type="hidden" name="clxjmain.belong_city" id="city11"/>
-                                            <input type="hidden" name="clxjmain.type1" value="true"/>
-                                            <input type="hidden" name="clxjmain.type2" value="true"/>
+                                            <input type="hidden" id="CLtype1" name="type1" value="true"/>
+                                            <input type="hidden" id="CLtype2" name="type2" value="true"/>
                                         </tr>
                                         <tr>
                                             <td>入住</td>
@@ -103,51 +103,18 @@
                                     </table>
                                 </form>
                             </div>
-                            <div class="xj none">
-                                <!-- 国外丛林 -->
-                                <form action="<%=path %>/clxjmain!selClOfPage.action" method="post"
-                                      onsubmit="getCity('01',jackson)">
-                                    <table>
-                                        <tr>
-                                            <td>目的地</td>
-                                            <td class="sec"><input type="text" placeholder="请输入城市名" id="jackson"
-                                                                   data-wholename=""></td>
-                                            <input type="hidden" name="clxjmain.belong_city" id="city01"/>
-                                            <input type="hidden" name="clxjmain.type1" value="false"/>
-                                            <input type="hidden" name="clxjmain.type2" value="true"/>
-                                        </tr>
-                                        <tr>
-                                            <td>入住</td>
-                                            <td><p><input name="startTime" class="laydate-icon ts" id="demo7"
-                                                          value="2019-1-1"></p>
-
-                                                <p>退房：<input name="endTime" class="laydate-icon" id="demo8"
-                                                             value="2019-8-12"></p></td>
-                                        </tr>
-                                        <tr>
-                                            <td>关键词</td>
-                                            <td class="sec"><input type="text" name="clxjmain.name"
-                                                                   placeholder="请输入地标/商圈/景点" id="gjclkey"></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="ses sec"><input type="submit" value="搜索"></td>
-                                        </tr>
-                                    </table>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="myTab_Content none">
+                <div id="rightXJ" class="myTab_Content none">
                     <div class="lbttj">
                         <div class="tj-top">
-                            <span class="gnxjac">国内闲居</span><span>国际闲居</span>
+                            <span id="gnxj"  class="gnxjac" onclick="gnxj()">国内闲居</span><span  id="gjxj" onclick="gjxj()">国际闲居</span>
                         </div>
                         <div class="tj-bottom tj-bottom1">
                             <div class="xj">
                                 <!-- 国内闲居 -->
-                                <form action="<%=path %>/clxjmain!selXjOfPage.action" method="post"
+                                <form action="selectJungle" method="post"
                                       onsubmit="getCity('10',zmx)">
                                     <table>
                                         <tr>
@@ -155,8 +122,8 @@
                                             <td class="sec ">
                                                 <input type="text" placeholder="请输入城市名" id="zmx" data-wholename="">
                                                 <input type="hidden" name="clxjmain.belong_city" id="city10"/>
-                                                <input type="hidden" name="clxjmain.type1" value="true"/>
-                                                <input type="hidden" name="clxjmain.type2" value="false"/>
+                                                <input type="hidden" id="XJtype1" name="type1" value="true"/>
+                                                <input type="hidden" id="XJtype2" name="type2" value="false"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -180,40 +147,6 @@
                                     </table>
                                 </form>
                             </div>
-                            <div class="xj none">
-                                <!-- 国外闲居 -->
-                                <form action="<%=path %>/clxjmain!selXjOfPage.action" method="post"
-                                      onsubmit="getCity('00',fromcity)">
-                                    <table>
-                                        <tr>
-                                            <td>目的地</td>
-                                            <td class="sec"><input type="text" placeholder="请输入城市名" id='fromcity'
-                                                                   data-wholename=""></td>
-                                            <input type="hidden" name="clxjmain.belong_city" id="city00"/>
-                                            <input type="hidden" name="clxjmain.type1" value="false"/>
-                                            <input type="hidden" name="clxjmain.type2" value="false"/>
-                                        </tr>
-                                        <tr>
-                                            <td>入住</td>
-                                            <td><p><input name="startTime" class="laydate-icon ts" id="demo3"
-                                                          value="2019-2-12"></p>
-
-                                                <p>退房：<input name="endTime" name="startTime" class="laydate-icon"
-                                                             id="demo4" value="2019-9-12"></p></td>
-                                        </tr>
-                                        <tr>
-                                            <td>关键词</td>
-                                            <td class="sec"><input name="clxjmain.name" type="text"
-                                                                   placeholder="请输入地标/商圈/景点" id="gjxjkey"></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="ses sec"><input type="submit" value="搜索"><!-- <a
-                                                href="#"><img src="images/06.png">所有闲居</a></td>-->
-                                        </tr>
-                                    </table>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -223,7 +156,7 @@
 </div>
 <div class="index-content">
     <div id="a1" class="index-recommended">
-        <p class="rmtj">热门推荐<i>明月松间照，清泉石上流</i></p>
+        <p class="rmtj">热门推荐${ceshi}<i>明月松间照，清泉石上流</i></p>
 
         <div class="taq1">
             <div>
@@ -521,8 +454,56 @@
 
 <%--<%@ include  file="/qiantai/bottom.jsp"%>--%>
 <script src="${path}/static/js"></script>
-<script src="${path}/js/scorll.js"></script>
+<script src="${path}/static/js/scorll.js"></script>
 <script type="text/javascript">
+    function leftCL() {
+        var arr=document.getElementById("leftCL");
+        var arr1=document.getElementById("leftXJ");
+        var rightCL=document.getElementById("rightCL");
+        var rightXJ=document.getElementById("rightXJ");
+        rightCL.classList.remove("none");
+        rightXJ.classList.add("none");
+        arr.classList.add("active");
+        arr1.classList.remove("active");
+    }
+    function leftXJ() {
+        var arr=document.getElementById("leftCL");
+        var arr1=document.getElementById("leftXJ");
+        var rightCL=document.getElementById("rightCL");
+        var rightXJ=document.getElementById("rightXJ");
+        rightXJ.classList.remove("none");
+        rightCL.classList.add("none");
+        arr1.classList.add("active");
+        arr.classList.remove("active");
+    }
+    function gncl() {
+        var arr=document.getElementById("gncl");
+        var arr1=document.getElementById("gjcl");
+        document.getElementById("CLtype1").value='true';
+        arr.classList.add("gnxjac");
+        arr1.classList.remove("gnxjac");
+    }
+    function gjcl() {
+        var arr=document.getElementById("gncl");
+        var arr1=document.getElementById("gjcl");
+        document.getElementById("CLtype1").value='false';
+        arr.classList.remove("gnxjac");
+        arr1.classList.add("gnxjac");
+    }
+    function gnxj() {
+        var arr=document.getElementById("gnxj");
+        var arr1=document.getElementById("gjxj");
+        document.getElementById("XJtype1").value='true';
+        arr.classList.add("gnxjac");
+        arr1.classList.remove("gnxjac");
+    }
+    function gjxj() {
+        var arr=document.getElementById("gnxj");
+        var arr1=document.getElementById("gjxj");
+        document.getElementById("XJtype1").value='false';
+        arr.classList.remove("gnxjac");
+        arr1.classList.add("gnxjac");
+    }
     /*
         function(){
             laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
@@ -548,32 +529,33 @@
     interlabelFromcity ['国际城市'] = new Array();
     var hotList = new Array(14, 15, 16, 17, 18, 19);
     $.ajax({
-        type: "post",
-        url: "<%=path %>/city!selCityType.action",
+        type : "post",
+        url : "selectCityType",
         data: {},
         dataType: "json",
-        async: false,
-        success: function (results) {
-            for (var i = 0; i < results.citytypes.rm.length; i++) {
-                labelFromcity['热门城市'][i] = results.citytypes.rm[i];
+        async : false,
+        success : function(results){
+            console.log(results);
+            for(var i =0;i<results.rm.length;i++){
+                labelFromcity['热门城市'][i]=results.rm[i].cid;
             }
-            for (var i = 0; i < results.citytypes.a_f.length; i++) {
-                labelFromcity[['A-F']][i] = results.citytypes.a_f[i];
+            for(var i =0;i<results.a_f.length;i++){
+                labelFromcity[['A-F']][i]=results.a_f[i].cid;
             }
-            for (var i = 0; i < results.citytypes.g_j.length; i++) {
-                labelFromcity[['G-J']][i] = results.citytypes.g_j[i];
+            for(var i =0;i<results.g_j.length;i++){
+                labelFromcity[['G-J']][i]=results.g_j[i].cid;
             }
-            for (var i = 0; i < results.citytypes.k_n.length; i++) {
-                labelFromcity[['K-N']][i] = results.citytypes.k_n[i];
+            for(var i =0;i<results.k_n.length;i++){
+                labelFromcity[['K-N']][i]=results.k_n[i].cid;
             }
-            for (var i = 0; i < results.citytypes.o_w.length; i++) {
-                labelFromcity[['O-W']][i] = results.citytypes.o_w[i];
+            for(var i =0;i<results.o_w.length;i++){
+                labelFromcity[['O-W']][i]=results.o_w[i].cid;
             }
-            for (var i = 0; i < results.citytypes.x_z.length; i++) {
-                labelFromcity[['X-Z']][i] = results.citytypes.x_z[i];
+            for(var i =0;i<results.x_z.length;i++){
+                labelFromcity[['X-Z']][i]=results.x_z[i].cid;
             }
-            for (var i = 0; i < results.citytypes.gjcs.length; i++) {
-                interlabelFromcity ['国际城市'][i] = results.citytypes.gjcs[i];
+            for(var i =0;i<results.gjcs.length;i++){
+                interlabelFromcity ['国际城市'][i]=results.gjcs[i].cid;
             }
         }
     });
@@ -581,7 +563,7 @@
     //新方法，加载页面的时候把所有的城市的数据加载出来
     $.ajax({
         type: "post",
-        url: "<%=path %>/city!initializeCity.action",
+        url: "selectCityTypeAll",
         data: {},
         dataType: "json",
         async: false,

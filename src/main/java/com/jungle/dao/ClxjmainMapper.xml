@@ -115,10 +115,10 @@
     <include refid="Base_Column_List" />
     from clxjmain
     <where>
-      <if test="type1!=null and type1!=''">
+      <if test="type1!=null">
         and type1=${type1}
       </if>
-      <if test="type2!=null and type2!=''">
+      <if test="type2!=null">
         and type2=${type2}
       </if>
       <if test="belongCity!=null and belongCity!=''">

@@ -61,16 +61,14 @@
                 </div>
                 <div class="tj-bottom">
                     <div <c:if test="${citytype ==true}">class="xj"</c:if><c:if test="${citytype ==false}">class="xj none"</c:if> <c:if test="${citytype ==null}"> class="xj"</c:if>>
-                        <form action="selectJungle" method="post" onsubmit="getCity('10',ones)">
-                            <input type="hidden" id="type1" name="type1" value="1"><%--设置国内外--%>
-                            <input type="hidden" name="type2" value="1"><%--丛林--%>
+                        <form action="selectCL" method="post" onsubmit="getCity('10',ones)">
+                            <input type="hidden" id="type1" name="type1" value="true"><%--设置国内外--%>
+                            <input type="hidden" name="type2" value="true"><%--丛林--%>
                             <table>
                                 <tr>
                                     <td>目的地</td>
                                     <td class="sec "><input type="text"  <c:if test="${cityzw!=null }">value="${cityzw }"</c:if>  <c:if test="${citypy!=null }"> data-wholename="${citypy }"</c:if><c:if test="${citypy==null }"> data-wholename=""</c:if> placeholder="请输入城市名" id="ones"></td>
                                     <input type="hidden" name="clxjmain.belong_city" id="city10" <c:if test="${cityzw!=null }">value="${cityzw }"</c:if>>
-                                    <input type="hidden" name="clxjmain.type1" value="true"/>
-                                    <input type="hidden" name="clxjmain.type2" value="false"/>
                                 </tr>
                                 <tr>
                                     <td>入住</td>
@@ -144,14 +142,14 @@
     function gn() {
         var arr=document.getElementById("gn");
         var arr1=document.getElementById("gj");
-        document.getElementById("type1").value=1;
+        document.getElementById("type1").value='true';
         arr.classList.add("gnxjac");
         arr1.classList.remove("gnxjac");
     }
     function gj() {
         var arr=document.getElementById("gn");
         var arr1=document.getElementById("gj");
-        document.getElementById("type1").value=0;
+        document.getElementById("type1").value='false';
         arr.classList.remove("gnxjac");
         arr1.classList.add("gnxjac");
     }

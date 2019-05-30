@@ -122,4 +122,11 @@ public class pageController {
     public String foundJzfzlist() {
         return "qiantai/FoundJzfzlist";
     }
+    /**
+     * 点击首页
+     */
+    @RequestMapping("index")
+    public String index(){
+        return "redirect:/index";
+    }
 }

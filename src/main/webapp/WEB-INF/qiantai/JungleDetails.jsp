@@ -11,12 +11,12 @@
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6ckv1PGt7okn9XhxK6ris4IB"></script>
      <title>丛林闲居</title>
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.ad-gallery.js"></script>
-    <script type="text/javascript" src="js/zzsc.js"></script>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" type="text/css" href="style/jquery.ad-gallery.css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.ad-gallery.js"></script>
+    <script type="text/javascript" src="/static/js/zzsc.js"></script>
+    <link rel="stylesheet" href="/static/style/cy.css">
+    <link rel="stylesheet" href="/static/style/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style/jquery.ad-gallery.css">
 	<style rel="stylesheet">  
 .pagination {font-family: Tahoma;font-size: 12px;height: 22px;margin: 5px 10px;text-align: right;}  
 .pagination a,.page-cur,.page-start,.page-end,.page-disabled,.page-skip {  
@@ -127,8 +127,8 @@ function loginOut(){
                 </div> -->  
                <div class="tk rjj"> 
                     <p>日均价：<i style="font-size: 25px;"><c:if test="${clxjmainJson.price ==0}">随缘</c:if><c:if test="${clxjmainJson.price !=0}">${clxjmainJson.price}</c:if></i>
-                    <c:if test="${sessionUser!=null }"><a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${clxjmainJson.id}&isOrder=2">立即预定</a> </c:if>
-                     <c:if test="${sessionUser==null }"><a href="#" onclick="Alllogin()">请先登录</a> </c:if> 
+                    <c:if test="${regUser!=null }"><a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${clxjmainJson.id}&isOrder=2">立即预定</a> </c:if>
+                     <c:if test="${regUser==null }"><a href="#" onclick="Alllogin()">请先登录</a> </c:if>
                      </p> 
                 </div> 
                 <div style="margin-top: 100px;">       
@@ -209,10 +209,10 @@ function loginOut(){
                             <tr>
                                 <td></td>
                                 <td>
-                                	<c:if test="${sessionUser !=null}">
+                                	<c:if test="${regUser !=null}">
                                 		<input type="button" value="提交点评" onclick="subForm()">
                                 	</c:if>
-                                	<c:if test="${sessionUser ==null}" >
+                                	<c:if test="${regUser ==null}" >
                                 		<input type="button" value="请先登录" onclick="Alllogin()">
                                 	</c:if>
                                 </td>
