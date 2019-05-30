@@ -42,7 +42,19 @@ public class Jungle_Controller {
         return map;
     }
     /**
-     * 根据条件搜索丛闲居信息
+     * 根据条件搜索丛林信息
+     * @param clxjmain 实体类对象
+     * @param request
+     * @return
+     */
+    @RequestMapping("selectCL")
+    public String selectCL(Clxjmain clxjmain, HttpServletRequest request) throws ParseException {
+        List<Clxjmain> list=jungle_service.selectJungle(clxjmain);
+        request.setAttribute("JungleList",list);
+        return "qiantai/clxjmain";
+    }
+    /**
+     * 根据条件搜索闲居信息
      * @param clxjmain 实体类对象
      * @param request
      * @return
