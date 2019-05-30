@@ -97,7 +97,7 @@
             <div class="dl"><a href="/login">登录</a><i>|</i><a href="/register">注册</a></div>
         </c:if>
         <c:if test="${regUser!=null }">
-            <div class="index-grzx "><a href="UserPersonal.jsp">个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;<i>|</i>&nbsp;&nbsp;&nbsp;&nbsp;<a
+            <div class="index-grzx "><a href="userPersonal">个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;<i>|</i>&nbsp;&nbsp;&nbsp;&nbsp;<a
                     href="/logout">退出</a></div>
         </c:if>
     </div>
