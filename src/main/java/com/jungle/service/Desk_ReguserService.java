@@ -8,7 +8,7 @@ import com.jungle.bean.Reguser;
  * @File Desk_ReguserService
  * 前台业务实现功能 接口
  **/
-public interface Desk_RegUserService {
+public interface Desk_ReguserService {
     //前台登录验证
     public Reguser login(Reguser reguser);
 
@@ -20,5 +20,10 @@ public interface Desk_RegUserService {
 
     //修改用户密码（忘记密码）
     int updatePwd(Reguser reguser);
-}
 
+    //修改用户资料
+    int updUser(Reguser reguser);
+
+    //修改密码
+    int updUserPwd(String p, Reguser reguser, String oldpwd);
+}

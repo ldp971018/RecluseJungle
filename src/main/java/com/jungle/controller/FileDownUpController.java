@@ -28,7 +28,7 @@ public class FileDownUpController {
         // 把二进制流放入到响应体中
         ServletOutputStream os = resp.getOutputStream();
         // 得到文件夹的路径
-        String path = req.getServletContext().getRealPath("updataFile");
+        String path = req.getServletContext().getRealPath("downloadFile");
         System.out.println(path);
         // 得到一个文件
         File file = new File(path, fileName);

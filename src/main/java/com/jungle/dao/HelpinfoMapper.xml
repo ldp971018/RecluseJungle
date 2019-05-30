@@ -1,127 +1,131 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jungle.dao.HelpinfoMapper" >
-  <resultMap id="BaseResultMap" type="com.jungle.bean.Helpinfo" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="BIT" />
-    <result column="age" property="age" jdbcType="INTEGER" />
-    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
-    <result column="phonenum" property="phonenum" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="income" property="income" jdbcType="DECIMAL" />
-    <result column="basicliving" property="basicliving" jdbcType="BIT" />
-    <result column="applymoney" property="applymoney" jdbcType="DECIMAL" />
-    <result column="fileurl" property="fileurl" jdbcType="VARCHAR" />
-    <result column="applycontent" property="applycontent" jdbcType="VARCHAR" />
-    <result column="applystatus" property="applystatus" jdbcType="INTEGER" />
-    <result column="applytype" property="applytype" jdbcType="BIT" />
-    <result column="time" property="time" jdbcType="VARCHAR" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
-    <result column="applymoneyusertime" property="applymoneyusertime" jdbcType="VARCHAR" />
-    <result column="vouchname" property="vouchname" jdbcType="VARCHAR" />
-    <result column="vouchidcard" property="vouchidcard" jdbcType="VARCHAR" />
-    <result column="vouchaddress" property="vouchaddress" jdbcType="VARCHAR" />
-    <result column="vouchcompany" property="vouchcompany" jdbcType="VARCHAR" />
-    <result column="vouchphonenum" property="vouchphonenum" jdbcType="VARCHAR" />
-    <result column="vouchmobile" property="vouchmobile" jdbcType="VARCHAR" />
-    <result column="vouchdddress" property="vouchdddress" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.jungle.dao.HelpinfoMapper">
+    <resultMap id="BaseResultMap" type="com.jungle.bean.Helpinfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="BIT"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="phonenum" property="phonenum" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="income" property="income" jdbcType="DECIMAL"/>
+        <result column="basicliving" property="basicliving" jdbcType="BIT"/>
+        <result column="applymoney" property="applymoney" jdbcType="DECIMAL"/>
+        <result column="fileurl" property="fileurl" jdbcType="VARCHAR"/>
+        <result column="applycontent" property="applycontent" jdbcType="VARCHAR"/>
+        <result column="applystatus" property="applystatus" jdbcType="INTEGER"/>
+        <result column="applytype" property="applytype" jdbcType="BIT"/>
+        <result column="time" property="time" jdbcType="VARCHAR"/>
+        <!--<result column="uid" property="reguser.id" jdbcType="INTEGER"/>-->
+        <result column="applymoneyusertime" property="applymoneyusertime" jdbcType="VARCHAR"/>
+        <result column="vouchname" property="vouchname" jdbcType="VARCHAR"/>
+        <result column="vouchidcard" property="vouchidcard" jdbcType="VARCHAR"/>
+        <result column="vouchaddress" property="vouchaddress" jdbcType="VARCHAR"/>
+        <result column="vouchcompany" property="vouchcompany" jdbcType="VARCHAR"/>
+        <result column="vouchphonenum" property="vouchphonenum" jdbcType="VARCHAR"/>
+        <result column="vouchmobile" property="vouchmobile" jdbcType="VARCHAR"/>
+        <result column="vouchdddress" property="vouchdddress" jdbcType="VARCHAR"/>
+        <association property="reguser" column="uid"
+                     select="com.jungle.dao.ReguserMapper.selectByPrimaryKey"></association>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, name, sex, age, idcard, phonenum, email, address, income, basicliving, applymoney, 
     fileurl, applycontent, applystatus, applytype, time, uid, applymoneyusertime, vouchname, 
     vouchidcard, vouchaddress, vouchcompany, vouchphonenum, vouchmobile, vouchdddress
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jungle.bean.HelpinfoExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from helpinfo
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from helpinfo
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jungle.bean.HelpinfoExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from helpinfo
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from helpinfo
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from helpinfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jungle.bean.HelpinfoExample" >
-    delete from helpinfo
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jungle.bean.Helpinfo" >
+    <delete id="deleteByExample" parameterType="com.jungle.bean.HelpinfoExample">
+        delete from helpinfo
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.jungle.bean.Helpinfo">
     insert into helpinfo (id, name, sex, age, 
       idcard, phonenum, email, 
       address, income, basicliving, 
@@ -141,362 +145,362 @@
       #{vouchphonenum,jdbcType=VARCHAR}, #{vouchmobile,jdbcType=VARCHAR}, #{vouchdddress,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jungle.bean.Helpinfo" >
-    insert into helpinfo
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="age != null" >
-        age,
-      </if>
-      <if test="idcard != null" >
-        idcard,
-      </if>
-      <if test="phonenum != null" >
-        phonenum,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="income != null" >
-        income,
-      </if>
-      <if test="basicliving != null" >
-        basicliving,
-      </if>
-      <if test="applymoney != null" >
-        applymoney,
-      </if>
-      <if test="fileurl != null" >
-        fileurl,
-      </if>
-      <if test="applycontent != null" >
-        applycontent,
-      </if>
-      <if test="applystatus != null" >
-        applystatus,
-      </if>
-      <if test="applytype != null" >
-        applytype,
-      </if>
-      <if test="time != null" >
-        time,
-      </if>
-      <if test="uid != null" >
-        uid,
-      </if>
-      <if test="applymoneyusertime != null" >
-        applymoneyusertime,
-      </if>
-      <if test="vouchname != null" >
-        vouchname,
-      </if>
-      <if test="vouchidcard != null" >
-        vouchidcard,
-      </if>
-      <if test="vouchaddress != null" >
-        vouchaddress,
-      </if>
-      <if test="vouchcompany != null" >
-        vouchcompany,
-      </if>
-      <if test="vouchphonenum != null" >
-        vouchphonenum,
-      </if>
-      <if test="vouchmobile != null" >
-        vouchmobile,
-      </if>
-      <if test="vouchdddress != null" >
-        vouchdddress,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=BIT},
-      </if>
-      <if test="age != null" >
-        #{age,jdbcType=INTEGER},
-      </if>
-      <if test="idcard != null" >
-        #{idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="phonenum != null" >
-        #{phonenum,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="income != null" >
-        #{income,jdbcType=DECIMAL},
-      </if>
-      <if test="basicliving != null" >
-        #{basicliving,jdbcType=BIT},
-      </if>
-      <if test="applymoney != null" >
-        #{applymoney,jdbcType=DECIMAL},
-      </if>
-      <if test="fileurl != null" >
-        #{fileurl,jdbcType=VARCHAR},
-      </if>
-      <if test="applycontent != null" >
-        #{applycontent,jdbcType=VARCHAR},
-      </if>
-      <if test="applystatus != null" >
-        #{applystatus,jdbcType=INTEGER},
-      </if>
-      <if test="applytype != null" >
-        #{applytype,jdbcType=BIT},
-      </if>
-      <if test="time != null" >
-        #{time,jdbcType=VARCHAR},
-      </if>
-      <if test="uid != null" >
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="applymoneyusertime != null" >
-        #{applymoneyusertime,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchname != null" >
-        #{vouchname,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchidcard != null" >
-        #{vouchidcard,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchaddress != null" >
-        #{vouchaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchcompany != null" >
-        #{vouchcompany,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchphonenum != null" >
-        #{vouchphonenum,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchmobile != null" >
-        #{vouchmobile,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchdddress != null" >
-        #{vouchdddress,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.jungle.bean.HelpinfoExample" resultType="java.lang.Integer" >
-    select count(*) from helpinfo
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update helpinfo
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.name != null" >
+    <insert id="insertSelective" parameterType="com.jungle.bean.Helpinfo">
+        insert into helpinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+            <if test="phonenum != null">
+                phonenum,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="income != null">
+                income,
+            </if>
+            <if test="basicliving != null">
+                basicliving,
+            </if>
+            <if test="applymoney != null">
+                applymoney,
+            </if>
+            <if test="fileurl != null">
+                fileurl,
+            </if>
+            <if test="applycontent != null">
+                applycontent,
+            </if>
+            <if test="applystatus != null">
+                applystatus,
+            </if>
+            <if test="applytype != null">
+                applytype,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="reguser.id != null">
+                uid,
+            </if>
+            <if test="applymoneyusertime != null">
+                applymoneyusertime,
+            </if>
+            <if test="vouchname != null">
+                vouchname,
+            </if>
+            <if test="vouchidcard != null">
+                vouchidcard,
+            </if>
+            <if test="vouchaddress != null">
+                vouchaddress,
+            </if>
+            <if test="vouchcompany != null">
+                vouchcompany,
+            </if>
+            <if test="vouchphonenum != null">
+                vouchphonenum,
+            </if>
+            <if test="vouchmobile != null">
+                vouchmobile,
+            </if>
+            <if test="vouchdddress != null">
+                vouchdddress,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=BIT},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenum != null">
+                #{phonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="income != null">
+                #{income,jdbcType=DECIMAL},
+            </if>
+            <if test="basicliving != null">
+                #{basicliving,jdbcType=BIT},
+            </if>
+            <if test="applymoney != null">
+                #{applymoney,jdbcType=DECIMAL},
+            </if>
+            <if test="fileurl != null">
+                #{fileurl,jdbcType=VARCHAR},
+            </if>
+            <if test="applycontent != null">
+                #{applycontent,jdbcType=VARCHAR},
+            </if>
+            <if test="applystatus != null">
+                #{applystatus,jdbcType=INTEGER},
+            </if>
+            <if test="applytype != null">
+                #{applytype,jdbcType=BIT},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="reguser.id != null">
+                #{reguser.id,jdbcType=INTEGER},
+            </if>
+            <if test="applymoneyusertime != null">
+                #{applymoneyusertime,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchname != null">
+                #{vouchname,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchidcard != null">
+                #{vouchidcard,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchaddress != null">
+                #{vouchaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchcompany != null">
+                #{vouchcompany,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchphonenum != null">
+                #{vouchphonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchmobile != null">
+                #{vouchmobile,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchdddress != null">
+                #{vouchdddress,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.jungle.bean.HelpinfoExample" resultType="java.lang.Integer">
+        select count(*) from helpinfo
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update helpinfo
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=BIT},
+            </if>
+            <if test="record.age != null">
+                age = #{record.age,jdbcType=INTEGER},
+            </if>
+            <if test="record.idcard != null">
+                idcard = #{record.idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phonenum != null">
+                phonenum = #{record.phonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.income != null">
+                income = #{record.income,jdbcType=DECIMAL},
+            </if>
+            <if test="record.basicliving != null">
+                basicliving = #{record.basicliving,jdbcType=BIT},
+            </if>
+            <if test="record.applymoney != null">
+                applymoney = #{record.applymoney,jdbcType=DECIMAL},
+            </if>
+            <if test="record.fileurl != null">
+                fileurl = #{record.fileurl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applycontent != null">
+                applycontent = #{record.applycontent,jdbcType=VARCHAR},
+            </if>
+            <if test="record.applystatus != null">
+                applystatus = #{record.applystatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.applytype != null">
+                applytype = #{record.applytype,jdbcType=BIT},
+            </if>
+            <if test="record.time != null">
+                time = #{record.time,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reguser.id != null">
+                uid = #{record.uid,jdbcType=INTEGER},
+            </if>
+            <if test="record.applymoneyusertime != null">
+                applymoneyusertime = #{record.applymoneyusertime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vouchname != null">
+                vouchname = #{record.vouchname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vouchidcard != null">
+                vouchidcard = #{record.vouchidcard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vouchaddress != null">
+                vouchaddress = #{record.vouchaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vouchcompany != null">
+                vouchcompany = #{record.vouchcompany,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vouchphonenum != null">
+                vouchphonenum = #{record.vouchphonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vouchmobile != null">
+                vouchmobile = #{record.vouchmobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vouchdddress != null">
+                vouchdddress = #{record.vouchdddress,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update helpinfo
+        set id = #{record.id,jdbcType=INTEGER},
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=BIT},
-      </if>
-      <if test="record.age != null" >
         age = #{record.age,jdbcType=INTEGER},
-      </if>
-      <if test="record.idcard != null" >
         idcard = #{record.idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phonenum != null" >
         phonenum = #{record.phonenum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.email != null" >
         email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.address != null" >
         address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.income != null" >
         income = #{record.income,jdbcType=DECIMAL},
-      </if>
-      <if test="record.basicliving != null" >
         basicliving = #{record.basicliving,jdbcType=BIT},
-      </if>
-      <if test="record.applymoney != null" >
         applymoney = #{record.applymoney,jdbcType=DECIMAL},
-      </if>
-      <if test="record.fileurl != null" >
         fileurl = #{record.fileurl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.applycontent != null" >
         applycontent = #{record.applycontent,jdbcType=VARCHAR},
-      </if>
-      <if test="record.applystatus != null" >
         applystatus = #{record.applystatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.applytype != null" >
         applytype = #{record.applytype,jdbcType=BIT},
-      </if>
-      <if test="record.time != null" >
         time = #{record.time,jdbcType=VARCHAR},
-      </if>
-      <if test="record.uid != null" >
         uid = #{record.uid,jdbcType=INTEGER},
-      </if>
-      <if test="record.applymoneyusertime != null" >
         applymoneyusertime = #{record.applymoneyusertime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vouchname != null" >
         vouchname = #{record.vouchname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vouchidcard != null" >
         vouchidcard = #{record.vouchidcard,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vouchaddress != null" >
         vouchaddress = #{record.vouchaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vouchcompany != null" >
         vouchcompany = #{record.vouchcompany,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vouchphonenum != null" >
         vouchphonenum = #{record.vouchphonenum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vouchmobile != null" >
         vouchmobile = #{record.vouchmobile,jdbcType=VARCHAR},
-      </if>
-      <if test="record.vouchdddress != null" >
-        vouchdddress = #{record.vouchdddress,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update helpinfo
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=BIT},
-      age = #{record.age,jdbcType=INTEGER},
-      idcard = #{record.idcard,jdbcType=VARCHAR},
-      phonenum = #{record.phonenum,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      income = #{record.income,jdbcType=DECIMAL},
-      basicliving = #{record.basicliving,jdbcType=BIT},
-      applymoney = #{record.applymoney,jdbcType=DECIMAL},
-      fileurl = #{record.fileurl,jdbcType=VARCHAR},
-      applycontent = #{record.applycontent,jdbcType=VARCHAR},
-      applystatus = #{record.applystatus,jdbcType=INTEGER},
-      applytype = #{record.applytype,jdbcType=BIT},
-      time = #{record.time,jdbcType=VARCHAR},
-      uid = #{record.uid,jdbcType=INTEGER},
-      applymoneyusertime = #{record.applymoneyusertime,jdbcType=VARCHAR},
-      vouchname = #{record.vouchname,jdbcType=VARCHAR},
-      vouchidcard = #{record.vouchidcard,jdbcType=VARCHAR},
-      vouchaddress = #{record.vouchaddress,jdbcType=VARCHAR},
-      vouchcompany = #{record.vouchcompany,jdbcType=VARCHAR},
-      vouchphonenum = #{record.vouchphonenum,jdbcType=VARCHAR},
-      vouchmobile = #{record.vouchmobile,jdbcType=VARCHAR},
-      vouchdddress = #{record.vouchdddress,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jungle.bean.Helpinfo" >
-    update helpinfo
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=BIT},
-      </if>
-      <if test="age != null" >
-        age = #{age,jdbcType=INTEGER},
-      </if>
-      <if test="idcard != null" >
-        idcard = #{idcard,jdbcType=VARCHAR},
-      </if>
-      <if test="phonenum != null" >
-        phonenum = #{phonenum,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="income != null" >
-        income = #{income,jdbcType=DECIMAL},
-      </if>
-      <if test="basicliving != null" >
-        basicliving = #{basicliving,jdbcType=BIT},
-      </if>
-      <if test="applymoney != null" >
-        applymoney = #{applymoney,jdbcType=DECIMAL},
-      </if>
-      <if test="fileurl != null" >
-        fileurl = #{fileurl,jdbcType=VARCHAR},
-      </if>
-      <if test="applycontent != null" >
-        applycontent = #{applycontent,jdbcType=VARCHAR},
-      </if>
-      <if test="applystatus != null" >
-        applystatus = #{applystatus,jdbcType=INTEGER},
-      </if>
-      <if test="applytype != null" >
-        applytype = #{applytype,jdbcType=BIT},
-      </if>
-      <if test="time != null" >
-        time = #{time,jdbcType=VARCHAR},
-      </if>
-      <if test="uid != null" >
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="applymoneyusertime != null" >
-        applymoneyusertime = #{applymoneyusertime,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchname != null" >
-        vouchname = #{vouchname,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchidcard != null" >
-        vouchidcard = #{vouchidcard,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchaddress != null" >
-        vouchaddress = #{vouchaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchcompany != null" >
-        vouchcompany = #{vouchcompany,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchphonenum != null" >
-        vouchphonenum = #{vouchphonenum,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchmobile != null" >
-        vouchmobile = #{vouchmobile,jdbcType=VARCHAR},
-      </if>
-      <if test="vouchdddress != null" >
-        vouchdddress = #{vouchdddress,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jungle.bean.Helpinfo" >
+        vouchdddress = #{record.vouchdddress,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jungle.bean.Helpinfo">
+        update helpinfo
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=BIT},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenum != null">
+                phonenum = #{phonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="income != null">
+                income = #{income,jdbcType=DECIMAL},
+            </if>
+            <if test="basicliving != null">
+                basicliving = #{basicliving,jdbcType=BIT},
+            </if>
+            <if test="applymoney != null">
+                applymoney = #{applymoney,jdbcType=DECIMAL},
+            </if>
+            <if test="fileurl != null">
+                fileurl = #{fileurl,jdbcType=VARCHAR},
+            </if>
+            <if test="applycontent != null">
+                applycontent = #{applycontent,jdbcType=VARCHAR},
+            </if>
+            <if test="applystatus != null">
+                applystatus = #{applystatus,jdbcType=INTEGER},
+            </if>
+            <if test="applytype != null">
+                applytype = #{applytype,jdbcType=BIT},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+            <if test="reguser.id != null">
+                uid = #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="applymoneyusertime != null">
+                applymoneyusertime = #{applymoneyusertime,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchname != null">
+                vouchname = #{vouchname,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchidcard != null">
+                vouchidcard = #{vouchidcard,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchaddress != null">
+                vouchaddress = #{vouchaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchcompany != null">
+                vouchcompany = #{vouchcompany,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchphonenum != null">
+                vouchphonenum = #{vouchphonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchmobile != null">
+                vouchmobile = #{vouchmobile,jdbcType=VARCHAR},
+            </if>
+            <if test="vouchdddress != null">
+                vouchdddress = #{vouchdddress,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jungle.bean.Helpinfo">
     update helpinfo
     set name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=BIT},

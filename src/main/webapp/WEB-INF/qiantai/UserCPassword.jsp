@@ -9,24 +9,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
      <title>丛林闲居-用户中心-修改密码</title>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="<%=path%>/static/style/cy.css">
+    <link rel="stylesheet" href="<%=path%>/static/tyle/style.css">
 </head>
 <body style="background-color:#f6f6f6;">
-<c:if test="${sessionUser==null }">
+<c:if test="${regUser==null }">
 <script type="text/javascript">
-window.location.href = "<%=path%>/login.jsp";
-</script>
-</c:if>
-<c:if test="${updateUser ==true}">
-<script type="text/javascript">
-	alert("更新密码成功");
-	window.location.href = "<%=path%>/UserCPassword.jsp";
-</script></c:if> 
-<c:if test="${updateUser ==false}">
-<script type="text/javascript">
-	alert("更新密码失败，请重试");
-	window.location.href = "<%=path%>/UserCPassword.jsp";
+window.location.href = "<%=path%>/login";
 </script>
 </c:if>
 <div>
@@ -36,19 +25,19 @@ window.location.href = "<%=path%>/login.jsp";
           <jsp:include  page="head.jsp" />
         <script type="text/javascript">
    function loginOut(){
-		window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/clxjmain!Homepage.action";
+		window.location.href = "<%=path%>/logout";
 	}
    </script>
         <!--首页轮播图-->
 <!--用车-填写订单-->
         <div class="personal-content">
-            <div><img src="images/ayw_03.gif"></div>
+            <div><img src="<%=path%>/static/images/ayw_03.gif"></div>
             <div class="per-cont-left">
                 <ul class="left-top">
                     <li class="top-one">
                         <ul class="lf one-i">
-                            <li><c:if test="${sessionUser.sex ==true}"><img src="images/touxiagn.png"/></c:if>
-                            	<c:if test="${sessionUser.sex ==false}"><img src="images/touxiagnv.jpg"/></c:if>
+                            <li><c:if test="${regUser.sex ==true}"><img src="<%=path%>/static/images/touxiagn.png"/></c:if>
+                            	<c:if test="${regUser.sex ==false}"><img src="<%=path%>/static/images/touxiagnv.jpg"/></c:if>
                             </li>
                         </ul>
                         <ul class="lf one-ii">
@@ -57,8 +46,8 @@ window.location.href = "<%=path%>/login.jsp";
                             <li class="quit"><em onclick="loginOut()">[退出]</em></li>
                         </ul>
                     </li>
-                    <li class="top-two cf">手机：${sessionUser.mobile }</li>
-                    <li class="top-two">邮箱：${sessionUser.email }</li>
+                    <li class="top-two cf">手机：${regUser.mobile }</li>
+                    <li class="top-two">邮箱：${regUser.email }</li>
                 </ul>
                 <ul class="grzl-banner">
                     <li> <a href="UserPersonal.jsp"><p class="grzl"></p>个人资料</a></li>
@@ -74,27 +63,28 @@ window.location.href = "<%=path%>/login.jsp";
 
 
                 <div class="jbxx">
-                    <img src="images/xxxx_06.jpg">修改密码
+                    <img src="<%=path%>/static/images/xxxx_06.jpg">修改密码
                     <p></p>
                 </div>
                 <div>
-                <form action="<%=path%>/reguser!updateUser.action" method="post" id="updatePwdForm()">
-                	<input type="hidden" id="oldpwd2" value="${sessionUser.pwd }"/>
-                	<input type="hidden" name="updatePwd" value="1"/>
-                	<input type="hidden" name="reguser.username" value="${sessionUser.username }"/>
-                	<input type="hidden" name="reguser.id" value="${sessionUser.id }"/>
+                <form action="<%=path %>/modifyUserPwd" method="post" id="updatePwdForm()">
+                	<input type="hidden" name="reguser.username" value="${regUser.username }"/>
+                	<input type="hidden" name="reguser.id" value="${regUser.id }"/>
                     <table class="sg">
                         <tr>
                             <td>原始密码：</td>
-                            <td><input type="password" id="oldpwd" onblur="checkOldPwd()"><span><label id="oldpwderror"></label></span></td>
+                            <td><input type="password" name="oldpwd" id="oldpwd" onblur="checkOldPwd()"><span><label id="oldpwderror"></label></span></td>
                         </tr>
                         <tr>
                             <td>新密码：</td>
-                            <td><input id="pwd" type="password" onblur="checkPwd()"><span><label id="pwderror"></label></span></td>
+                            <input type="hidden" name="username" value="${regUser.username }"/>
+                            <input type="hidden" name="id" value="${regUser.id }"/>
+                            <td><input id="pwd" name="pwd" type="password" onblur="checkPwd()"><span><label id="pwderror"></label></span></td>
                         </tr>
                         <tr>
                             <td>再次输入新密码：</td>
-                            <td><input id="repwd" type="password" name="reguser.pwd" onblur="checkRepwd()"><span><label id="repwderror" ></label></span></td> 
+
+                            <td><input id="repwd" type="password"  onblur="checkRepwd()"><span><label id="repwderror" ></label></span></td>
                         </tr>
                     </table>
                    </form>
@@ -120,15 +110,9 @@ var checks = false;
 			oldpwderror.innerHTML = "原始密码不能小于6位";
 			checks = false;
 		}else{
-			var oldpwd2 = document.getElementById("oldpwd2").value;
-			if(oldpwd2!=oldpwd.value){
-				oldpwderror.innerHTML = "原始密码错误，请重新填写";
-				checks = false;
-			}else{
-				oldpwderror.innerHTML = "";
-				checks = true;
-			}
-		}
+            oldpwderror.innerHTML = "";
+            checks = true;
+        }
 	}
 	function checkPwd(){
 		var pwd = document.getElementById("pwd").value;

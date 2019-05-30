@@ -3,6 +3,9 @@ package com.jungle.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 用于其他无业务功能的页面跳转
+ */
 @Controller
 public class pageController {
     /**
@@ -36,6 +39,16 @@ public class pageController {
     }
 
     /**
+     * 跳转到忘记密码页面
+     *
+     * @return
+     */
+    @RequestMapping("/retrievePassword")
+    public String retrievePassword() {
+        return "qiantai/RetrievePassword";
+    }
+
+    /**
      * 跳转前台主界面右边主页面
      *
      * @return
@@ -47,14 +60,17 @@ public class pageController {
 
     /**
      * 跳转丛林界面
+     *
      * @return
      */
     @RequestMapping("clxjmain")
     public String clxjmain() {
         return "qiantai/clxjmain";
     }
+
     /**
      * 跳转闲居界面
+     *
      * @return
      */
     @RequestMapping("JungleList")
@@ -114,7 +130,7 @@ public class pageController {
     }
 
     /**
-     * 跳转到我要求助（基金会）
+     * 跳转到公司列表（基金会）
      *
      * @return
      */
@@ -122,11 +138,26 @@ public class pageController {
     public String foundJzfzlist() {
         return "qiantai/FoundJzfzlist";
     }
+
+
+
+
     /**
-     * 点击首页
+     *  跳转个人中心
+     * @return
      */
-    @RequestMapping("index")
-    public String index(){
-        return "redirect:/index";
+    @RequestMapping("userPersonal")
+    public String userPersonal() {
+        return "qiantai/UserPersonal";
     }
+
+    /**
+     *  跳转修改密码
+     */
+    @RequestMapping("userCPassword")
+    public String userCPassword() {
+        return "qiantai/UserCPassword";
+    }
+
+
 }

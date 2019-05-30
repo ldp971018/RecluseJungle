@@ -1,7 +1,7 @@
 package com.jungle.controller;
 
 import com.jungle.bean.Reguser;
-import com.jungle.service.Desk_RegUserService;
+import com.jungle.service.Desk_ReguserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 public class Desk_Controller {
     @Autowired
-    private Desk_RegUserService desk_RegUserservice;
+    private Desk_ReguserService desk_Reguserservice;
 
     /**
      * 前台页面登录
@@ -35,7 +35,7 @@ public class Desk_Controller {
         System.out.println("Desk_login" + reguser);
         if (reguser != null && reguser.getUsername() != null && !reguser.getUsername().equals("")
                 && reguser.getPwd() != null && !reguser.getPwd().equals("")) {
-            Reguser user = desk_RegUserservice.login(reguser);
+            Reguser user = desk_Reguserservice.login(reguser);
             System.out.println(user);
             if (user != null) {
                 session.setAttribute("regUser", user);
@@ -62,7 +62,7 @@ public class Desk_Controller {
         Map<String, Object> map = new HashMap<>();
         map.put("code", 1);
         if (reguser != null && reguser.getUsername() != null && !reguser.getUsername().equals("")) {
-            Reguser reguser1 = desk_RegUserservice.checkMobile(reguser.getUsername());
+            Reguser reguser1 = desk_Reguserservice.checkMobile(reguser.getUsername());
             System.out.println(reguser1);
             if (reguser1 != null) {
                 map.put("status", true);
@@ -115,7 +115,7 @@ public class Desk_Controller {
         if (reguser != null && reguser.getUsername() != null && !"".equals(reguser.getUsername()) && reguser.getPwd() != null
                 && !"".equals(reguser.getPwd())) {
             req.getSession().removeAttribute(reguser.getUsername());
-            int i = desk_RegUserservice.updatePwd(reguser);
+            int i = desk_Reguserservice.updatePwd(reguser);
             if (i != 0) {
                 map.put("status", true);
             } else {
@@ -142,7 +142,7 @@ public class Desk_Controller {
         Map<String, Object> map = new HashMap<>();
         if (reguser != null && reguser.getMobile() != null && !"".equals(reguser.getMobile()) && reguser.getEmail() != null && !"".equals(reguser.getEmail())
                 && reguser.getPwd() != null && !"".equals(reguser.getPwd())) {
-            int i = desk_RegUserservice.insReguser(reguser);
+            int i = desk_Reguserservice.insReguser(reguser);
             System.out.println(i);
             if (i != 0)
                 map.put("status", true);
@@ -167,4 +167,36 @@ public class Desk_Controller {
         session.removeAttribute("regUser");
         return "redirect:/index.jsp";
     }
+
+    /**
+     *  修改用户信息
+     * @param reguser
+     */
+    @RequestMapping("modifyUser")
+    public String modifyUser(Reguser reguser,HttpSession session) {
+        Reguser regUser = (Reguser) session.getAttribute("regUser");
+        reguser.setPwd(regUser.getPwd());
+        reguser.setRegtime(regUser.getRegtime());
+        System.out.print(reguser);
+        int i = desk_Reguserservice.updUser(reguser);
+        if(i != 0){
+            session.setAttribute("regUser",reguser);
+            return "forward:userPersonal";
+        }
+        return null;
+    }
+
+    @RequestMapping("modifyUserPwd")
+    public String modifyUserPwd(Reguser reguser,HttpSession session,String oldpwd) {
+        Reguser regUser = (Reguser) session.getAttribute("regUser");
+        //原密码
+        String p = regUser.getPwd();
+        int i = desk_Reguserservice.updUserPwd(p,reguser,oldpwd);
+        if(i != 0){
+            return "forward:/login";
+        }
+        return "forward:/userCPassword";
+    }
+
+
 }

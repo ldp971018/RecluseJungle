@@ -44,7 +44,7 @@ public class MD5_Util {
      * @return
      */
     public static boolean MD5_Verify(String source, String salt, String password) {
-        if (source.equals(MD5_Encryption(password, salt)))
+        if (source.equals(MD5_Encryption(salt , password)))
             return true;
         else
             return false;
@@ -52,7 +52,9 @@ public class MD5_Util {
 
 
     public static void main(String[] args) {
-        String s = MD5_Util.MD5_Encryption("admin", "admin");
+        String s = MD5_Util.MD5_Encryption("15179442623", "123456");
         System.out.println(s);
+        boolean b = MD5_Verify("cd57b36cfbf1bbf88f8da37eb0379d02", "15179442623", "123456");
+        System.out.println(b);
     }
 }

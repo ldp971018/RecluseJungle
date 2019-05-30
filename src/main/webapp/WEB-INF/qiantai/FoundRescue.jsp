@@ -13,10 +13,23 @@
     <link rel="stylesheet" href="<%=path %>/static/style/style.css">
 </head>
 <script type="text/javascript">
-    function goDownload(filename) {
-        alert("123");
-        window.location.href = "/download?fileName=" + encodeURI(encodeURI(filename));
+    function changeTable(op) {
+
+        if (op == 'salvation') {
+            $("#divTwo").attr("class", "qzsqb-one none");
+            $("#divOne").attr("class", "qzsqb-one");
+            $("#salvation").attr("class", "qzfz");
+            $("#saveUp").attr("class", "");
+        }
+        if (op == 'saveUp') {
+            $("#divOne").attr("class", "qzsqb-one none");
+            $("#divTwo").attr("class", "qzsqb-one");
+            $("#saveUp").attr("class", "qzfz");
+            $("#salvation").attr("class", "");
+
+        }
     }
+
 </script>
 <body>
 <div>
@@ -24,7 +37,7 @@
         javascript:window.history.forward(1); //我目前先用着这个
     </script>
     <!-- 下载中文文件start -->
-    <%--<script src="/static/sheet/js/download.js"></script>--%>
+    <script src="/static/sheet/js/download.js"></script>
     <!-- 下载中文文件stop -->
     <!--首页TOP-->
     <div class="yc-txdd1">
@@ -65,16 +78,20 @@
                     </ul>
                     <div class="fzym-p1">
                         <p class="fzym-p11">求助申请表格下载</p>
-                        <p class="fzym-p12"><span class="qzfz">救助</span><span>扶助</span></p>
+                        <p class="fzym-p12">
+                            <a href="javascript:void(0)" onclick="changeTable('salvation')"> <span class="qzfz"
+                                                                                                   id="salvation">救助</span></a>
+                            <a href="javascript:void(0)" onclick="changeTable('saveUp')"><span id="saveUp">扶助</span></a>
+                        </p>
                     </div>
                     <div class="qzsqb">
-                        <div class="qzsqb-one">
+                        <div class="qzsqb-one" id="divOne">
                             <ul>
                                 <li><a href="javascript:void(0)" onclick="goDownload('江西济缘慈善基金会救助申请表.doc')">江西济缘慈善基金会救助申请表</a>
                                 </li>
                                 <li><a href="javascript:void(0)" onclick="goDownload('江西济缘慈善基金会救助扶助审批表.doc')">江西济缘慈善基金会救助扶助审批表</a>
                                 </li>
-                                <li><a href="javascript:void(0)" onclick="goDownload('申请江西济缘慈善基金会救助（扶助）须知.doc')">申请江西济缘慈善基金会救助（扶助）须知</a>
+                                <li><a href="javascript:void(0)" onclick="goDownload('申请江西济缘慈善基金会救助（扶助）须知.docx')">申请江西济缘慈善基金会救助（扶助）须知</a>
                                 </li>
                             </ul>
                             <br/>
@@ -88,50 +105,50 @@
                                 <div class="fzymt-one">
                                     <div class="fyt-top"><p></p><i>个人基本信息</i><span></span></div>
                                     <div class="ft-table1">
-                                        <form action="<%=path%>/helpinfo!saveHelp.action" method="post" id="help0Form"
+                                        <form action="/helpinfo?type=salvation" method="post" id="help0Form"
                                               enctype="multipart/form-data">
                                             <input type="hidden" id="uid0" value="${regUser.id}"
-                                                   name="helpinfo.uid"/>
-                                            <input type="hidden" value="false" name="helpinfo.applytype"/>
+                                                   name="reguser.id"/>
+                                            <input type="hidden" value="false" name="applytype"/>
                                             <p><input type="text" placeholder="申请人姓名（请填写真实姓名）" class="just-one"
-                                                      id="name0" name="helpinfo.name"
+                                                      id="name0" name="name"
                                                       onblur="checkName(0)"><i>*</i><input maxlength="3" type="text"
                                                                                            placeholder="年龄（请填写真实年龄）"
                                                                                            class="just-one" id="age0"
-                                                                                           name="helpinfo.age"
+                                                                                           name="age"
                                                                                            onblur="checkAge(0)"><i>*</i>
                                             </p>
-                                            <p>性别：<input type="radio" name="helpinfo.sex" value="true"
-                                                         checked="checked">男<input type="radio" name="helpinfo.sex"
+                                            <p>性别：<input type="radio" name="sex" value="true"
+                                                         checked="checked">男<input type="radio" name="sex"
                                                                                    value="false">女 </p>
                                             <p><input type="text" placeholder="身份证号（填写18位二代身份证号码）" maxlength="18"
-                                                      class="just-one" id="idcard0" name="helpinfo.idcard"
+                                                      class="just-one" id="idcard0" name="idcard"
                                                       onblur="checkIdCard(0)"><i>*</i><input type="text" maxlength="11"
                                                                                              placeholder="联系电话（请填写11位手机号码）"
                                                                                              class="just-one"
                                                                                              id="phonenum0"
-                                                                                             name="helpinfo.phonenum"
+                                                                                             name="phonenum"
                                                                                              onblur="checkPhoneNum(0)"><i>*</i>
                                             </p>
                                             <p><input type="text" placeholder="联系邮箱" class="just-two" id="email0"
-                                                      name="helpinfo.email" onblur="checkEmail(0)"><i>*</i></p>
+                                                      name="email" onblur="checkEmail(0)"><i>*</i></p>
                                             <p><input type="text" placeholder="住址或单位" class="just-two" id="address0"
-                                                      name="helpinfo.address" onblur="checkAddress(0)"><i>*</i></p>
-                                            <p>是否享受低保<input type="radio" name="helpinfo.basicliving" value="true"
+                                                      name="address" onblur="checkAddress(0)"><i>*</i></p>
+                                            <p>是否享受低保<input type="radio" name="basicliving" value="true"
                                                             checked="checked">是<input type="radio"
-                                                                                      name="helpinfo.basicliving"
+                                                                                      name="basicliving"
                                                                                       value="false">否 </p>
                                             <p><input type="text" placeholder="家庭年收入（元）" class="just-one" id="income0"
-                                                      name="helpinfo.income" onblur="checkInCome(0)"><i>*</i><input
+                                                      name="income" onblur="checkInCome(0)"><i>*</i><input
                                                     type="text" placeholder="拟申请救助金额（元）" class="just-one"
-                                                    id="applymoney0" name="helpinfo.applymoney"
+                                                    id="applymoney0" name="applymoney"
                                                     onblur="checkApplymoney(0)"><i>*</i></p>
-                                            <p id="more0"><input type="file" id="file0" name="helpinfoFileJson.file0"
+                                            <p id="more0"><input type="file" id="file0" name="fileName"
                                                                  onchange="checkFile(0)"><input type="button" value="添加"
                                                                                                 onclick="addMore(0)"><i>*</i>
                                             </p>
                                             <p><textarea placeholder="请简要概述主要困难......" id="applycontent0"
-                                                         name="helpinfo.applycontent"></textarea></p>
+                                                         name="applycontent"></textarea></p>
                                         </form>
                                     </div>
 
@@ -144,11 +161,11 @@
                             </div>
 
                         </div>
-                        <div class="qzsqb-one none">
+                        <div class="qzsqb-one none" id="divTwo">
                             <ul>
                                 <li><a href="javascript:void(0)" onclick="goDownload('江西济缘慈善基金会扶助申请表.doc')">江西济缘慈善基金会扶助申请表</a>
                                 </li>
-                                <li><a href="javascript:void(0)" onclick="goDownload('丛林闲居合作项目单位丛林建设补助资金申请表.doc')">丛林闲居合作项目单位丛林建设补助资金申请表</a>
+                                <li><a href="javascript:void(0)" onclick="goDownload('丛林闲居合作项目单位丛林建设补助资金申请表.docx')">丛林闲居合作项目单位丛林建设补助资金申请表</a>
                                 </li>
                             </ul>
                             <br/>
@@ -156,87 +173,87 @@
                                 <p class="fzym-p21">提交申请
                                 <p><c:if test="${regUser ==null }"><em
                                         style="font-size: 10px;color: red;margin-left: 200px;">申请扶助首先要登录哦，点击<a
-                                        href="login.jsp?returnurl=/FoundRescue.jsp">登录</a></em></c:if></p></p>
+                                        href="/login">登录</a></em></c:if></p></p>
                             </div>
                             <div class="fzym-table">
                                 <div class="fzymt-one">
-                                    <form action="<%=path%>/helpinfo!saveHelp.action" method="post" id="help1Form"
+                                    <form action="<%=path%>/helpinfo?type=saveUp" method="post" id="help1Form"
                                           enctype="multipart/form-data">
                                         <div class="fyt-top"><p></p><i>个人基本信息</i><span></span></div>
                                         <div class="ft-table1">
-                                            <input type="hidden" id="uid1" value="${sessionUser.id}"
-                                                   name="helpinfo.uid"/>
+                                            <input type="hidden" id="uid1" value="${regUser.id}"
+                                                   name="reguser.id"/>
                                             <input type="hidden" value="true" name="helpinfo.applytype"/>
                                             <p><input type="text" placeholder="申请人姓名（请填写真实姓名）" class="just-one"
-                                                      id="name1" name="helpinfo.name"
+                                                      id="name1" name="name"
                                                       onblur="checkName(1)"><i>*</i><input maxlength="3" type="text"
                                                                                            placeholder="年龄（请填写真实年龄）"
                                                                                            class="just-one" id="age1"
-                                                                                           name="helpinfo.age"
+                                                                                           name="age"
                                                                                            onblur="checkAge(1)"><i>*</i>
                                             </p>
-                                            <p>性别：<input type="radio" name="helpinfo.sex" value="true"
-                                                         checked="checked">男<input type="radio" name="helpinfo.sex"
+                                            <p>性别：<input type="radio" name="sex" value="true"
+                                                         checked="checked">男<input type="radio" name="sex"
                                                                                    value="false">女 </p>
                                             <p><input type="text" placeholder="身份证号（填写18位二代身份证号码）" maxlength="18"
-                                                      class="just-one" id="idcard1" name="helpinfo.idcard"
+                                                      class="just-one" id="idcard1" name="idcard"
                                                       onblur="checkIdCard(1)"><i>*</i><input type="text" maxlength="11"
                                                                                              placeholder="联系电话（请填写11位手机号码）"
                                                                                              class="just-one"
                                                                                              id="phonenum1"
-                                                                                             name="helpinfo.phonenum"
+                                                                                             name="phonenum"
                                                                                              onblur="checkPhoneNum(1)"><i>*</i>
                                             </p>
                                             <p><input type="text" placeholder="联系邮箱" class="just-two" id="email1"
-                                                      name="helpinfo.email" onblur="checkEmail(1)"><i>*</i></p>
+                                                      name="email" onblur="checkEmail(1)"><i>*</i></p>
                                             <p><input type="text" placeholder="住址或单位" class="just-two" id="address1"
-                                                      name="helpinfo.address" onblur="checkAddress(1)"><i>*</i></p>
-                                            <p>是否享受低保<input type="radio" name="helpinfo.basicliving" value="true"
+                                                      name="address" onblur="checkAddress(1)"><i>*</i></p>
+                                            <p>是否享受低保<input type="radio" name="basicliving" value="true"
                                                             checked="checked">是<input type="radio"
-                                                                                      name="helpinfo.basicliving"
+                                                                                      name="basicliving"
                                                                                       value="false">否 </p>
                                             <p><input type="text" placeholder="家庭年收入（元）" class="just-one" id="income1"
-                                                      name="helpinfo.income" onblur="checkInCome(1)"><i>*</i><input
+                                                      name="income" onblur="checkInCome(1)"><i>*</i><input
                                                     type="text" placeholder="拟申请救助金额（元）" class="just-one"
-                                                    id="applymoney1" name="helpinfo.applymoney"
+                                                    id="applymoney1" name="applymoney"
                                                     onblur="checkApplymoney(1)"><i>*</i></p>
-                                            <p id="more1"><input type="file" id="file1" name="helpinfoFileJson.file1"
+                                            <p id="more1"><input type="file" id="file1" name="fileName"
                                                                  onchange="checkFile(1)"><input type="button" value="添加"
                                                                                                 onclick="addMore(1)"><i>*</i>
                                             </p>
                                             <p><textarea placeholder="请简要概述主要困难......" id="applycontent1"
-                                                         name="helpinfo.applycontent"></textarea></p>
+                                                         name="applycontent"></textarea></p>
                                         </div>
                                         <div class="fyt-top"><p></p><i>担保人信息</i><span></span></div>
                                         <div class="ft-table1">
                                             <p><input type="text" placeholder="担保人姓名（请填写真实姓名）" class="just-one"
-                                                      name="helpinfo.vouchname" id="vouchname"
+                                                      name="vouchname" id="vouchname"
                                                       onblur="checkVouchName()"><i>*</i><input type="text"
                                                                                                maxlength="18"
                                                                                                placeholder="身份证号码（填写18位二代身份证号码）"
                                                                                                class="just-one"
                                                                                                id="vouchidcard"
-                                                                                               name="helpinfo.vouchidcard"
+                                                                                               name="vouchidcard"
                                                                                                onblur="checkVouchIdCard()"><i>*</i>
                                             </p>
                                             <p><input type="text" placeholder="单位固定电话（xxxx-xxxxxxx）" class="just-one"
-                                                      id="vouchphonenum" name="helpinfo.vouchphonenum"
+                                                      id="vouchphonenum" name="vouchphonenum"
                                                       onblur="checkVouchPhoneNum()"><i>*</i><input type="text"
                                                                                                    placeholder="个人联系电话（请填写11位手机号码）"
                                                                                                    maxlength="11"
                                                                                                    class="just-one"
                                                                                                    id="vouchmobile"
-                                                                                                   name="helpinfo.vouchmobile"
+                                                                                                   name="vouchmobile"
                                                                                                    onblur="checkVouchmobile()"><i>*</i>
                                             </p>
                                             <p><input type="text" placeholder="申请资金使用期限" class="just-two"
-                                                      id="applymoneyusertime" name="helpinfo.applymoneyusertime"
+                                                      id="applymoneyusertime" name="applymoneyusertime"
                                                       onblur="checkApplymoneyusertime()"><i>*</i></p>
                                             <p><input type="text" placeholder="地址" class="just-two" id="vouchaddress"
-                                                      name="helpinfo.vouchaddress" onblur="checkVouchAddress()"><i>*</i>
+                                                      name="vouchaddress" onblur="checkVouchAddress()"><i>*</i>
                                             </p>
                                             <p><input type="text" placeholder="工作单位" class="just-two" id="vouchcompany"
-                                                      name="helpinfo.vouchcompany" onblur="checkVouchCompany()"><i>*</i>
+                                                      name="vouchcompany" onblur="checkVouchCompany()"><i>*</i>
                                             </p>
                                             <p>
                                                 <button type="button" value="提交信息" onclick="subHelp1()">提交信息</button>
@@ -295,6 +312,22 @@
 
 
 </div>
+<c:if test="${!empty msg}">
+    <div class="tcc" id="okok">
+        <div class="cgxd4">
+            <div class="cgxd4-top"><p class="one"><img src="<%=path%>/static/images/zhmm4_03.jpg">提示</p>
+                <p class="two"><img src="<%=path%>/static/images/14_01.png" class="close3"></p></div>
+            <div class="cgxd4-main" id="msg">
+                    ${msg}
+            </div>
+            <div class="cgxd4-buttom">
+                <a href="/foundRescue">确&nbsp;认</a>
+            </div>
+        </div>
+    </div>
+</c:if>
+
+
 <script src="<%=path%>/static/js/jquery.js"></script>
 <%--<script src="../../static/js"></script>--%>
 <script type="text/javascript">
@@ -316,15 +349,17 @@
         }
         ;
     })
+
     function placeholderSupport() {
         return 'placeholder' in document.createElement('input');
     }
 </script>
 <!-- 表单异步提交start -->
-<%--<script src="<%=path%>/static/libs/js/form/form.js" type="text/javascript"></script>--%>
+<script src="/WEB-INF/houtai/libs/js/form/form.js" type="text/javascript"></script>
 <!-- 表单异步提交end -->
 <script type="text/javascript">
     var checks = false;
+
     //提交救助
     function subHelp0() {
         var uid = document.getElementById("uid0").value;
@@ -354,7 +389,8 @@
                                     if (checks) {
                                         checkFile(0);
                                         if (checks) {
-                                            document.getElementById("help0Form").submit();
+                                            alert("help0Form");
+                                            $("#help0Form").submit();
                                         }
                                     }
                                 }
@@ -365,6 +401,7 @@
             }
         }
     }
+
     //提交求助
     function subHelp1() {
         var uid = document.getElementById("uid1").value;
@@ -426,6 +463,7 @@
             }
         }
     }
+
     //检查用户名
     function checkName(i) {
         var name = /^[\u4E00-\u9FA5]{2,4}$/; //中文名字
@@ -438,6 +476,7 @@
             namei.style.border = ""
         }
     }
+
     //检查年龄
     function checkAge(i) {
         var age = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/; //年龄0-120
@@ -450,6 +489,7 @@
             agei.style.border = ""
         }
     }
+
     //检查身份证号码
     function checkIdCard(i) {
         var idCard = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;//身份证号码
@@ -462,6 +502,7 @@
             idCardi.style.border = ""
         }
     }
+
     //检查手机号码
     function checkPhoneNum(i) {
         var phoneNum = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/; //手机号码
@@ -474,6 +515,7 @@
             phoneNumi.style.border = ""
         }
     }
+
     //检查邮箱
     function checkEmail(i) {
         var email = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;//电子邮箱
@@ -486,6 +528,7 @@
             emaili.style.border = ""
         }
     }
+
     //检查住址/单位是否为空
     function checkAddress(i) {
         var address = /\S/;//不为空
@@ -498,6 +541,7 @@
             addressi.style.border = ""
         }
     }
+
     //检查家庭年收入
     function checkInCome(i) {
         var inCome = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/; //金钱
@@ -510,6 +554,7 @@
             inComei.style.border = ""
         }
     }
+
     //检查申请救助金额
     function checkApplymoney(i) {
         var inCome = /^(([1-9]\d{0,9})|0)(\.\d{1,2})?$/; //金钱
@@ -522,6 +567,7 @@
             applymoneyi.style.border = ""
         }
     }
+
     //检查担保人名字
     function checkVouchName() {
         var name = /^[\u4E00-\u9FA5]{2,4}$/; //中文名字
@@ -534,6 +580,7 @@
             vouchname.style.border = ""
         }
     }
+
     //检查担保人身份证
     function checkVouchIdCard() {
         var idCard = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;//身份证号码
@@ -546,6 +593,7 @@
             vouchidcard.style.border = ""
         }
     }
+
     //检查担保人单位固定电话
     function checkVouchPhoneNum() {
         var phone = /(\d{2,5}-\d{7,8}(-\d{1,})?)|(13\d{9})|(159\d{8})/; //固定电话
@@ -558,6 +606,7 @@
             vouchphonenum.style.border = ""
         }
     }
+
     //检查担保人手机号码
     function checkVouchmobile() {
         var phoneNum = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/; //手机号码
@@ -570,6 +619,7 @@
             vouchmobile.style.border = ""
         }
     }
+
     //检查担保人地址是否为空
     function checkVouchAddress() {
         var address = /\S/;//不为空
@@ -582,6 +632,7 @@
             vouchaddress.style.border = ""
         }
     }
+
     //检查担保人工作单位是否为空
     function checkVouchCompany() {
         var address = /\S/;//不为空
@@ -594,6 +645,7 @@
             vouchcompany.style.border = ""
         }
     }
+
     //检查资金使用期限
     function checkApplymoneyusertime() {
         var address = /\S/;//不为空
@@ -606,6 +658,7 @@
             applymoneyusertime.style.border = ""
         }
     }
+
     //判断上传文件不是空的
     function checkFile(i) {
         var filei = document.getElementById("file" + i).value;
@@ -614,6 +667,7 @@
             checks = false;
         } else checks = true;
     }
+
     //增加和移除一个上传文件
     function addMore(type) {
         var p = document.getElementById("more" + type);
@@ -621,7 +675,7 @@
         var input = document.createElement("input");
         var button = document.createElement("input");
         input.type = "file";
-        input.name = "helpinfoFileJson.file" + type;
+        input.name = "fileName"/* + type*/;
         button.type = "button";
         button.value = "移除";
         button.onclick = function () {

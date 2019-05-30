@@ -80,7 +80,7 @@ public class SendController {
                 System.out.println(reguser.getUsername() + "-" + request.getSession().getAttribute(reguser.getUsername()));
                 return map;
             } catch (MessagingException e) {
-//                e.printStackTrace();
+                e.printStackTrace();
                 map.put("msg", "&emsp;服务器出了小差！请稍后重试！");
                 return map;
             }

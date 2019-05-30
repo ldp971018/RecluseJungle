@@ -311,10 +311,11 @@
             <artifactId>mapper</artifactId>
             <version>4.1.5</version>
         </dependency>
+        <!-- 邮件start -->
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>1.5.4</version>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>

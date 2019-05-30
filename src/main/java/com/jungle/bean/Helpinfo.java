@@ -33,7 +33,7 @@ public class Helpinfo {
 
     private String time;
 
-    private Integer uid;
+    private Reguser reguser;
 
     private String applymoneyusertime;
 
@@ -179,12 +179,12 @@ public class Helpinfo {
         this.time = time == null ? null : time.trim();
     }
 
-    public Integer getUid() {
-        return uid;
+    public Reguser getReguser() {
+        return reguser;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setReguser(Reguser reguser) {
+        this.reguser = reguser;
     }
 
     public String getApplymoneyusertime() {
@@ -249,5 +249,36 @@ public class Helpinfo {
 
     public void setVouchdddress(String vouchdddress) {
         this.vouchdddress = vouchdddress == null ? null : vouchdddress.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Helpinfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", age=" + age +
+                ", idcard='" + idcard + '\'' +
+                ", phonenum='" + phonenum + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", income=" + income +
+                ", basicliving=" + basicliving +
+                ", applymoney=" + applymoney +
+                ", fileurl='" + fileurl + '\'' +
+                ", applycontent='" + applycontent + '\'' +
+                ", applystatus=" + applystatus +
+                ", applytype=" + applytype +
+                ", time='" + time + '\'' +
+                ", reguser=" + reguser +
+                ", applymoneyusertime='" + applymoneyusertime + '\'' +
+                ", vouchname='" + vouchname + '\'' +
+                ", vouchidcard='" + vouchidcard + '\'' +
+                ", vouchaddress='" + vouchaddress + '\'' +
+                ", vouchcompany='" + vouchcompany + '\'' +
+                ", vouchphonenum='" + vouchphonenum + '\'' +
+                ", vouchmobile='" + vouchmobile + '\'' +
+                ", vouchdddress='" + vouchdddress + '\'' +
+                '}';
     }
 }
