@@ -57,10 +57,11 @@ public class FoundationServiceImpl implements FoundationService {
             else
                 helpinfo.setApplytype(false);//扶助
             String[] url = path.split("foundationUploadFile");
-            helpinfo.setFileurl("/foundationUploadFile" + url[1]);
+            helpinfo.setFileurl("\\foundationUploadFile" + url[1]);
+            System.out.println("录入路径-"+"\\foundationUploadFile" + url[1]);
             helpinfo.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             i = helpinfoMapper.insertSelective(helpinfo);
-            System.out.println("录入信息失败-" + i + " 路径-" + fileDir.exists());
+            System.out.println("录入信息-" + i + " 路径-" + fileDir.exists());
             if (i == 0) {
                 if (fileDir != null && fileDir.exists()) { //如果存在 则删除
                     DeleteFile.deleteFile(fileDir);
