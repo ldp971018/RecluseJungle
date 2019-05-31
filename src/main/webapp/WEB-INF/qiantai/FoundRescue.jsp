@@ -51,7 +51,7 @@
         <!--用车-填写订单-->
         <div class="yc-txdd">
             <div class="yc-mbx">
-                <p>当前位置：<a href="index.jsp" class="ll">丛林闲居网</a> > <a href="FoundIndex.jsp" class="ll">基金会</a> > <a
+                <p>当前位置：<a href="index.jsp" class="ll">丛林闲居网</a> > <a href="/foundIndex" class="ll">基金会</a> > <a
                         href="#"
                         class="xz">我要求助</a></p>
             </div>
