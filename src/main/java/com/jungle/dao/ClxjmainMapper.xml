@@ -115,17 +115,19 @@
     <include refid="Base_Column_List" />
     from clxjmain
     <where>
+      <if test="belongCity!=null and belongCity!=''">
+        <bind name="belongCity" value="'%'+belongCity+'%'"></bind>
+        and belong_city like #{belongCity}
+      </if>
       <if test="type1!=null">
         and type1=${type1}
       </if>
       <if test="type2!=null">
         and type2=${type2}
       </if>
-      <if test="belongCity!=null and belongCity!=''">
-        and belong_city=${belongCity}
-      </if>
       <if test="createtime!=null">
-        and createtime &gt;= ${createtime}
+        <bind name="createtime" value="createtime"></bind>
+        and createtime &gt;= #{createtime}
       </if>
       <if test="name!=null and name!=''">
         <bind name="name" value="'%'+name+'%'"></bind>
