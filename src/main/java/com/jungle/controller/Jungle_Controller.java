@@ -48,7 +48,9 @@ public class Jungle_Controller {
      * @return
      */
     @RequestMapping("selectCL")
-    public String selectCL(Clxjmain clxjmain, HttpServletRequest request) throws ParseException {
+    public String selectCL(Clxjmain clxjmain, HttpServletRequest request){
+        if(clxjmain.getBelongCity().equals("请选择城市"))
+            clxjmain.setBelongCity("");
         List<Clxjmain> list=jungle_service.selectJungle(clxjmain);
         request.setAttribute("JungleList",list);
         return "qiantai/clxjmain";
@@ -60,10 +62,47 @@ public class Jungle_Controller {
      * @return
      */
     @RequestMapping("selectJungle")
-    public String selectJungle(Clxjmain clxjmain, HttpServletRequest request) throws ParseException {
+    public String selectJungle(Clxjmain clxjmain, HttpServletRequest request){
+        if(clxjmain.getBelongCity().equals("请选择城市"))
+            clxjmain.setBelongCity("");
         List<Clxjmain> list=jungle_service.selectJungle(clxjmain);
         request.setAttribute("JungleList",list);
         return "qiantai/JungleList";
     }
 
+    /**
+     * 加载index界面
+     * @return
+     */
+    @RequestMapping("/loadIndex")
+    public String loadIndex(HttpServletRequest request){
+        //查询全部
+        List<Clxjmain> listAll=jungle_service.selectJungle(null);
+        //国内丛林
+        Clxjmain clxjmainGNCL=new Clxjmain();
+        clxjmainGNCL.setType1(true);
+        clxjmainGNCL.setType2(true);
+        List<Clxjmain> listGNCL=jungle_service.selectJungle(clxjmainGNCL);
+        //国内闲居
+        Clxjmain clxjmainGNXJ=new Clxjmain();
+        clxjmainGNXJ.setType1(true);
+        clxjmainGNXJ.setType2(false);
+        List<Clxjmain> listGNXJ=jungle_service.selectJungle(clxjmainGNXJ);
+        //境外丛林
+        Clxjmain clxjmainGWCL=new Clxjmain();
+        clxjmainGWCL.setType1(false);
+        clxjmainGWCL.setType2(true);
+        List<Clxjmain> listGWCL=jungle_service.selectJungle(clxjmainGWCL);
+        //境外闲居
+        Clxjmain clxjmainGWXJ=new Clxjmain();
+        clxjmainGWXJ.setType1(false);
+        clxjmainGWXJ.setType2(false);
+        List<Clxjmain> listGWXJ=jungle_service.selectJungle(clxjmainGWXJ);
+        request.setAttribute("listGNCL",listGNCL);
+        request.setAttribute("listGNXJ",listGNXJ);
+        request.setAttribute("listGWCL",listGWCL);
+        request.setAttribute("listGWXJ",listGWXJ);
+        request.setAttribute("indexInfo",listAll);
+        return "qiantai/index";
+    }
 }

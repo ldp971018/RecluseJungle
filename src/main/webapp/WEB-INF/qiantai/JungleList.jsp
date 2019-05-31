@@ -67,15 +67,15 @@ function Allregister(){
                         <table>
                             <tr>
                                 <td>目的地</td>
-                                <td class="sec "><input type="text"  <c:if test="${clxjmain.belongCity!=null }">value="${clxjmain.belongCity }"</c:if>  <c:if test="${citypy!=null }"> data-wholename="${citypy }"</c:if><c:if test="${citypy==null }"> data-wholename=""</c:if> placeholder="请输入城市名" id="ones"></td>
+                                <td class="sec "><input type="text" name="belongCity" <c:if test="${clxjmain.belongCity!=null }">value="${clxjmain.belongCity }"</c:if>  <c:if test="${citypy!=null }"> data-wholename="${citypy }"</c:if><c:if test="${citypy==null }"> data-wholename=""</c:if> placeholder="请输入城市名" id="ones"></td>
                                 			<input type="hidden" name="clxjmain.belong_city" id="city10" <c:if test="${clxjmain.belongCity!=null }">value="${clxjmain.belongCity }"</c:if>>
                             </tr>
                             <tr>
                                 <td>入住</td>
-                                <td><p><input name="createtime" class="laydate-icon" id="demo1" <c:if test="${clxjmain.createtime !=null}">value="${clxjmain.createtime }"</c:if><c:if test="${clxjmain.createtime ==null}">value="2018-02-03"</c:if> >
+                                <td><p><input placeholder="年/月/日" name="createtime" class="laydate-icon" id="demo1" value="${clxjmain.createtime }">
                                 </p>
 
-                                    <p>退房<input name="endTime" class="laydate-icon" id="demo2" <c:if test="${endTime !=null}">value="${endTime }"</c:if><c:if test="${endTime ==null}">value="2019-01-01"</c:if>>
+                                    <p>退房<input placeholder="年/月/日" name="endTime" class="laydate-icon" id="demo2" value="${endTime }">
                                     </p></td>
                             </tr>
                             <tr>  
