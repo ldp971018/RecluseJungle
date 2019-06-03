@@ -120,6 +120,16 @@ public class pageController {
     }
 
     /**
+     * 跳转到求助进度（基金会）
+     *
+     * @return
+     */
+    @RequestMapping("/userPquery")
+    public String userPquery() {
+        return "qiantai/UserPquery";
+    }
+
+    /**
      * 跳转到公司列表（基金会）
      *
      * @return
@@ -129,11 +139,30 @@ public class pageController {
         return "qiantai/FoundJzfzlist";
     }
 
+    /**
+     * 跳转到月底支出查询（基金会-我要查询）
+     *
+     * @return
+     */
+    @RequestMapping("/pLlist")
+    public String pLlist() {
+        return "qiantai/PLlist";
+    }
 
+    /**
+     * 跳转到款物发放公示（基金会-我要查询）
+     *
+     * @return
+     */
+    @RequestMapping("/pLpublicity")
+    public String pLpublicity() {
+        return "qiantai/PLpublicity";
+    }
 
 
     /**
-     *  丛林闲居-用户中心-个人资料
+     * 跳转个人中心
+     *
      * @return
      */
     @RequestMapping("userPersonal")
@@ -142,7 +171,7 @@ public class pageController {
     }
 
     /**
-     *  丛林闲居-用户中心-修改密码
+     * 跳转修改密码
      */
     @RequestMapping("userCPassword")
     public String userCPassword() {

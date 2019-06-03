@@ -1,13 +1,19 @@
 package com.jungle.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.jungle.bean.Donation;
 import com.jungle.bean.Helpinfo;
 import com.jungle.service.FoundationService;
+import com.jungle.serviceImpl.FoundationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 
 /**
@@ -43,6 +49,45 @@ public class Foundation_Controller {
             req.setAttribute("msg", "检测您的提交信息存在异常！");
         }
         return "qiantai/FoundRescue";
+    }
+
+    /**
+     * 查询捐款总金额 爱心捐赠明细（基金会-我要查询）
+     *
+     * @return
+     */
+    @RequestMapping("/selDonationLoveCount")
+    @ResponseBody
+    public Map<String, Object> selDonation() {
+        HashMap<String, Object> map = new HashMap<>();
+        String money = "" + foundationServiceImpl.selDonationCount();
+        List countMoney = new ArrayList();
+        for (int i = 0; i < money.length(); i++) {
+            countMoney.add(money.substring(i, i + 1));
+        }
+        map.put("msg", countMoney);
+
+        return map;
+    }
+
+    /**
+     * 爱心捐赠明细（基金会-我要查询）
+     *
+     * @param page  当前页
+     * @param limit 每页显示多少条数据
+     * @return
+     */
+    @RequestMapping("/selDonation")
+    @ResponseBody
+    public Map<String, Object> selDonation(@RequestParam(defaultValue = "") String donationname, @RequestParam(defaultValue = "") String donationtime, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
+        System.out.println(page + "-" + limit);
+        HashMap<String, Object> map = new HashMap<>();
+        PageInfo<Donation> pageInfo = foundationServiceImpl.selDonation(donationtime, donationname, page, limit);
+        System.out.println(pageInfo.getList().toString());
+        map.put("code", 0);
+        map.put("count", FoundationServiceImpl.donationCount);
+        map.put("data", pageInfo.getList());
+        return map;
     }
 
 }

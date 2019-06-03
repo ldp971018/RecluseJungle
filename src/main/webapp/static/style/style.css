@@ -1030,7 +1030,7 @@
 }
 
 .laydate-icon, .laydate-icon-default, .laydate-icon-danlan, .laydate-icon-dahong, .ts {
-    width: 140px;
+    width: 28px;
     height: 30px;
     border-radius: 3px;
     margin-left: 6px;
@@ -4870,6 +4870,7 @@ code {
     line-height: 60px;
 }
 
+/**/
 .jjh-jzfz1 div {
     float: left;
 }
