@@ -50,12 +50,12 @@ window.location.href = "<%=path%>/login";
                     <li class="top-two">邮箱：${regUser.email }</li>
                 </ul>
                 <ul class="grzl-banner">
-                    <li> <a href="UserPersonal.jsp"><p class="grzl"></p>个人资料</a></li>
+                    <li> <a href="userPersonal"><p class="grzl"></p>个人资料</a></li>
                     <li  class="yhzxsp yhzxs2"> <a href="javascript:void(0)"><p class="xgmm"></p>密码修改</a></li>
-                    <li > <a href="UserJAOrder.jsp"> <p class="clxjdd"></p>丛林闲居订单</a></li>
-                    <li> <a href="UserCarOrder.jsp"><p class="ycdd"></p>我的用车订单</a></li>
-                    <li> <a href="UserPquery.jsp"><p class="qzjd"></p>求助进度查询</a></li>
-                    <li > <a href="UserJPquery.jsp"><p class="jmcx"></p>加盟进度查询</a></li>
+                    <li> <a href="showAllClxjorderByUserid"> <p class="clxjdd"></p>丛林闲居订单</a></li>
+                    <li> <a href="showAllCarorderByUserid"><p class="ycdd"></p>我的用车订单</a></li>
+                    <li> <a href="showAllHelpinfo"><p class="qzjd"></p>求助进度查询</a></li>
+                    <li> <a href="showAllJoinclByUserid"><p class="jmcx"></p>加盟进度查询</a></li>
                 </ul>
             </div>
 

@@ -120,16 +120,6 @@ public class pageController {
     }
 
     /**
-     * 跳转到求助进度（基金会）
-     *
-     * @return
-     */
-    @RequestMapping("/userPquery")
-    public String userPquery() {
-        return "qiantai/UserPquery";
-    }
-
-    /**
      * 跳转到公司列表（基金会）
      *
      * @return
@@ -143,7 +133,7 @@ public class pageController {
 
 
     /**
-     *  跳转个人中心
+     *  丛林闲居-用户中心-个人资料
      * @return
      */
     @RequestMapping("userPersonal")
@@ -152,7 +142,7 @@ public class pageController {
     }
 
     /**
-     *  跳转修改密码
+     *  丛林闲居-用户中心-修改密码
      */
     @RequestMapping("userCPassword")
     public String userCPassword() {
