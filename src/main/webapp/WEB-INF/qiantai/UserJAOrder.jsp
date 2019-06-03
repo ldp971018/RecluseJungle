@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	String path = request.getContextPath();
 %>
@@ -9,8 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>丛林闲居-用户中心-丛林闲居订单</title>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="<%=path %>/static/style/cy.css">
+    <link rel="stylesheet" href="<%=path %>/static/style/style.css">
     <style rel="stylesheet">  
 .pagination {font-family: Tahoma;font-size: 12px;height: 22px;margin: 5px 10px;text-align: right;}  
 .pagination a,.page-cur,.page-start,.page-end,.page-disabled,.page-skip {  
@@ -24,21 +25,9 @@ height:22px;line-height:22px;margin:0 3px 0 0;text-align:center;vertical-align:m
 </style> 
 </head>
 <body style="background-color:#f6f6f6;">
-<c:if test="${sessionUser==null }">
+<c:if test="${regUser==null }">
 <script type="text/javascript">
-window.location.href = "<%=path%>/login.jsp";
-</script>
-</c:if>
-<c:if test="${isUpdate ==1}">
-<script type="text/javascript">
-	alert("取消预定成功");
-	window.location.href = "<%=path%>/UserJAOrder.jsp"; 
-</script>
-</c:if>
-<c:if test="${isUpdate ==0}">
-<script type="text/javascript">
-	alert("取消预定失败，请重试");
-	window.location.href = "<%=path%>/UserJAOrder.jsp";
+window.location.href = "<%=path%>/login";
 </script>
 </c:if>
 <div>
@@ -48,61 +37,89 @@ window.location.href = "<%=path%>/login.jsp";
      <jsp:include  page="head.jsp" />
    <script type="text/javascript">
    function loginOut(){
-		window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/clxjmain!Homepage.action";
+		window.location.href = "<%=path%>/logout";
 	}
    </script>
     <!--首页轮播图-->
     <!--用车-填写订单-->
     <div class="personal-content">
-        <div><img src="images/ayw_03.gif"></div>
+        <div><img src="<%=path %>/static/images/ayw_03.gif"></div>
         <div class="per-cont-left">
             <ul class="left-top">
                 <li class="top-one">
                     <ul class="lf one-i">
-                        <li><c:if test="${sessionUser.sex ==true}"><img src="images/touxiagn.png"/></c:if>
-                            	<c:if test="${sessionUser.sex ==false}"><img src="images/touxiagnv.jpg"/></c:if>
+                        <li><c:if test="${regUser.sex ==true}"><img src="<%=path %>/static/images/touxiagn.png"/></c:if>
+                            	<c:if test="${regUser.sex ==false}"><img src="<%=path %>/static/images/touxiagnv.jpg"/></c:if>
                             </li>
                     </ul>
                     <ul class="lf one-ii">
                         <li> </li>
-                        <li>尊敬的会员！<input type="hidden" id="uid" value="${sessionUser.id }"/></li> 
+                        <li>尊敬的会员！<input type="hidden" id="uid" value="${regUser.id }"/></li>
                         <li class="quit"><em onclick="loginOut()">[退出]</em></li>
                     </ul>
                 </li>
-                <li class="top-two cf">手机：${sessionUser.mobile }</li>
-                <li class="top-two">邮箱：${sessionUser.email }</li>
+                <li class="top-two cf">手机：${regUser.mobile }</li>
+                <li class="top-two">邮箱：${regUser.email }</li>
             </ul>
             <ul class="grzl-banner">
-                <li> <a href="UserPersonal.jsp"><p class="grzl"></p>个人资料</a></li>
-                <li> <a href="UserCPassword.jsp"><p class="xgmm"></p>密码修改</a></li>
+                <li> <a href="userPersonal"><p class="grzl"></p>个人资料</a></li>
+                <li> <a href="userCPassword"><p class="xgmm"></p>密码修改</a></li>
                 <li  class="yhzxsp yhzxs"> <a href="javascript:void(0)"> <p class="clxjdd"></p>丛林闲居订单</a></li>
-                <li> <a href="UserCarOrder.jsp"><p class="ycdd"></p>我的用车订单</a></li>
-                <li> <a href="UserPquery.jsp"><p class="qzjd"></p>求助进度查询</a></li>
-                <li > <a href="UserJPquery.jsp"><p class="jmcx"></p>加盟进度查询</a></li>
+                <li> <a href="showAllCarorderByUserid"><p class="ycdd"></p>我的用车订单</a></li>
+                <li> <a href="showAllHelpinfo"><p class="qzjd"></p>求助进度查询</a></li>
+                <li > <a href="showAllJoinclByUserid"><p class="jmcx"></p>加盟进度查询</a></li>
             </ul>
         </div>
 
         <div class="per-cont-right">
             <div class="yhzx-jmjdcx">
                 <div class="jmjdcx-top">
-                   <span class="dywr" onclick="selTable(0)">所有订单(<em id="countAll"></em>)</span> |<span onclick="selTable(1)">未完成(<em id="countNo"></em>)</span> |<span onclick="selTable(2)">已完成(<em id="countOk"></em>)</span>
-                </div>
-                <div class="jmjdcx-nr">
-                    <div class="jmjdx-one">
-                        <div class="clxjdd-top">
-                            <p class="one">酒店</p>
-                            <p class="two">入住时间</p>
-                            <p class="two">订单状态</p>
-                            <p class="two">订单操作</p>
-                        </div>
-                        <div class="clxjdd-bot" id="tab"> 
-                           
-                        </div>
-                        <div class="fenye4" style="width: 100%"> 
-                            <div id="pageNav"  align="center"></div>     
-                        </div>
-                    </div>
+                    <span><a href="showAllClxjorderByUserid">所有订单</a></span> |<span> <a href="findClxjorderState0">未完成</a></span> |<span><a href="findClxjorderState1">已完成</a></span>
+                    <table border="1">
+                        <tr align="center" height="50">
+                            <td width="280">酒店</td>
+                            <td width="140">入住时间</td>
+                            <td width="140">订单状态</td>
+                            <td width="140">订单操作</td>
+                        </tr>
+                        <c:forEach items="${list}" var="s" varStatus="n">
+                            <tr><td colspan="4">订单号：${s.oid}&nbsp;&nbsp;&nbsp;&nbsp;预订时间：<fmt:formatDate value="${s.reservetime}" pattern="yyyy-MM-dd hh:mm:ss"/></td></tr>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td><img width="90" height="90" src="${s.carinfo.carouselImg}"></td>
+                                            <td>&nbsp;&nbsp;${s.carinfo.cartitle}￥${s.carinfo.price}元</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td align="center"><fmt:formatDate value="${s.checkstartdate}" pattern="yyyy-MM-dd"/></td>
+                                <td align="center">
+                                    <c:if test="${s.state==0}">
+                                        交易进行中
+                                    </c:if>
+                                    <c:if test="${s.state==1}">
+                                        交易失败
+                                    </c:if>
+                                    <c:if test="${s.state==2}">
+                                        交易成功
+                                    </c:if>
+                                </td>
 
+                                <td align="center">
+                                    <c:if test="${s.state==0}">
+                                        <a href="editClxjorderState?oid=${s.oid}">取消预订</a>
+                                    </c:if>
+                                    <c:if test="${s.state==1}">
+                                        <a href="editClxjorderState?oid=${s.oid}">再次预订</a>
+                                    </c:if>
+                                    <c:if test="${s.state==2}">
+                                        感谢预订
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </div>
             </div>
         </div>
@@ -110,9 +127,8 @@ window.location.href = "<%=path%>/login.jsp";
     </div>
     <%@ include  file="bottom.jsp"%>
 </div>
-<script src="js/jquery.min.js"></script>
-<script src="../../js"></script>
-<script type="text/javascript">  
+<script src="<%=path %>/static/js/jquery.min.js"></script>
+<script type="text/javascript">
 function updateOrder(update){
 	var oid = 'oid'+update;
 	var state1 ='state'+update;
@@ -140,7 +156,7 @@ var countNo;
 function getCount(){
 	$.ajax({  
         type : "post",  
-         url : "<%=path%>/clxjorder!selclxjorderCount.action",  
+         url : "<%=path%>/clxjorder!selclxjorderCount.action",
          data: {"uid":$("#uid").val()},
          dataType: "json",
          async : false,   
@@ -247,7 +263,8 @@ function deleteRows(tabid){
         rowNum=rowNum-1;
         i=i-1;
     }
-} 
+}
+/*分页*/
  function supage(divId, funName, params, curPage, total, pageSize){  
 	    var output = '<div class="pagination" style="margin-top:0px;margin-left:-60px;width:320px;">';    
 	    var pageSize = parseInt(pageSize)>0 ? parseInt(pageSize) : 10;  

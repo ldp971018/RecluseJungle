@@ -131,7 +131,29 @@ public class pageController {
     }
 
     /**
-     *  跳转个人中心
+     * 跳转到月底支出查询（基金会-我要查询）
+     *
+     * @return
+     */
+    @RequestMapping("/pLlist")
+    public String pLlist() {
+        return "qiantai/PLlist";
+    }
+
+    /**
+     * 跳转到款物发放公示（基金会-我要查询）
+     *
+     * @return
+     */
+    @RequestMapping("/pLpublicity")
+    public String pLpublicity() {
+        return "qiantai/PLpublicity";
+    }
+
+
+    /**
+     * 跳转个人中心
+     *
      * @return
      */
     @RequestMapping("userPersonal")
@@ -140,7 +162,7 @@ public class pageController {
     }
 
     /**
-     *  跳转修改密码
+     * 跳转修改密码
      */
     @RequestMapping("userCPassword")
     public String userCPassword() {

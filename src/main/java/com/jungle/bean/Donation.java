@@ -53,4 +53,15 @@ public class Donation {
     public void setDonationtime(Date donationtime) {
         this.donationtime = donationtime;
     }
+
+    @Override
+    public String toString() {
+        return "Donation{" +
+                "id=" + id +
+                ", donationname='" + donationname + '\'' +
+                ", type='" + type + '\'' +
+                ", money=" + money +
+                ", donationtime=" + donationtime +
+                '}';
+    }
 }

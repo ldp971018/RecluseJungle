@@ -27,4 +27,6 @@ public interface DonationMapper {
     int updateByPrimaryKeySelective(Donation record);
 
     int updateByPrimaryKey(Donation record);
+
+    Donation selectDonationCount();
 }
