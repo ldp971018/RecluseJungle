@@ -119,15 +119,6 @@ public class pageController {
         return "qiantai/foundDonations";
     }
 
-    /**
-     * 跳转到求助进度（基金会）
-     *
-     * @return
-     */
-    @RequestMapping("/userPquery")
-    public String userPquery() {
-        return "qiantai/UserPquery";
-    }
 
     /**
      * 跳转到公司列表（基金会）

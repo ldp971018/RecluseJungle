@@ -9,22 +9,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>丛林闲居-用车-填写订单</title>
-<link rel="stylesheet" href="style/cy.css">
-<link rel="stylesheet" href="style/style.css">
-<script src="js/laydate.js"></script>
-<link rel="stylesheet" href="style/laydate.css">
-<link rel="stylesheet" href="js/molv/laydate.css">
+<link rel="stylesheet" href="/static/style/cy.css">
+<link rel="stylesheet" href="/static/style/style.css">
+<script src="/static/js/laydate.js"></script>
+<link rel="stylesheet" href="/static/style/laydate.css">
+<link rel="stylesheet" href="/static/js/molv/laydate.css">
 <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 <!-- 表单验证start -->
-<script src="<%=path %>/js/jquery.js"></script>
-<script src="<%=path %>/js/jquery.validate.js"></script>
-<script src="<%=path%>/js/jquery.metadata.js"></script>
-<script src="<%=path%>/js/messages_cn.js"></script>
-<link rel="stylesheet" href="<%=path%>/css/validation.css">
+<script src="<%=path %>/static/js/jquery.js"></script>
+<script src="<%=path %>/static/js/jquery.validate.js"></script>
+<script src="<%=path%>/static/js/jquery.metadata.js"></script>
+<script src="<%=path%>/static/js/messages_cn.js"></script>
+<link rel="stylesheet" href="<%=path%>/static/css/validation.css">
 <!-- 表单验证stop -->
 </head>
 <body>
-<c:if test="${sessionUser==null }">
+<c:if test="${regUser==null }">
 <script type="text/javascript">
 window.location.href = "<%=path%>/login.jsp";
 </script>
@@ -43,44 +43,44 @@ function loginOut(){
 <p>当前位置：<a href="JungleList.jsp" class="ll">国内丛林</a> > <a
 	href="CarAllModels.jsp" class="ll">用车</a> > <a href="#" class="xz">填写乘车人信息</a></p>
 </div>
-<div><img src="images/yc_03.jpg"></div>
+<div><img src="/static/images/yc_03.jpg"></div>
 <div class="yc-mbx1">
-<p><span>用车</span><img src="images/tj_03.jpg"><span>选择车型</span><img
-	src="images/tj_03.jpg"><span>订单填写</span><img
-	src="images/tj_05.jpg"><i>完成订单</i></p>
+<p><span>用车</span><img src="/static/images/tj_03.jpg"><span>选择车型</span><img
+	src="/static/images/tj_03.jpg"><span>订单填写</span><img
+	src="/static/images/tj_05.jpg"><i>完成订单</i></p>
 </div>
 <div class="yc-title">填写订单</div>
 <form action="<%=path %>/carorder!saveCarorder.action" method="post"
-	id="carorderForm"><input type="hidden" name="carorder.uid"
-	value="${sessionUser.id }" /> <input type="hidden" name="carorder.cid"
+	id="carorderForm"><input type="hidden" name="uid"
+	value="${regUser.id }" /> <input type="hidden" name="cid"
 	value="${carinfoJson.id }" /> <input type="hidden"
-	name="carorder.total" value="${carinfoJson.price }" />
+	name="total" value="${carinfoJson.price }" />
 <div class="yc-main">
 <div class="ym-left">
 <p class="tics">选择用车方式</p>
 <table class="one-tab">
 	<tr>
 		<td>用车日期&nbsp;&nbsp;&nbsp;</td>
-		<td class="ycrq"><input name="carorder.usetime" type="text"
+		<td class="ycrq"><input name="usetime" type="text"
 			id="d241" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 			class="Wdate" style="width: 300px" /></td>
 		<td a></td>
 	</tr>
 	<tr>
 		<td>出发地点&nbsp;&nbsp;&nbsp;</td>
-		<td class="ycrq1"><input name="carorder.startplace" type="text" /></td>
+		<td class="ycrq1"><input name="startplace" type="text" /></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>目的地点&nbsp;&nbsp;&nbsp;</td>
-		<td class="ycrq1"><input name="carorder.endplace" type="text" /></td>
+		<td class="ycrq1"><input name="endplace" type="text" /></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>用车程向&nbsp;&nbsp;&nbsp;</td>
-		<td class="ycrq2"><input name="carorder.useroption" type="radio"
+		<td class="ycrq2"><input name="useroption" type="radio"
 			checked="checked" value="true">&nbsp;&nbsp;单程&nbsp;&nbsp;<input
-			type="radio" name="carorder.useroption" value="false">&nbsp;&nbsp;往返&nbsp;&nbsp;
+			type="radio" name="useroption" value="false">&nbsp;&nbsp;往返&nbsp;&nbsp;
 		</td>
 	</tr>
 </table>
@@ -88,7 +88,7 @@ function loginOut(){
 <table class="two-tab">
 	<tr>
 		<td>乘车人&nbsp;&nbsp;&nbsp;</td>
-		<td class="ycrq3"><input name="carorder.checkperson" type="text" maxlength="4"
+		<td class="ycrq3"><input name="checkperson" type="text" maxlength="4"
 			placeholder="请输入乘车人姓名"></td>
 		<!--<input type="checkbox">保存至常用联系人</td>-->
 		<td></td>
@@ -101,7 +101,7 @@ function loginOut(){
 	</tr>
 	<tr>
 		<td>手机号码&nbsp;&nbsp;&nbsp;</td>
-		<td class="ycrq3"><input name="carorder.checkphone" type="text" maxlength="11"
+		<td class="ycrq3"><input name="checkphone" type="text" maxlength="11"
 			placeholder="请输入乘车人手机号码"></td> 
 		<!--<input type="checkbox">乘车人免费接收提醒短信</td>-->
 		<td></td>
@@ -117,7 +117,7 @@ function loginOut(){
 		<td>
 		<p class="fwly">服务留言&nbsp;&nbsp;&nbsp;</p>
 		</td>
-		<td class="ycrq3"><textarea name="carorder.message"
+		<td class="ycrq3"><textarea name="message"
 			placeholder="例：有小孩一同乘坐，请开慢点"></textarea></td>
 	</tr>
 	<!--
@@ -150,7 +150,7 @@ function loginOut(){
 </ul>
 </div>
 <div class="ym-r2">
-<p><img src="images/11.png"></p>
+<p><img src="/static/images/11.png"></p>
 <p><span>如需帮组请咨询</span></p>
 <p><i>400-688-6798</i></p>
 </div>
@@ -164,9 +164,9 @@ function loginOut(){
 <div class="tcc">
 <div class="cgxd1">
 <div class="cgxd-main">
-<p class="xdcg"><img src="images/xdcg.png"></p>  
-<p class="ddbh">订单编号：<i>${carorder.oid }</i>
-[请牢记您的订单编号]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单总价：<i>${carorder.total }</i>
+<p class="xdcg"><img src="/static/images/xdcg.png"></p>
+<p class="ddbh">订单编号：<i>${oid }</i>
+[请牢记您的订单编号]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单总价：<i>${total }</i>
 （该订单属于线下支付类型）</p>
 <p class="fhdd">您可以：<a href="UserCarOrder.jsp" class="fh">返回我的订单</a>（如有疑问请联系丛林闲居客服QQ:2897968708）</p>
 <p class="wxts"><i>*温馨提示：</i>IE6.0及更低版本浏览器用户请检查您的浏览器是否支持128位密钥长度，如果不支持，请升级您的浏览器（<span>查看如何检查和升级方案</span>）</p>
@@ -181,7 +181,7 @@ function loginOut(){
 <div>
 <p class="sjh"><input type="text" placeholder="手机号"></p>
 <p class="tpyxm"><input type="text" placeholder="图片验证码"><img
-	src="images/yzm_03.png"></p>
+	src="/static/images/yzm_03.png"></p>
 <p class="tpyxm"><input type="text" placeholder="手机验证码"><a
 	href="#">获取验证码</a></p>
 <p><i><a href="#">收不到验证码？重新再发一次</a> </i></p>
@@ -205,39 +205,39 @@ function subForm(){
 $(document).ready(function(){
 	$("#carorderForm").validate({
 		rules: {
-			"carorder.usetime": {
+			"usetime": {
 				required: true
 				},
-		    "carorder.startplace": {
+		    "startplace": {
 		    	required: true
 		   		},
-		   	"carorder.endplace": {
+		   	"endplace": {
 				required: true
 				},
-			"carorder.checkperson": {
+			"checkperson": {
 				required: true,
 				isChinese:true
 				},
-			"carorder.checkphone": {
+			"checkphone": {
 				required: true,
 				isMobile:true
 				}
 		  	},  
 		messages: {
-		  	"carorder.usetime": {
+		  	"usetime": {
 		  		 required: "用车日期不能为空" 
 				},
-		   "carorder.startplace": { 
+		   "startplace": {
 		    	required: "出发点不能为空"
 		  		},
-		  "carorder.endplace": {
+		  "endplace": {
 				required: "目的地点不能为空"
 				},
-		  "carorder.checkperson": {
+		  "checkperson": {
 				required: "乘车人名字不能为空",
 				isChinese:"请输入正确的中文名字"
 				},
-		  "carorder.checkphone": { 
+		  "checkphone": {
 				required: "乘车人手机号码不能为空", 
 				isMobile: "请输入正确的手机号码"
 				}

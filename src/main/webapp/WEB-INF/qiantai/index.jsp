@@ -160,33 +160,33 @@
 
         <div class="taq1">
             <div>
-                <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[0].id}"><img width="466" height="320"
+                <a href="JungleDetails?id=${indexInfo[0].id}"><img width="466" height="320"
                                                                                            src="${clxjBackurl }${indexInfo[0].firstImgBig }"></a>
             </div>
             <span></span><span class="mfcy"><a
-                href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[0].id}">${indexInfo[0].name }</a> </span>
+                href="JungleDetails?id=${indexInfo[0].id}">${indexInfo[0].name }</a> </span>
         </div>
         <div class="taq1 spec">
             <div>
-                <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[1].id}"> <img width="467" height="320"
+                <a href="JungleDetails?id=${indexInfo[1].id}"> <img width="467" height="320"
                                                                                             src="${clxjBackurl }${indexInfo[1].firstImgBig  }"></a>
             </div>
             <span></span><span class="mfcy"><a
-                href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[1].id}">${indexInfo[1].name  }</a> </span>
+                href="JungleDetails?id=${indexInfo[1].id}">${indexInfo[1].name  }</a> </span>
         </div>
         <div class="taq2 spec">
             <div>
                 <div>
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[2].id}"><img width="224" height="141"
+                    <a href="JungleDetails?id=${indexInfo[2].id}"><img width="224" height="141"
                                                                                                src="${clxjBackurl }${indexInfo[2].firstImgBig }"></a>
                     <span></span><span class="mfcy"><a
-                        href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[2].id}">${indexInfo[2].name }</a> </span>
+                        href="JungleDetails?id=${indexInfo[2].id}">${indexInfo[2].name }</a> </span>
                 </div>
                 <div class="spec2">
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[3].id}"><img width="224" height="141"
+                    <a href="JungleDetails?id=${indexInfo[3].id}"><img width="224" height="141"
                                                                                                src="${clxjBackurl }${indexInfo[3].firstImgBig }"></a>
                     <span></span><span class="mfcy"><a
-                        href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${indexInfo[3].id}">${indexInfo[3].name  }</a> </span>
+                        href="JungleDetails?id=${indexInfo[3].id}">${indexInfo[3].name  }</a> </span>
                 </div>
             </div>
         </div>
@@ -202,45 +202,43 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                        <c:forEach items="${listGNCL}" var="domestic">
                             <li><a href="javascript:void(0)"
-                                   onclick="goOther(1,1,'${domestic.address }')">${domestic.introduction }</a></li>
-                        </c:forEach>
+                                   onclick="goOther(1,1,'${listGNCL[0].belongCity }')">${listGNCL[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[0].id}"><img width="467"
+                    <a href="JungleDetails?id=${listGNCL[0].id}"><img width="467"
                                                                                                   height="320"
                                                                                                   src="${clxjBackurl }${listGNCL[0].firstImgBig }"></a>
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[0].id}"><span>${listGNCL[0].name }</span></a>
+                    <a href="JungleDetails?id=${listGNCL[0].id}"><span>${listGNCL[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[1].id}"> <img width="223"
+                            <a href="JungleDetails?id=${listGNCL[1].id}"> <img width="223"
                                                                                                            height="142"
                                                                                                            src="${clxjBackurl }${listGNCL[1].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[1].id}"><span>${listGNCL[1].name }</span></a>
+                            <a href="JungleDetails?id=${listGNCL[1].id}"><span>${listGNCL[1].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[2].id}"><img width="223"
+                            <a href="JungleDetails?id=${listGNCL[2].id}"><img width="223"
                                                                                                           height="141"
                                                                                                           src="${clxjBackurl }${listGNCL[2].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[2].id}"><span>${listGNCL[2].name }</span></a>
+                            <a href="JungleDetails?id=${listGNCL[2].id}"><span>${listGNCL[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[3].id}"><img width="224"
+                            <a href="JungleDetails?id=${listGNCL[3].id}"><img width="224"
                                                                                                           height="142"
                                                                                                           src="${clxjBackurl }${listGNCL[3].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[3].id}"><span>${listGNCL[3].name }</span></a>
+                            <a href="JungleDetails?id=${listGNCL[3].id}"><span>${listGNCL[3].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[4].id}"><img width="224"
+                            <a href="JungleDetails?id=${listGNCL[4].id}"><img width="224"
                                                                                                           height="141"
                                                                                                           src="${clxjBackurl }${listGNCL[4].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNCL[4].id}"><span>${listGNCL[4].name }</span></a>
+                            <a href="JungleDetails?id=${listGNCL[4].id}"><span>${listGNCL[4].name }</span></a>
                         </div>
                     </div>
                 </div>
@@ -249,45 +247,43 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                        <c:forEach items="${listGNXJ}" var="domestic2">
                             <li><a href="javascript:void(0)"
-                                   onclick="goOther(1,0,'${domestic2.address }')">${domestic2.introduction }</a></li>
-                        </c:forEach>
+                                   onclick="goOther(1,0,'${listGNXJ[0].belongCity }')">${listGNXJ[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[0].id}"><img width="467"
+                    <a href="JungleDetails?id=${listGNXJ[0].id}"><img width="467"
                                                                                                   height="320"
                                                                                                   src="${clxjBackurl }${listGNXJ[0].firstImgBig }"></a>
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[0].id}"><span>${listGNXJ[0].name }</span></a>
+                    <a href="JungleDetails?id=${listGNXJ[0].id}"><span>${listGNXJ[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[1].id}"><img width="223"
+                            <a href="JungleDetails?id=${listGNXJ[1].id}"><img width="223"
                                                                                                           height="142"
                                                                                                           src="${clxjBackurl }${listGNXJ[1].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[1].id}"><span>${listGNXJ[1].name }</span></a>
+                            <a href="JungleDetails?id=${listGNXJ[1].id}"><span>${listGNXJ[1].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[2].id}"><img width="223"
+                            <a href="JungleDetails?id=${listGNXJ[2].id}"><img width="223"
                                                                                                           height="141"
                                                                                                           src="${clxjBackurl }${listGNXJ[2].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[2].id}"><span>${listGNXJ[2].name }</span></a>
+                            <a href="JungleDetails?id=${listGNXJ[2].id}"><span>${listGNXJ[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[3].id}"><img width="224"
+                            <a href="JungleDetails?id=${listGNXJ[3].id}"><img width="224"
                                                                                                           height="142"
                                                                                                           src="${clxjBackurl }${listGNXJ[3].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[3].id}"><span>${listGNXJ[3].name }</span></a>
+                            <a href="JungleDetails?id=${listGNXJ[3].id}"><span>${listGNXJ[3].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[4].id}"><img width="224"
+                            <a href="JungleDetails?id=${listGNXJ[4].id}"><img width="224"
                                                                                                           height="141"
                                                                                                           src="${clxjBackurl }${listGNXJ[4].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGNXJ[4].id}"><span>${listGNXJ[4].name }</span></a>
+                            <a href="JungleDetails?id=${listGNXJ[4].id}"><span>${listGNXJ[4].name }</span></a>
                         </div>
                     </div>
                 </div>
@@ -305,45 +301,43 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                        <c:forEach items="${listGWCL}" var="abroad">
                             <li><a href="javascript:void(0)"
-                                   onclick="goOther(0,1,'${abroad.address }')">${abroad.introduction }</a></li>
-                        </c:forEach>
+                                   onclick="goOther(0,1,'${listGWCL[0].belongCity }')">${listGWCL[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[0].id}"><img width="465"
+                    <a href="JungleDetails?id=${listGWCL[0].id}"><img width="465"
                                                                                                   height="320"
                                                                                                   src="${clxjBackurl }${listGWCL[0].firstImgBig }"></a>
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[0].id}"><span>${listGWCL[0].name }</span></a>
+                    <a href="JungleDetails?id=${listGWCL[0].id}"><span>${listGWCL[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[1].id}"><img width="223"
+                            <a href="JungleDetails?id=${listGWCL[1].id}"><img width="223"
                                                                                                           height="142"
                                                                                                           src="${clxjBackurl }${listGWCL[1].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[1].id}"><span>${listGWCL[1].name }</span></a>
+                            <a href="JungleDetails?id=${listGWCL[1].id}"><span>${listGWCL[1].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[2].id}"> <img width="225"
+                            <a href="JungleDetails?id=${listGWCL[2].id}"> <img width="225"
                                                                                                            height="141"
                                                                                                            src="${clxjBackurl }${listGWCL[2].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[2].id}"><span>${listGWCL[2].name }</span></a>
+                            <a href="JungleDetails?id=${listGWCL[2].id}"><span>${listGWCL[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[3].id}"> <img width="224"
+                            <a href="JungleDetails?id=${listGWCL[3].id}"> <img width="224"
                                                                                                            height="142"
                                                                                                            src="${clxjBackurl }${listGWCL[3].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[3].id}"><span>${listGWCL[3].name }</span></a>
+                            <a href="JungleDetails?id=${listGWCL[3].id}"><span>${listGWCL[3].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[4].id}"> <img width="224"
+                            <a href="JungleDetails?id=${listGWCL[4].id}"> <img width="224"
                                                                                                            height="141"
                                                                                                            src="${clxjBackurl }${listGWCL[4].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWCL[4].id}"><span>${listGWCL[4].name }</span></a>
+                            <a href="JungleDetails?id=${listGWCL[4].id}"><span>${listGWCL[4].name }</span></a>
                         </div>
                     </div>
                 </div>
@@ -352,45 +346,43 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                        <c:forEach items="${listGWXJ}" var="abroad2">
                             <li><a href="javascript:void(0)"
-                                   onclick="goOther(0,0,'${abroad2.address }')">${abroad2.introduction }</a></li>
-                        </c:forEach>
+                                   onclick="goOther(0,0,'${listGWXJ[0].belongCity }')">${listGWXJ[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[0].id}"><img width="465"
+                    <a href="JungleDetails?id=${listGWXJ[0].id}"><img width="465"
                                                                                                   height="320"
                                                                                                   src="${clxjBackurl }${listGWXJ[0].firstImgBig }"></a>
-                    <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[0].id}"><span>${listGWXJ[0].name }</span></a>
+                    <a href="JungleDetails?id=${listGWXJ[0].id}"><span>${listGWXJ[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[1].id}"><img width="223"
+                            <a href="JungleDetails?id=${listGWXJ[1].id}"><img width="223"
                                                                                                           height="142"
                                                                                                           src="${clxjBackurl }${listGWXJ[1].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[1].id}"><span>${listGWXJ[1].name }</span></a>
+                            <a href="JungleDetails?id=${listGWXJ[1].id}"><span>${listGWXJ[1].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[2].id}"><img width="225"
+                            <a href="JungleDetails?id=${listGWXJ[2].id}"><img width="225"
                                                                                                           height="141"
                                                                                                           src="${clxjBackurl }${listGWXJ[2].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[2].id}"><span>${listGWXJ[2].name }</span></a>
+                            <a href="JungleDetails?id=${listGWXJ[2].id}"><span>${listGWXJ[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[3].id}"><img width="224"
+                            <a href="JungleDetails?id=${listGWXJ[3].id}"><img width="224"
                                                                                                           height="142"
                                                                                                           src="${clxjBackurl }${listGWXJ[3].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[3].id}"><span>${listGWXJ[3].name }</span></a>
+                            <a href="JungleDetails?id=${listGWXJ[3].id}"><span>${listGWXJ[3].name }</span></a>
                         </div>
                         <div>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[4].id}"> <img width="224"
+                            <a href="JungleDetails?id=${listGWXJ[4].id}"> <img width="224"
                                                                                                            height="141"
                                                                                                            src="${clxjBackurl }${listGWXJ[4].firstImgBig }"></a>
-                            <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${listGWXJ[4].id}"><span>${listGWXJ[4].name }</span></a>
+                            <a href="JungleDetails?id=${listGWXJ[4].id}"><span>${listGWXJ[4].name }</span></a>
                         </div>
                     </div>
                 </div>
@@ -420,9 +412,9 @@
             </form>
         </div>
         <div class="ic-con">
-            <p class="ckax"><img src="${path}/images/07.png">实时查看基金会总爱心金额</p>
+            <p class="ckax"><img src="${path}/static/images/07.png">实时查看基金会总爱心金额</p>
             <p class="money">${moneyCountStr }</p>
-            <p><img src="${path}/images/jk_03.jpg"></p>
+            <p><img src="${path}/static/images/jk_03.jpg"></p>
             <p class="xz"><span class="one"><a href="${path}/qiantai/PLpublicity.jsp">捐款支出细则</a> </span><span
                     class="two"><a href="${path}/qiantai/FoundIndex.jsp">基金会简介</a> </span></p>
         </div>
@@ -679,9 +671,9 @@
             type1 = false;
         }
         if (type2 == 1) {
-            window.location.href = "<%=path%>/clxjmain!selClOfPage.action?clxjmain.type2=true&clxjmain.type1=" + type1 + "&city=" + city;
+            window.location.href = "selectCLByIndex?type2=true&type1=" + type1 + "&city=" + city;
         } else {
-            window.location.href = "<%=path%>/clxjmain!selXjOfPage.action?clxjmain.type2=false&clxjmain.type1=" + type1 + "&city=" + city;
+            window.location.href = "selectJungleByIndex?type2=false&type1=" + type1 + "&city=" + city;
         }
     }
 </script>

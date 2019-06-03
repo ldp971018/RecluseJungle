@@ -1,5 +1,7 @@
 package com.jungle.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Clxjorder {
@@ -8,9 +10,9 @@ public class Clxjorder {
     private Integer cid;
 
     private Integer uid;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date checkstartdate;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date checkenddate;
 
     private Long total;

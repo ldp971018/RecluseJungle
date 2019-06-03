@@ -54,10 +54,9 @@ function Alllogin(){
 	var Request = new Object();
 		Request = GetRequest();
 		var returnUrl;
-		returnUrl = Request['clxjmain.id'];     
-	window.location.href = "login.jsp?returnurl=/clxjmain!selClxjOfId.action&clxjmain.id="+returnUrl; 
-		
-	
+		returnUrl = Request['id'];
+	window.location.href = "/login?CLXJId="+returnUrl;
+
 } 
 function loginOut(){
 	var Request = new Object();
@@ -71,9 +70,9 @@ function loginOut(){
 
 <div class="yc-txdd">
     <div class="yc-mbx"> 
-        <p>当前位置：<a href="javascript:void(0)" class="ll" onclick="goList()"><c:if test="${clxjmainJson.type1 == 1}">国内</c:if><c:if test="${clxjmainJson.type1 ==0}">国际</c:if><c:if test="${clxjmainJson.type2 == 1}">丛林</c:if><c:if test="${clxjmainJson.type2 == 0}">闲居</c:if></a> >  <a href="javascript:void(0)" class="xz">${clxjmainJson.name }</a></p>
+        <p>当前位置：<a href="javascript:void(0)" class="ll" onclick="goList()"><c:if test="${clxjmainJson.type1}">国内</c:if><c:if test="${!clxjmainJson.type1}">国际</c:if><c:if test="${clxjmainJson.type2}">丛林</c:if><c:if test="${!clxjmainJson.type2}">闲居</c:if></a> >  <a href="javascript:void(0)" class="xz">${clxjmainJson.name }</a></p>
     </div>
-    <div><img src="images/xxy_03.jpg"></div>
+    <div><img src="/static/images/xxy_03.jpg"></div>
 </div>
  <!--详情页（丛林）-->
         <div class="xqy-top">
@@ -92,7 +91,7 @@ function loginOut(){
                 <div class="ad-nav">
                     <div class="ad-thumbs">
                         <ul class="ad-thumb-list">
-                        <c:forEach items="${urlStr }" var="pl">
+                        <c:forEach items="${clxjmainJson.firstImgMin }" var="pl">
                             <li>  
                                 <a href="${clxjBackurl }${pl}">
                                     <img width="75" height="50" src="${clxjBackurl }${pl}" class="image0">
@@ -108,13 +107,13 @@ function loginOut(){
         <div class="xqyt-right">
             <div class="xr-top">
                 <!-- <div class="hpl"><i class="bfl">98%</i><i class="hp">好评率</i></div> -->
-                <span class="dp">共<i>${clxjmainJson.ccount }</i>点评</span>|
-                <span class="fwzs"><img src="images/18.png">服务指数：<i class="fs">${clxjmainJson.hpl }</i><i class="yg">/10分</i></span>
+                <span class="dp">共<i>${clxjmainJson.reserveNum }</i>点评</span>|
+                <span class="fwzs"><img src="/static/images/18.png">服务指数：<i class="fs"><%--${clxjmainJson.hpl }--%></i><i class="yg">/10分</i></span>
             </div>
             <div class="xr-bottom">
-                <!-- <div class="tk">
+               <%--<div class="tk">
                     <p class="syzc">寺院主持</p>
-                    <p class="xjq"><a href="#">学诚法师</a><span>1966年生于福建仙游，1982于莆田广化寺定海长
+                    <p class="xjq"><a href="#">学诚法师</a><span>老衲1966年生于福建仙游，1982于莆田广化寺定海长
                        老座下剃度，并依止圆拙老法师修学..</span> </p>
                 </div>
                 <div class="tk">
@@ -124,10 +123,10 @@ function loginOut(){
                 <div class="tk">
                     <p class="syzc">交通路线</p>
                     <p class="xjq">地铁4号线北宫门站，换乘346路公交车至终</p>
-                </div> -->  
+                </div>--%>
                <div class="tk rjj"> 
                     <p>日均价：<i style="font-size: 25px;"><c:if test="${clxjmainJson.price ==0}">随缘</c:if><c:if test="${clxjmainJson.price !=0}">${clxjmainJson.price}</c:if></i>
-                    <c:if test="${regUser!=null }"><a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${clxjmainJson.id}&isOrder=2">立即预定</a> </c:if>
+                    <c:if test="${regUser!=null }"><a href="ResFiorder?id=${clxjmainJson.id}">立即预定</a> </c:if>
                      <c:if test="${regUser==null }"><a href="#" onclick="Alllogin()">请先登录</a> </c:if>
                      </p> 
                 </div> 
@@ -142,16 +141,16 @@ function loginOut(){
         <div class="xqy-content"> 
             <div class="xqycon-left">
                 <p class="cljj">
-                    <c:if test="${clxjmainJson.type2 == 1}">丛林</c:if><c:if test="${clxjmainJson.type2 == 0}">闲居</c:if>简介<input type="hidden" id="cid" value="${clxjmainJson.id }"/>
+                    <c:if test="${clxjmainJson.type2}">丛林</c:if><c:if test="${!clxjmainJson.type2}">闲居</c:if>简介<input type="hidden" id="cid" value="${clxjmainJson.id }"/>
                 </p>
                 <p class="jj"> 
                 	${clxjmainJson.introduction }
                 </p>
-                <c:if test="${clxjmainJson.type2==1 }">
+                <c:if test="${clxjmainJson.type2}">
                 <div class="xr-bottom"> 
                     <div>
                         <p class="syzc">寺院主持</p>
-                        <p class="xjq1"><a href="#">${clxjmainJson.abbot }</a><span>${clxjmainJson.abbotresume }<span> </p>
+                        <p class="xjq1"><a href="#">${clxjmainJson.abbot }</a><span>${clxjmainJson.abbotresume }</span> </p>
                     </div>
                     <div class="tk">
                         <p class="syzc">开放时间</p>
@@ -176,7 +175,7 @@ function loginOut(){
       					<div class="xxy-mian"> 
       					
       					<!-- 所有评论 -->
-                        <div class="xm-one"">  
+                        <div class="xm-one">
                             <div class="xm-top" id="commentAll" style="border:none;min-height:0px;font-size:15px;">
                             </div>
                         <div class="fenye1">
@@ -225,11 +224,11 @@ function loginOut(){
             </div>
             <div class="xqycon-right">
                 
-                <p class="zbxj"><img src="images/xxy1_03.jpg">周边<c:if test="${clxjmainJson.type2 == 1}">丛林</c:if><c:if test="${clxjmainJson.type2 == 0}">闲居</c:if></p>
+                <p class="zbxj"><img src="/static/images/xxy1_03.jpg">周边<c:if test="${clxjmainJson.type2}">丛林</c:if><c:if test="${!clxjmainJson.type2}">闲居</c:if></p>
                 <c:if test="${clxjmainJsons ==null}">周边暂时无推荐哦</c:if> 
                 <c:forEach items="${clxjmainJsons }"  var="clxj"  end="9">  
                 <div class="jd" >      
-                    <p><img style="cursor:pointer;" onclick="goOther(${clxj.id})" height="70" width="100" src="${clxjBackurl }${clxj.first_img_min}"> </p>
+                    <p><img style="cursor:pointer;" onclick="goOther(${clxj.id})" height="70" width="100" src="${clxjBackurl }${clxj.firstImgMin}"> </p>
                     <p class="js"><span>${clxj.name}</span><span class="jdy"></span></p>
                     <p class="qian">￥<i><c:if test="${clxj.price==0}">随缘</c:if><c:if test="${clxj.price!=0}">${clxj.price}</c:if></i></p>
                 </div>      
@@ -241,7 +240,7 @@ function loginOut(){
 <div class="tcc none">
     <div class="cgxd1">
         <div class="cgxd-main">
-            <p class="xdcg"><img src="images/xdcg.png">  <img src="images/14_01.png" class="close"></p>
+            <p class="xdcg"><img src="/static/images/xdcg.png">  <img src="/static/images/14_01.png" class="close"></p>
             <p class="ddbh">订单编号：<i>WO20121015141125</i> [请牢记您的订单编号]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单总价：<i>9800元</i> （该订单属于线下支付类型）</p>
             <p class="fhdd">您可以：<a href="#" class="fh">返回我的订单</a><a href="#" class="jx">继续预定用车</a>（如有疑问请联系丛林闲居客服QQ:88888888）</p>
             <p class="wxts"><i>*温馨提示：</i>IE6.0及更低版本浏览器用户请检查您的浏览器是否支持128位密钥长度，如果不支持，请升级您的浏览器（<span>查看如何检查和升级方案</span>）</p>
@@ -256,7 +255,7 @@ function loginOut(){
                 </p>
                 <div>
                     <p class="sjh"><input type="text" placeholder="手机号"></p>
-                    <p class="tpyxm"><input type="text" placeholder="图片验证码"><img src="images/yzm_03.png"> </p>
+                    <p class="tpyxm"><input type="text" placeholder="图片验证码"><img src="/static/images/yzm_03.png"> </p>
                     <p class="tpyxm"><input type="text" placeholder="手机验证码"><a href="#">获取验证码</a> </p>
                     <p><i><a href="#">收不到验证码？重新再发一次</a> </i></p>
                     <p><input type="submit" value="确&nbsp;&nbsp;定"></p>
@@ -529,7 +528,7 @@ function goList(){
 	window.location.href = url;
 }
 function goOther(clxjid){
-	window.location.href = "<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id="+clxjid;    
+	window.location.href = "JungleDetails?id="+clxjid;
 }
 
 function showComment(){

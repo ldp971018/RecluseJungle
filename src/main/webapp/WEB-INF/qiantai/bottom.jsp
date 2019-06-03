@@ -43,7 +43,7 @@
 <footer>
     <ul>
         <li>江西省丛林闲居投资有限公司，工业和信息化部网站备案许可证编号：赣ICP备19070915号</li>
-        <li>Copyright © 2109 <a href="#">丛林闲居</a>  版权所有 3wcl.com | 客服中心：400-688-6798</li>
+        <li>Copyright © 2018 <a href="#">丛林闲居</a>  版权所有 3wcl.com | 客服中心：400-688-6798</li>
     </ul>
     <p><a href="#"><img src="../../static/images/index_48.jpg"></a><a href="#"><img src="../../static/images/index_50.jpg"></a><a href="#"><img src="../../static/images/index_52.jpg"></a> <a href="#"><img src="../../static/images/index_54.jpg"></a><a href="#"><img src="../../static/images/index_56.jpg"></a> <a href="#"><img src="../../static/images/index_58.jpg"></a>    </p>
 </footer>
