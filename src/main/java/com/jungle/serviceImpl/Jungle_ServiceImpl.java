@@ -1,12 +1,10 @@
 package com.jungle.serviceImpl;
 
-import com.jungle.bean.City;
-import com.jungle.bean.Citygroup;
-import com.jungle.bean.Clxjmain;
-import com.jungle.bean.ClxjmainExample;
+import com.jungle.bean.*;
 import com.jungle.dao.CityMapper;
 import com.jungle.dao.CitygroupMapper;
 import com.jungle.dao.ClxjmainMapper;
+import com.jungle.dao.ClxjorderMapper;
 import com.jungle.service.Jungle_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +20,8 @@ public class Jungle_ServiceImpl implements Jungle_Service {
     private ClxjmainMapper clxjmainMapper;
     @Autowired
     private CitygroupMapper citygroupMapper;
+    @Autowired
+    private ClxjorderMapper clxjorderMapper;
     @Autowired
     private CityMapper cityMapper;
     //查询地区并分类
@@ -86,6 +86,10 @@ public class Jungle_ServiceImpl implements Jungle_Service {
         return map;
     }
 
+    /**
+     * 查询所有城市
+     * @return
+     */
     @Override
     public List<City> selectCityTypeAll() {
         List<City> list = cityMapper.selectByExample(null);
@@ -101,5 +105,42 @@ public class Jungle_ServiceImpl implements Jungle_Service {
     public List<Clxjmain> selectJungle(Clxjmain clxjmain){
         List<Clxjmain> list = clxjmainMapper.selectByWhere(clxjmain);
         return list;
+    }
+
+    /**
+     * 根据id查询丛林闲居信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Clxjmain JungleDetailsById(Integer id) {
+        Clxjmain clxjmain=clxjmainMapper.selectByPrimaryKey(id);
+        return clxjmain;
+    }
+
+    /**
+     * 添加订单
+     * @param clxjorder
+     * @return
+     */
+    @Override
+    public boolean addOrder(Clxjorder clxjorder) {
+        int flag=clxjorderMapper.insert(clxjorder);
+        if(flag==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 根据丛林id查询丛林闲居信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Clxjmain selectClxjmainById(Integer id) {
+        Clxjmain clxjmain=clxjmainMapper.selectByPrimaryKey(id);
+        return clxjmain;
     }
 }
