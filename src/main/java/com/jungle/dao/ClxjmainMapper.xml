@@ -125,7 +125,7 @@
       <if test="type2!=null">
         and type2=${type2}
       </if>
-      <if test="createtime!=null">
+      <if test="createtime!=null and createtime!=''">
         <bind name="createtime" value="createtime"></bind>
         and createtime &gt;= #{createtime}
       </if>

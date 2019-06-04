@@ -1,5 +1,7 @@
 package com.jungle.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,9 +11,9 @@ public class Clxjorder implements Serializable {
     private Integer cid;
 
     private Integer uid;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date checkstartdate;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date checkenddate;
 
     private Long total;
@@ -27,6 +29,16 @@ public class Clxjorder implements Serializable {
     private Integer state;
 
     private Date reservetime;
+
+    private Carinfo carinfo;
+
+    public Carinfo getCarinfo() {
+        return carinfo;
+    }
+
+    public void setCarinfo(Carinfo carinfo) {
+        this.carinfo = carinfo;
+    }
 
     public String getOid() {
         return oid;

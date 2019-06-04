@@ -30,6 +30,16 @@ public class Carorder implements Serializable {
 
     private Date reservetime;
 
+    private  Carinfo carinfo;
+
+    public Carinfo getCarinfo() {
+        return carinfo;
+    }
+
+    public void setCarinfo(Carinfo carinfo) {
+        this.carinfo = carinfo;
+    }
+
     public String getOid() {
         return oid;
     }

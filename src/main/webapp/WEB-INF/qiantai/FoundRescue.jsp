@@ -287,7 +287,7 @@
                             <img src="<%=path%>/static/images/brower_07.jpg">
                         </div>
                     </a>
-                    <a href="/userPquery">
+                    <a href="showAllHelpinfo">
                         <div>
                             <img src="<%=path%>/static/images/brower_19.jpg" class="enheng" style="margin-top: 23px;">
                             <p>求助进度</p>

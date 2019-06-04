@@ -98,10 +98,10 @@
     <c:forEach items="${JungleList}" var="x">
         <div class="lby-xy">
             <div class="lby-left">
-                <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${x.id}"><img width="296" height="188" src=${clxjBackurl }${x.firstImgMin }></a>
+                <a href="JungleDetails?id=${x.id}"><img width="296" height="188" src=${clxjBackurl }${x.firstImgMin }></a>
             </div>
             <div class="lby-right">
-                <p class="title"><a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${x.id}">${x.name }</a></p>
+                <p class="title"><a href="JungleDetails?id=${x.id}">${x.name }</a></p>
                 <p class="con">${x.introduction }</p>
                 <p class="address">位  置:${x.address }</p>
             </div>
@@ -117,7 +117,7 @@
                     </p>
                     <p class="yd">
                         <span class="mony">${x.price }<i>/晚</i></span>
-                        <a href="<%=path%>/clxjmain!selClxjOfId.action?clxjmain.id=${x.id}"><span class="dj">预定</span></a>
+                        <a href="JungleDetails?id=${x.id}"><span class="dj">预定</span></a>
                     </p>
                 </div>
             </div>

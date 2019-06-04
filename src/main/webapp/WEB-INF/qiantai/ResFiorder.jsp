@@ -9,10 +9,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>丛林闲居-订房-填写订单</title>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="/static/style/cy.css">
+    <link rel="stylesheet" href="/static/style/style.css">
+    <script src="${path}/static/js/laydate.js"></script>
+    <link rel="stylesheet" href="${path}/static/style/laydate.css">
     <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
-<script src="<%=path %>/js/jquery.js"></script>
+<script src="<%=path %>/static/js/jquery.js"></script>
 </head> 
 <body style="background-color: #e7f2ff;">
 <script language="JavaScript">
@@ -20,17 +22,17 @@
 </script>
 <!--登录页TOP-->
 <div class="index-top1">
-<c:if test="${sessionUser==null }">
+<c:if test="${regUser==null }">
 <script type="text/javascript">
-window.location.href = "<%=path%>/login.jsp"; 
+window.location.href = "/login.jsp";
 </script>
 </c:if>
     <div class="left">
-        <span class="one"><a href="                   "><img src="images/logo1.png"></a></span> 
+        <span class="one"><a href="                   "><img src="/static/images/logo1.png"></a></span>
     </div>
     <div class="right1">
         <div class="three1">
-            <span><img src="images/index_03.png"></span>
+            <span><img src="/static/images/index_03.png"></span>
             <ul>
                 <li class="rx">客户服务热线:</li>
                 <li class="phone">400-688-6798</li>
@@ -40,15 +42,15 @@ window.location.href = "<%=path%>/login.jsp";
 </div>
 <div class="df-txdd">
     <div class="dt-main">
-    <form action="<%=path %>/clxjorder!addOrder.action" method="post" id="orderForm">
+    <form action="addOrder" method="post" id="orderForm">
         <div class="dtm-left">
             <div class="top">
-            	<input type ="hidden" name="clxjorder.cid" id="cid" value="${clxjmainJson.id }"/>
-            	<input type ="hidden" name="clxjorder.uid"  value="${sessionUser.id }"/>
-            	<input type ="hidden" name="clxjorder.total" id="total"/>
-            	<input type ="hidden" name="clxjorder.state"   value="1"/>
+            	<input type ="hidden" name="cid" id="cid" value="${clxjmainJson.id }"/>
+            	<input type ="hidden" name="uid"  value="${regUser.id }"/>
+            	<input type ="hidden" name="total" id="total" value="${clxjmainJson.price }"/>
+            	<input type ="hidden" name="state"   value="1"/>
             	<input type ="hidden" name="type2"   value="${clxjmainJson.type2 }"/>
-                <p class="one"><img src="images/txdd_03.jpg">${clxjmainJson.name }</p>
+                <p class="one"><img src="/static/images/txdd_03.jpg">${clxjmainJson.name }</p>
                 <p class="two">地址:${clxjmainJson.address }</p>
             </div>
             <div class="second">
@@ -66,30 +68,30 @@ window.location.href = "<%=path%>/login.jsp";
                     </p> -->
                     <!-- <p class="kf1">客房1：豪华中庭房</p> -->
                     <p class="time kfsl">入住时间：
-       				 <input id="d5221" name="clxjorder.checkstartdate"  class="Wdate" type="text" onFocus="var d5222=$dp.$('d5222');WdatePicker({onpicked:function(){d5222.focus();},maxDate:'#F{$dp.$D(\'d5222\')}',minDate:'%y-%M-{%d}'})" />
+       				 <input id="d5221" name="checkstartdate"  placeholder="年/月/日" class="Wdate laydate-icon" type="text" onFocus="var d5222=$dp.$('d5222');WdatePicker({onpicked:function(){d5222.focus();},maxDate:'#F{$dp.$D(\'d5222\')}',minDate:'%y-%M-{%d}'})" />
 						至
-					<input id="d5222" name="clxjorder.checkenddate" class="Wdate" type="text"  onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d5221\')}',onpicking:function(dp){checkDate(dp.cal.getNewDateStr(),${clxjmainJson.price })}})" /><em id="em" style="color: red;"></em>
+					<input id="d5222" name="checkenddate"  placeholder="年/月/日" class="Wdate laydate-icon" type="text"  onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d5221\')}',onpicking:function(dp){checkDate(dp.cal.getNewDateStr(),${clxjmainJson.price })}})" /><em id="em" style="color: red;"></em>
        				 </p> 
-                    <p class="kfs2 txxm">入住人姓名：<input name="clxjorder.checkperson" id="checkperson" onblur="check('checkperson')" type="text" placeholder="如：张三" style="height:28px;"><i>(请填写实际一名入住人姓名)</i></p> 
+                    <p class="kfs2 txxm">入住人姓名：<input name="checkperson" id="checkperson" onblur="check('checkperson')" type="text" placeholder="如：张三" style="height:28px;"><i>(请填写实际一名入住人姓名)</i></p>
                     <!-- <p class="kfs3 ">房型：200*200cm大床/120*200cm双床</p> --><br/>  
-                    <p class="zyts"><span class="one"><img src="images/icon-important.png"></span><span class="two">重要提示：每位在丛林或闲居居住过的人，在离开时必须以入住信息中“联系人”的名字或登录账号为名字，向江西济缘慈善基金会捐款人民币30元（多捐不限）。否则，系统将会自动将您列入不受欢迎的人。</span> </p>
+                    <p class="zyts"><span class="one"><img src="/static/images/icon-important.png"></span><span class="two">重要提示：每位在丛林或闲居居住过的人，在离开时必须以入住信息中“联系人”的名字或登录账号为名字，向江西济缘慈善基金会捐款人民币30元（多捐不限）。否则，系统将会自动将您列入不受欢迎的人。</span> </p>
                 </div>
                 <div class="df-rzxx">
                     <p>入住信息：</p>
                     <table>
                         <tr>  
                             <td>联系人:</td>
-                            <td><input type="text" name="clxjorder.relperson" id="relperson" onblur="check('relperson')"></td>
+                            <td><input type="text" name="relperson" id="relperson" onblur="check('relperson')"></td>
                             <td>请填写真实姓名</td>
                         </tr>
                         <tr>
                             <td>电话号码:</td>
-                            <td><input type="text" name="clxjorder.relphone" maxlength="11" id="relphone" onblur="check('relphone')"></td>
+                            <td><input type="text" name="relphone" maxlength="11" id="relphone" onblur="check('relphone')"></td>
                             <td>用于接收确认信息</td>
                         </tr>
                         <tr>
                             <td>邮箱:</td>
-                            <td><input type="text" name="clxjorder.relemail" id="relemail" onblur="check('relemail')"></td>
+                            <td><input type="text" name="relemail" id="relemail" onblur="check('relemail')"></td>
                             <td>用于接受确认邮件</td>
                         </tr>
                     </table>
@@ -116,20 +118,20 @@ window.location.href = "<%=path%>/login.jsp";
                 </ul>   
             </div>
             <div class="tjdd">
-                <input id="sub" type="button" value="提交订单" onclick="subForm()"> 
+                <input id="sub" type="button" value="提交订单" onclick="subForm()">
             </div>
         </div> 
         </form>
         <div class="dtm-right">
             <div class="dr-main">
                 <div class="top">
-                    <div><span class="one">1 </span><img src="images/xj_03.jpg"> <span class="two">2</span></div>
+                    <div><span class="one">1 </span><img src="/static/images/xj_03.jpg"> <span class="two">2</span></div>
                     <p class="special">填写订单</p><p>订单完成</p>
                 </div>
                 <div class="bottom">
                     <div class="df-sl">您预定了<i>1</i>间客房</div>
                     <div class="df-main">
-                        <img width="245" height="111" src="${clxjBackurl }${clxjmainJson.first_img_min }">
+                        <img width="245" height="111" src="${clxjBackurl }${clxjmainJson.firstImgMin }">
                         <!-- <ul>
                             <li>房   型：特惠大床房</li>
                             <li>床   型：大床1.5米</li>
@@ -164,10 +166,15 @@ window.location.href = "<%=path%>/login.jsp";
         <li>江西省丛林闲居投资有限公司，工业和信息化部网站备案许可证编号：赣ICP备15010915号</li>
         <li>Copyright © 2015 <a href="#">丛林闲居</a>  版权所有 3wcl.com | 客服中心：400-688-6798</li>
     </ul>
-    <p><a href="#"><img src="images/index_48.jpg"></a><a href="#"><img src="images/index_50.jpg"></a><a href="#"><img src="images/index_52.jpg"></a> <a href="#"><img src="images/index_54.jpg"></a><a href="#"><img src="images/index_56.jpg"></a> <a href="#"><img src="images/index_58.jpg"></a>    </p>
+    <p><a href="#"><img src="/static/images/index_48.jpg"></a><a href="#"><img src="/static/images/index_50.jpg"></a><a href="#"><img src="/static/images/index_52.jpg"></a> <a href="#"><img src="/static/images/index_54.jpg"></a><a href="#"><img src="/static/images/index_56.jpg"></a> <a href="#"><img src="/static/images/index_58.jpg"></a>    </p>
 </footer>
 <script type="text/javascript" src="<%=path %>/static/js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
+    !function(){
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#d5221'});//绑定元素
+        laydate({elem: '#d5222'});//绑定元素
+    }();
 	var checks = false;
 		function checkDate(time,price){ 
 			var d5221 = document.getElementById("d5221").value;
@@ -176,7 +183,7 @@ window.location.href = "<%=path%>/login.jsp";
 			var priceem = document.getElementById("priceem");
 			var total = document.getElementById("total");
 			$.post("<%=path %>/clxjorder!checkOrder.action",
-					   {"clxjorder.checkstartdate":d5221,"clxjorder.checkenddate":time,"clxjorder.cid":cid},
+					   {"checkstartdate":d5221,"checkenddate":time,"cid":cid},
 					  function(result){
 						  if(result == null){
 							  em.innerHTML = "&nbsp;&nbsp;该时段已经被人预定，请更改";
@@ -264,7 +271,7 @@ window.location.href = "<%=path%>/login.jsp";
 		var sub = document.getElementById("sub");
 		if(d5221==""||d5221==null||d5222==""||d5222==null){
 			alert("请选择预约时间");
-			checks = false; 
+			checks = false;
 		}else{
 		checkDate(d5221,price);
 		}
