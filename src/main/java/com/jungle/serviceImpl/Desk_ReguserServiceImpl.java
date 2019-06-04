@@ -4,7 +4,7 @@ import com.jungle.bean.Reguser;
 import com.jungle.bean.ReguserExample;
 import com.jungle.dao.ReguserMapper;
 import com.jungle.service.Desk_ReguserService;
-import com.util.MD5_Util;
+import com.jungle.util.MD5_Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

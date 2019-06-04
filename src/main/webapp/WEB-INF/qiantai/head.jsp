@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ page import="com.util.DateUtils" %>
+<%@ page import="com.jungle.util.DateUtils" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:directive.page import="java.util.Calendar"/>
 <%
@@ -59,7 +59,7 @@
     <div class="index-top3">
         <div class="left">
             <span class="one"><a href=""><img width="158" height="64"
-                                                                 src="<%=path%>/static/images/logo1.png"></a></span>
+                                              src="<%=path%>/static/images/logo1.png"></a></span>
             <span class="two"><img src="<%=path%>/static/images/index_q.png"></span>
 
             <div class="three">
@@ -108,7 +108,7 @@
     function dateTime() {
         var date = new Date();
         var time = "" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        $("#dateTime").html("&emsp;&emsp;&emsp;<font color='white'>" + time + "</font>");
+        jQuery("#dateTime").html("&emsp;&emsp;&emsp;<font color='white'>" + time + "</font>");
         setTimeout(dateTime, 1000);
     }
 </script>

@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Organization {
+public class Organization implements Serializable {
     private Integer orgId;
 
     private String orgName;

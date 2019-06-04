@@ -91,8 +91,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, name, sex, age, idcard, phonenum, email, address, income, basicliving, applymoney, 
-    fileurl, applycontent, applystatus, applytype, time, uid, applymoneyusertime, vouchname, 
+    id, name, sex, age, idcard, phonenum, email, address, income, basicliving, applymoney,
+    fileurl, applycontent, applystatus, applytype, time, uid, applymoneyusertime, vouchname,
     vouchidcard, vouchaddress, vouchcompany, vouchphonenum, vouchmobile, vouchdddress
   </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jungle.bean.HelpinfoExample">

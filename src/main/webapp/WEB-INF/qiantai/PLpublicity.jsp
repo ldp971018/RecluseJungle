@@ -8,12 +8,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>丛林闲居-公示列表-款物发放公示</title>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
-    <script src="js/laydate.js"></script>
-    <link rel="stylesheet" href="style/laydate.css">
-    <link rel="stylesheet" href="js/molv/laydate.css">
-
+    <%--<link rel="stylesheet" href="style/cy.css">--%>
+    <%--<link rel="stylesheet" href="style/style.css">--%>
+    <%--<script src="js/laydate.js"></script>--%>
+    <%--<link rel="stylesheet" href="style/laydate.css">--%>
+    <%--<link rel="stylesheet" href="js/molv/laydate.css">--%>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
     <style rel="stylesheet">
         .pagination {
             font-family: Tahoma;
@@ -71,15 +73,6 @@
 
         <!--首页banner-->
         <jsp:include page="head.jsp"/>
-        <script type="text/javascript">
-            function Alllogin() {
-                window.location.href = "login.jsp?returnurl=/PLpublicity.jsp";
-            }
-
-            function loginOut() {
-                window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/PLpublicity.jsp";
-            }
-        </script>
         <!--首页轮播图-->
 
 
@@ -102,37 +95,20 @@
 
                     <div class="jjh-jzfz">
                         <p><span>捐款人：<input type="text" class="esg78" id="donationname"
-                                            name="grant.donationname"></span><span>受助人：<input type="text"
-                                                                                              id="recipients"
-                                                                                              class="esg"
-                                                                                              name="grant.recipients"></span>
+                                            name="donationname"></span><span>受助人：<input type="text"
+                                                                                        id="recipients"
+                                                                                        class="esg"
+                                                                                        name="recipients"></span>
                         </p>
-                        <p><span>捐款时间：<input name="startTime" class="laydate-icon ts" id="demo1" value=""
-                                             style="width:95px;">&nbsp;&nbsp;到&nbsp;<input name="endTime"
-                                                                                           class="laydate-icon"
-                                                                                           id="demo2" value=""
-                                                                                           style="width:95px;"> </span><span><input
-                                type="button" value="开始查询" class="esg2" id="cx"></span></p>
+                        <p><span style="float: left">捐款时间：</span>
+                            <input type="text" class="layui-input" id="donationTime" placeholder="yyyy-MM-dd"
+                                   name="donationTime" style="width:228px;border-radius: 5px;float: left">
+                            <span>&emsp;<input
+                                    type="button" value="开始查询" class="layui-btn layui-btn-normal layui-btn-xm"
+                                    onclick="getPLpublicity()" style="margin-top: 0px"/></span></p>
                     </div>
-                    <p class="zg">总计<span id="c4"></span>条数据10/页</p>
-                    <div class="jzfj-gslb">
-                        <table border="1px solid #cccccc" style="border-bottom:none">
-                            <thead>
-                            <td>序号</td>
-                            <td>捐款人</td>
-                            <td>物品</td>
-                            <td>数量</td>
-                            <td>价值</td>
-                            <td>使用指向</td>
-                            <td>受助人</td>
-                            <td>捐赠时间</td>
-                            </thead>
-                        </table>
-
-                        <table border="1px solid #cccccc" id="commentAll">
-
-                        </table>
-
+                    <div class="jzfj-gslb" style="width: 885px;text-align: center">
+                        <table class="layui-hide" id="table"></table>
                     </div>
                     <div class="fenye">
                         <div id="pageNav"></div>
@@ -187,9 +163,63 @@
 
 
 </div>
-<script src="js/jquery.min.js"></script>
-<script src="../../js"></script>
+
 <script type="text/javascript">
+    var tableIns;
+    layui.use(['table', 'laydate'], function () {
+        var table = layui.table;
+        var laydate = layui.laydate;
+        //日期范围
+        //常规用法
+        laydate.render({
+            elem: '#donationTime'
+        });
+        tableIns = table.render({
+            elem: '#table'
+            , url: '/selPLpublicity'
+            , cols: [[
+                {field: 'id', title: '序号', width: 100, sort: true}
+                , {field: 'donationname', align: 'center', title: '捐款人', sort: true}
+                , {field: 'goods', align: 'center', title: '物品', sort: true}
+                , {field: 'num', align: 'center', title: '数量'}
+                , {field: 'worthless', align: 'center', title: '价值', sort: true}
+                , {field: 'useto', align: 'center', title: '使用指南'}
+                , {field: 'recipients', align: 'center', title: '受助人'}
+                , {
+                    field: 'donationtime',
+                    align: 'center',
+                    title: '捐赠时间',
+                    templet: "<div>{{layui.util.toDateString(d.donationtime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                }
+            ]]
+            , method: "post"
+            , page: true
+            , limits: [10, 20, 30, 50, 80, 100]
+            , limit: 10
+        });
+    });
+
+    function getPLpublicity() {
+        var donationname = $("#donationname");
+        var recipients = $("#recipients");
+        var donationTime = $("#donationTime");
+        //执行重载
+        tableIns.reload({
+            page: {
+                curr: 1,
+                limit: 10
+            }
+            , where: {
+                donationname: donationname.val(),
+                recipients: recipients.val(),
+                donationTime: donationTime.val()
+            }
+
+        });
+    }
+</script>
+
+<%--<script type="text/javascript">
     !function () {
         laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
         laydate({elem: '#demo1'});//绑定元素
@@ -359,6 +389,6 @@
             document.getElementById("commentForm").submit();
         }
     }
-</script>
+</script>--%>
 </body>
 </html>

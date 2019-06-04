@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Carinfo {
+import java.io.Serializable;
+
+public class Carinfo implements Serializable {
     private Integer id;
 
     private Integer cid;

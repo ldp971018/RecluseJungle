@@ -1,9 +1,14 @@
 package com.jungle.bean;
 
-public class Helpcomment {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
+
+@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+public class Helpcomment implements Serializable {
     private Integer id;
 
-    private Integer helpid;
+    private Helpinfo helpinfo;
 
     private Integer uid;
 
@@ -19,12 +24,12 @@ public class Helpcomment {
         this.id = id;
     }
 
-    public Integer getHelpid() {
-        return helpid;
+    public Helpinfo getHelpinfo() {
+        return helpinfo;
     }
 
-    public void setHelpid(Integer helpid) {
-        this.helpid = helpid;
+    public void setHelpinfo(Helpinfo helpinfo) {
+        this.helpinfo = helpinfo;
     }
 
     public Integer getUid() {
@@ -49,5 +54,16 @@ public class Helpcomment {
 
     public void setTime(String time) {
         this.time = time == null ? null : time.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Helpcomment{" +
+                "id=" + id +
+                ", helpinfo=" + helpinfo +
+                ", uid=" + uid +
+                ", content='" + content + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

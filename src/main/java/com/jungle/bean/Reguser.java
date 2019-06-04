@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Reguser {
+public class Reguser implements Serializable {
     private Integer id;
 
     private String username;

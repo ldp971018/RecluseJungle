@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Catalogs {
+import java.io.Serializable;
+
+public class Catalogs implements Serializable {
     private Integer id;
 
     private String catalogid;

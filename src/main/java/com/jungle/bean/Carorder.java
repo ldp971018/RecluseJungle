@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Carorder {
+public class Carorder implements Serializable {
     private String oid;
 
     private Integer cid;

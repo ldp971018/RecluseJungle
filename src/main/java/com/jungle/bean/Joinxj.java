@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Joinxj {
+import java.io.Serializable;
+
+public class Joinxj implements Serializable {
     private Integer id;
 
     private String xjname;
