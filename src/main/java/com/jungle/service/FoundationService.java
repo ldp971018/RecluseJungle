@@ -32,6 +32,9 @@ public interface FoundationService {
     //款物发放公示（基金会-我要查询）
     List<Grant> selRedisPLpublicity(String donationname, String recipients, String donationTime, Integer page, Integer limit) throws ParseException;
 
+    //查询基金会支出总额（基金会-我要捐增）
+    Double selExpenditure();
+
     //公示列表（基金会-公示列表）
     List<Helpinfo> selRedisFoundJzfzlist(Integer applystatus, String name, Long applymoney1, Long applymoney2, Integer page, Integer limit);
 
@@ -43,4 +46,5 @@ public interface FoundationService {
 
     //添加评论（基金会-公示列表-查看详情）
     int insHelpcomment(Integer helpid, Integer uid, String content);
+
 }

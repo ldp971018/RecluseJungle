@@ -72,10 +72,10 @@ function Allregister(){
                             </tr>
                             <tr>
                                 <td>入住</td>
-                                <td><p><input placeholder="年/月/日" name="createtime" class="laydate-icon" id="demo1" value="${clxjmain.createtime }">
+                                <td style="float: left"><p><input placeholder="年/月/日" name="createtime" class="laydate-icon" id="demo1" style="width: 100px;text-align: center" value="${clxjmain.createtime }">
                                 </p>
 
-                                    <p>退房<input placeholder="年/月/日" name="endTime" class="laydate-icon" id="demo2" value="${endTime }">
+                                    <p>退房<input placeholder="年/月/日" name="endTime" class="laydate-icon" id="demo2" style="width: 100px;text-align: center" value="${endTime }">
                                     </p></td>
                             </tr>
                             <tr>  

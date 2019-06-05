@@ -95,6 +95,9 @@
     fileurl, applycontent, applystatus, applytype, time, uid, applymoneyusertime, vouchname,
     vouchidcard, vouchaddress, vouchcompany, vouchphonenum, vouchmobile, vouchdddress
   </sql>
+    <select id="selectByExpenditure" resultType="com.jungle.bean.Helpinfo">
+        select sum(applymoney) as applymoney from helpinfo where applystatus=2
+    </select>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jungle.bean.HelpinfoExample">
         select
         <if test="distinct">

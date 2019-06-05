@@ -91,7 +91,7 @@
             Request = GetRequest();
             var returnUrl;
             returnUrl = Request['id'];
-            window.location.href = "/login?returnurl=/foundjzfzDetailed&id=" + returnUrl;
+            window.location.href = "/login?returnurl=/foundJzfzDetailed&id=" + returnUrl;
         }
     </script>
     <!--首页TOP-->

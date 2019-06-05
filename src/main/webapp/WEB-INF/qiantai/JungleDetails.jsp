@@ -29,6 +29,29 @@ height:22px;line-height:22px;margin:0 3px 0 0;text-align:center;vertical-align:m
 .page-skip {color: #666666;padding: 0 3px;}  
 </style>  
 </head>
+<script type="text/javascript">
+    //获取地址栏
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    function Alllogin() {
+        var Request = new Object();
+        Request = GetRequest();
+        var returnUrl;
+        returnUrl = Request['id'];
+        window.location.href = "/login?returnurl=JungleDetails&id=" + returnUrl;
+    }
+</script>
 <body>
 <div>
 <!--首页TOP-->
@@ -36,36 +59,7 @@ height:22px;line-height:22px;margin:0 3px 0 0;text-align:center;vertical-align:m
         
         <!--首页banner-->
          <jsp:include  page="head.jsp" />
- <script type="text/javascript">
-//获取地址栏
- function GetRequest() {
- 	  var url = location.search; //获取url中"?"符后的字串
- 	   var theRequest = new Object();
- 	   if (url.indexOf("?") != -1) {
- 	      var str = url.substr(1);
- 	      strs = str.split("&");
- 	      for(var i = 0; i < strs.length; i ++) {
- 	         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
- 	      }
- 	   }
- 	   return theRequest;
- 	}
-function Alllogin(){
-	var Request = new Object();
-		Request = GetRequest();
-		var returnUrl;
-		returnUrl = Request['id'];
-	window.location.href = "/login?CLXJId="+returnUrl;
 
-} 
-function loginOut(){
-	var Request = new Object();
-	Request = GetRequest();
-	var returnUrl;
-	returnUrl = Request['clxjmain.id'];  
-	window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/clxjmain!selClxjOfId.action&clxjmainid="+returnUrl;
-}
- </script>
 <!--用车-填写订单-->
 
 <div class="yc-txdd">

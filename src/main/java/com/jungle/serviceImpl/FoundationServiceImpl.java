@@ -115,6 +115,7 @@ public class FoundationServiceImpl implements FoundationService {
             Date parse2 = sf.parse(donationtime + " 23:59:59");
             criteria.andDonationtimeBetween(parse1, parse2);
         }
+        donationExample.setOrderByClause("donationtime desc");
         List<Donation> donations = donationMapper.selectByExample(donationExample);
         //得到本次查询所有数据的总长度（不考虑分页）
         if (donations != null)
@@ -166,6 +167,7 @@ public class FoundationServiceImpl implements FoundationService {
                 criteria.andMonthlyBetween(startTime, endTime);
             }
         }
+        payformonthExample.setOrderByClause("monthly desc");
         List<Payformonth> payForMonths = payformonthMapper.selectByExample(payformonthExample);
         plistCount = payformonthMapper.selectByExample(payformonthExample).size();
         return payForMonths;
@@ -197,10 +199,31 @@ public class FoundationServiceImpl implements FoundationService {
             Date parse1 = sf.parse(donationTime + " 00:00:00");
             criteria.andDonationtimeBetween(parse1, parse2);
         }
+        grantExample.setOrderByClause("donationTime desc");
         List<Grant> grants = grantMapper.selectByExample(grantExample);
         if (grants != null)
             grantCount = grants.size();
         return grants;
+    }
+
+    /**
+     * 查询基金会支出总额（基金会-我要捐增）
+     *
+     * @return
+     */
+    @Override
+    public Double selExpenditure() {
+        System.out.println("selExpenditure");
+        Helpinfo helpinfo = helpinfoMapper.selectByExpenditure();
+        Payformonth payformonth = payformonthMapper.selExpenditure();
+        Double countMoney = 0.0;
+        if (helpinfo != null && helpinfo.getApplymoney() != null) {
+            countMoney += Double.valueOf(helpinfo.getApplymoney());
+        }
+        if (payformonth != null && payformonth.getPaymoney() != null) {
+            countMoney += payformonth.getPaymoney().doubleValue();
+        }
+        return countMoney;
     }
 
     /**

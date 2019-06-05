@@ -26,15 +26,6 @@
 
 <!--首页banner-->
 <jsp:include page="/WEB-INF/qiantai/head.jsp"/>
-<script type="text/javascript">
-    function Alllogin() {
-        window.location.href = "/login";
-    }
-
-    function loginOut() {
-        window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/clxjmain!Homepage.action";
-    }
-</script>
 <!--首页轮播图-->
 <div class="index-lbt">
     <div id="scrollPics">
@@ -67,7 +58,7 @@
                 <div id="rightCL" class="myTab_Content">
                     <div class="lbttj">
                         <div class="tj-top">
-                            <span id="gncl"  class="gnxjac" onclick="gncl()">国内丛林</span><span id="gjcl"  onclick="gjcl()">国际丛林</span>
+                            <span id="gncl" class="gnxjac" onclick="gncl()">国内丛林</span><span id="gjcl" onclick="gjcl()">国际丛林</span>
                         </div>
                         <div class="tj-bottom tj-bottom2">
                             <div class="xj">
@@ -77,7 +68,8 @@
                                     <table>
                                         <tr>
                                             <td>目的地</td>
-                                            <td class="sec"><input type="text" name="belongCity" placeholder="请输入城市名" id="yyqx"
+                                            <td class="sec"><input type="text" name="belongCity" placeholder="请输入城市名"
+                                                                   id="yyqx"
                                                                    data-wholename=""></td>
                                             <input type="hidden" name="clxjmain.belong_city" id="city11"/>
                                             <input type="hidden" id="CLtype1" name="type1" value="true"/>
@@ -85,10 +77,12 @@
                                         </tr>
                                         <tr>
                                             <td>入住</td>
-                                            <td><p><input name="createtime" placeholder="年/月/日" class="laydate-icon ts" id="demo5"
+                                            <td><p><input name="createtime" placeholder="年/月/日" class="laydate-icon ts"
+                                                          style="width: 100px;text-align: center" id="demo5"
                                                           value=""></p>
 
-                                                <p>退房：<input name="endTime" placeholder="年/月/日" class="laydate-icon" id="demo6"
+                                                <p>退房：<input name="endTime" placeholder="年/月/日" class="laydate-icon"
+                                                             style="width: 100px;text-align: center" id="demo6"
                                                              value=""></p></td>
                                         </tr>
                                         <tr>
@@ -109,7 +103,7 @@
                 <div id="rightXJ" class="myTab_Content none">
                     <div class="lbttj">
                         <div class="tj-top">
-                            <span id="gnxj"  class="gnxjac" onclick="gnxj()">国内闲居</span><span  id="gjxj" onclick="gjxj()">国际闲居</span>
+                            <span id="gnxj" class="gnxjac" onclick="gnxj()">国内闲居</span><span id="gjxj" onclick="gjxj()">国际闲居</span>
                         </div>
                         <div class="tj-bottom tj-bottom1">
                             <div class="xj">
@@ -120,7 +114,8 @@
                                         <tr>
                                             <td>目的地</td>
                                             <td class="sec ">
-                                                <input type="text" name="belongCity" placeholder="请输入城市名" id="zmx" data-wholename="">
+                                                <input type="text" name="belongCity" placeholder="请输入城市名" id="zmx"
+                                                       data-wholename="">
                                                 <input type="hidden" name="clxjmain.belong_city" id="city10"/>
                                                 <input type="hidden" id="XJtype1" name="type1" value="true"/>
                                                 <input type="hidden" id="XJtype2" name="type2" value="false"/>
@@ -128,10 +123,12 @@
                                         </tr>
                                         <tr>
                                             <td>入住</td>
-                                            <td><p><input placeholder="年/月/日" name="createtime" class="laydate-icon ts" id="demo1"
+                                            <td><p><input placeholder="年/月/日" name="createtime" class="laydate-icon ts"
+                                                          style="width: 100px;text-align: center" id="demo1"
                                                           value=""></p>
 
-                                                <p>退房：<input placeholder="年/月/日" name="endTime" class="laydate-icon" id="demo2"
+                                                <p>退房：<input placeholder="年/月/日" name="endTime" class="laydate-icon"
+                                                             style="width: 100px;text-align: center"  id="demo2"
                                                              value=""></p></td>
                                         </tr>
                                         <tr>
@@ -161,7 +158,7 @@
         <div class="taq1">
             <div>
                 <a href="JungleDetails?id=${indexInfo[0].id}"><img width="466" height="320"
-                                                                                           src="${clxjBackurl }${indexInfo[0].firstImgBig }"></a>
+                                                                   src="${clxjBackurl }${indexInfo[0].firstImgBig }"></a>
             </div>
             <span></span><span class="mfcy"><a
                 href="JungleDetails?id=${indexInfo[0].id}">${indexInfo[0].name }</a> </span>
@@ -169,7 +166,7 @@
         <div class="taq1 spec">
             <div>
                 <a href="JungleDetails?id=${indexInfo[1].id}"> <img width="467" height="320"
-                                                                                            src="${clxjBackurl }${indexInfo[1].firstImgBig  }"></a>
+                                                                    src="${clxjBackurl }${indexInfo[1].firstImgBig  }"></a>
             </div>
             <span></span><span class="mfcy"><a
                 href="JungleDetails?id=${indexInfo[1].id}">${indexInfo[1].name  }</a> </span>
@@ -178,13 +175,13 @@
             <div>
                 <div>
                     <a href="JungleDetails?id=${indexInfo[2].id}"><img width="224" height="141"
-                                                                                               src="${clxjBackurl }${indexInfo[2].firstImgBig }"></a>
+                                                                       src="${clxjBackurl }${indexInfo[2].firstImgBig }"></a>
                     <span></span><span class="mfcy"><a
                         href="JungleDetails?id=${indexInfo[2].id}">${indexInfo[2].name }</a> </span>
                 </div>
                 <div class="spec2">
                     <a href="JungleDetails?id=${indexInfo[3].id}"><img width="224" height="141"
-                                                                                               src="${clxjBackurl }${indexInfo[3].firstImgBig }"></a>
+                                                                       src="${clxjBackurl }${indexInfo[3].firstImgBig }"></a>
                     <span></span><span class="mfcy"><a
                         href="JungleDetails?id=${indexInfo[3].id}">${indexInfo[3].name  }</a> </span>
                 </div>
@@ -194,7 +191,9 @@
     <div id="a2" class="index-domestic">
         <div class="rmtj">
             <div class="rmtj1">国内<i>明月松间照，清泉石上流</i></div>
-            <div class="rmtj2"><span id="TabGNCL" class="forest" onclick="TabGNCL()">丛林</span><span id="TabGNXJ" onclick="TabGNXJ()">闲居</span></div><!--
+            <div class="rmtj2"><span id="TabGNCL" class="forest" onclick="TabGNCL()">丛林</span><span id="TabGNXJ"
+                                                                                                    onclick="TabGNXJ()">闲居</span>
+            </div><!--
             <div class="rmtj3"><a href="javascript:void(0)">更多国内游></a> </div>
         --></div>
         <div class="im-main">
@@ -202,42 +201,42 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                            <li><a href="javascript:void(0)"
-                                   onclick="goOther(1,1,'${listGNCL[0].belongCity }')">${listGNCL[0].address }</a></li>
+                        <li><a href="javascript:void(0)"
+                               onclick="goOther(1,1,'${listGNCL[0].belongCity }')">${listGNCL[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
                     <a href="JungleDetails?id=${listGNCL[0].id}"><img width="467"
-                                                                                                  height="320"
-                                                                                                  src="${clxjBackurl }${listGNCL[0].firstImgBig }"></a>
+                                                                      height="320"
+                                                                      src="${clxjBackurl }${listGNCL[0].firstImgBig }"></a>
                     <a href="JungleDetails?id=${listGNCL[0].id}"><span>${listGNCL[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
                             <a href="JungleDetails?id=${listGNCL[1].id}"> <img width="223"
-                                                                                                           height="142"
-                                                                                                           src="${clxjBackurl }${listGNCL[1].firstImgBig }"></a>
+                                                                               height="142"
+                                                                               src="${clxjBackurl }${listGNCL[1].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNCL[1].id}"><span>${listGNCL[1].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGNCL[2].id}"><img width="223"
-                                                                                                          height="141"
-                                                                                                          src="${clxjBackurl }${listGNCL[2].firstImgBig }"></a>
+                                                                              height="141"
+                                                                              src="${clxjBackurl }${listGNCL[2].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNCL[2].id}"><span>${listGNCL[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
                             <a href="JungleDetails?id=${listGNCL[3].id}"><img width="224"
-                                                                                                          height="142"
-                                                                                                          src="${clxjBackurl }${listGNCL[3].firstImgBig }"></a>
+                                                                              height="142"
+                                                                              src="${clxjBackurl }${listGNCL[3].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNCL[3].id}"><span>${listGNCL[3].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGNCL[4].id}"><img width="224"
-                                                                                                          height="141"
-                                                                                                          src="${clxjBackurl }${listGNCL[4].firstImgBig }"></a>
+                                                                              height="141"
+                                                                              src="${clxjBackurl }${listGNCL[4].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNCL[4].id}"><span>${listGNCL[4].name }</span></a>
                         </div>
                     </div>
@@ -247,42 +246,42 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                            <li><a href="javascript:void(0)"
-                                   onclick="goOther(1,0,'${listGNXJ[0].belongCity }')">${listGNXJ[0].address }</a></li>
+                        <li><a href="javascript:void(0)"
+                               onclick="goOther(1,0,'${listGNXJ[0].belongCity }')">${listGNXJ[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
                     <a href="JungleDetails?id=${listGNXJ[0].id}"><img width="467"
-                                                                                                  height="320"
-                                                                                                  src="${clxjBackurl }${listGNXJ[0].firstImgBig }"></a>
+                                                                      height="320"
+                                                                      src="${clxjBackurl }${listGNXJ[0].firstImgBig }"></a>
                     <a href="JungleDetails?id=${listGNXJ[0].id}"><span>${listGNXJ[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
                             <a href="JungleDetails?id=${listGNXJ[1].id}"><img width="223"
-                                                                                                          height="142"
-                                                                                                          src="${clxjBackurl }${listGNXJ[1].firstImgBig }"></a>
+                                                                              height="142"
+                                                                              src="${clxjBackurl }${listGNXJ[1].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNXJ[1].id}"><span>${listGNXJ[1].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGNXJ[2].id}"><img width="223"
-                                                                                                          height="141"
-                                                                                                          src="${clxjBackurl }${listGNXJ[2].firstImgBig }"></a>
+                                                                              height="141"
+                                                                              src="${clxjBackurl }${listGNXJ[2].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNXJ[2].id}"><span>${listGNXJ[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
                             <a href="JungleDetails?id=${listGNXJ[3].id}"><img width="224"
-                                                                                                          height="142"
-                                                                                                          src="${clxjBackurl }${listGNXJ[3].firstImgBig }"></a>
+                                                                              height="142"
+                                                                              src="${clxjBackurl }${listGNXJ[3].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNXJ[3].id}"><span>${listGNXJ[3].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGNXJ[4].id}"><img width="224"
-                                                                                                          height="141"
-                                                                                                          src="${clxjBackurl }${listGNXJ[4].firstImgBig }"></a>
+                                                                              height="141"
+                                                                              src="${clxjBackurl }${listGNXJ[4].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGNXJ[4].id}"><span>${listGNXJ[4].name }</span></a>
                         </div>
                     </div>
@@ -293,7 +292,9 @@
     <div id="a3" class="index-abroad">
         <div class="rmtj">
             <div class="rmtj1">境外<i>明月松间照，清泉石上流</i></div>
-            <div class="rmtj2"><span id="TabGWCL" class="forest1" onclick="TabGWCL()">丛林</span><span id="TabGWXJ" onclick="TabGWXJ()">闲居</span></div><!--
+            <div class="rmtj2"><span id="TabGWCL" class="forest1" onclick="TabGWCL()">丛林</span><span id="TabGWXJ"
+                                                                                                     onclick="TabGWXJ()">闲居</span>
+            </div><!--
             <div class="rmtj3"><a href="javascript:void(0)">更多国内游></a> </div>
         --></div>
         <div class="ia-main">
@@ -301,42 +302,42 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                            <li><a href="javascript:void(0)"
-                                   onclick="goOther(0,1,'${listGWCL[0].belongCity }')">${listGWCL[0].address }</a></li>
+                        <li><a href="javascript:void(0)"
+                               onclick="goOther(0,1,'${listGWCL[0].belongCity }')">${listGWCL[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
                     <a href="JungleDetails?id=${listGWCL[0].id}"><img width="465"
-                                                                                                  height="320"
-                                                                                                  src="${clxjBackurl }${listGWCL[0].firstImgBig }"></a>
+                                                                      height="320"
+                                                                      src="${clxjBackurl }${listGWCL[0].firstImgBig }"></a>
                     <a href="JungleDetails?id=${listGWCL[0].id}"><span>${listGWCL[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
                             <a href="JungleDetails?id=${listGWCL[1].id}"><img width="223"
-                                                                                                          height="142"
-                                                                                                          src="${clxjBackurl }${listGWCL[1].firstImgBig }"></a>
+                                                                              height="142"
+                                                                              src="${clxjBackurl }${listGWCL[1].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWCL[1].id}"><span>${listGWCL[1].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGWCL[2].id}"> <img width="225"
-                                                                                                           height="141"
-                                                                                                           src="${clxjBackurl }${listGWCL[2].firstImgBig }"></a>
+                                                                               height="141"
+                                                                               src="${clxjBackurl }${listGWCL[2].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWCL[2].id}"><span>${listGWCL[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
                             <a href="JungleDetails?id=${listGWCL[3].id}"> <img width="224"
-                                                                                                           height="142"
-                                                                                                           src="${clxjBackurl }${listGWCL[3].firstImgBig }"></a>
+                                                                               height="142"
+                                                                               src="${clxjBackurl }${listGWCL[3].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWCL[3].id}"><span>${listGWCL[3].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGWCL[4].id}"> <img width="224"
-                                                                                                           height="141"
-                                                                                                           src="${clxjBackurl }${listGWCL[4].firstImgBig }"></a>
+                                                                               height="141"
+                                                                               src="${clxjBackurl }${listGWCL[4].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWCL[4].id}"><span>${listGWCL[4].name }</span></a>
                         </div>
                     </div>
@@ -346,42 +347,42 @@
                 <div class="one-left">
                     <p class="rm">热门目的地</p>
                     <ul class="city">
-                            <li><a href="javascript:void(0)"
-                                   onclick="goOther(0,0,'${listGWXJ[0].belongCity }')">${listGWXJ[0].address }</a></li>
+                        <li><a href="javascript:void(0)"
+                               onclick="goOther(0,0,'${listGWXJ[0].belongCity }')">${listGWXJ[0].address }</a></li>
                     </ul>
                 </div>
                 <div class="one-con">
                     <a href="JungleDetails?id=${listGWXJ[0].id}"><img width="465"
-                                                                                                  height="320"
-                                                                                                  src="${clxjBackurl }${listGWXJ[0].firstImgBig }"></a>
+                                                                      height="320"
+                                                                      src="${clxjBackurl }${listGWXJ[0].firstImgBig }"></a>
                     <a href="JungleDetails?id=${listGWXJ[0].id}"><span>${listGWXJ[0].name }</span></a>
                 </div>
                 <div class="one-right">
                     <div class="or-one">
                         <div>
                             <a href="JungleDetails?id=${listGWXJ[1].id}"><img width="223"
-                                                                                                          height="142"
-                                                                                                          src="${clxjBackurl }${listGWXJ[1].firstImgBig }"></a>
+                                                                              height="142"
+                                                                              src="${clxjBackurl }${listGWXJ[1].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWXJ[1].id}"><span>${listGWXJ[1].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGWXJ[2].id}"><img width="225"
-                                                                                                          height="141"
-                                                                                                          src="${clxjBackurl }${listGWXJ[2].firstImgBig }"></a>
+                                                                              height="141"
+                                                                              src="${clxjBackurl }${listGWXJ[2].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWXJ[2].id}"><span>${listGWXJ[2].name }</span></a>
                         </div>
                     </div>
                     <div class="or-two">
                         <div>
                             <a href="JungleDetails?id=${listGWXJ[3].id}"><img width="224"
-                                                                                                          height="142"
-                                                                                                          src="${clxjBackurl }${listGWXJ[3].firstImgBig }"></a>
+                                                                              height="142"
+                                                                              src="${clxjBackurl }${listGWXJ[3].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWXJ[3].id}"><span>${listGWXJ[3].name }</span></a>
                         </div>
                         <div>
                             <a href="JungleDetails?id=${listGWXJ[4].id}"> <img width="224"
-                                                                                                           height="141"
-                                                                                                           src="${clxjBackurl }${listGWXJ[4].firstImgBig }"></a>
+                                                                               height="141"
+                                                                               src="${clxjBackurl }${listGWXJ[4].firstImgBig }"></a>
                             <a href="JungleDetails?id=${listGWXJ[4].id}"><span>${listGWXJ[4].name }</span></a>
                         </div>
                     </div>
@@ -447,94 +448,104 @@
 <script src="${path}/static/js/scorll.js"></script>
 <script type="text/javascript">
     function TabGNCL() {
-        var arr=document.getElementById("TabGNCL");
-        var arr1=document.getElementById("TabGNXJ");
-        var rightCL=document.getElementById("infoGNCL");
-        var rightXJ=document.getElementById("infoGNXJ");
+        var arr = document.getElementById("TabGNCL");
+        var arr1 = document.getElementById("TabGNXJ");
+        var rightCL = document.getElementById("infoGNCL");
+        var rightXJ = document.getElementById("infoGNXJ");
         arr.classList.add("forest");
         arr1.classList.remove("forest");
         rightXJ.classList.add("none");
         rightCL.classList.remove("none");
     }
+
     function TabGNXJ() {
-        var arr=document.getElementById("TabGNCL");
-        var arr1=document.getElementById("TabGNXJ");
-        var rightCL=document.getElementById("infoGNCL");
-        var rightXJ=document.getElementById("infoGNXJ");
+        var arr = document.getElementById("TabGNCL");
+        var arr1 = document.getElementById("TabGNXJ");
+        var rightCL = document.getElementById("infoGNCL");
+        var rightXJ = document.getElementById("infoGNXJ");
         arr1.classList.add("forest");
         arr.classList.remove("forest");
         rightCL.classList.add("none");
         rightXJ.classList.remove("none");
     }
+
     function TabGWCL() {
-        var arr=document.getElementById("TabGWCL");
-        var arr1=document.getElementById("TabGWXJ");
-        var rightCL=document.getElementById("infoGWCL");
-        var rightXJ=document.getElementById("infoGWXJ");
+        var arr = document.getElementById("TabGWCL");
+        var arr1 = document.getElementById("TabGWXJ");
+        var rightCL = document.getElementById("infoGWCL");
+        var rightXJ = document.getElementById("infoGWXJ");
         arr.classList.add("forest1");
         arr1.classList.remove("forest1");
         rightXJ.classList.add("none");
         rightCL.classList.remove("none");
     }
+
     function TabGWXJ() {
-        var arr=document.getElementById("TabGWCL");
-        var arr1=document.getElementById("TabGWXJ");
-        var rightCL=document.getElementById("infoGWCL");
-        var rightXJ=document.getElementById("infoGWXJ");
+        var arr = document.getElementById("TabGWCL");
+        var arr1 = document.getElementById("TabGWXJ");
+        var rightCL = document.getElementById("infoGWCL");
+        var rightXJ = document.getElementById("infoGWXJ");
         arr1.classList.add("forest1");
         arr.classList.remove("forest1");
         rightCL.classList.add("none");
         rightXJ.classList.remove("none");
     }
+
     function leftCL() {
-        var arr=document.getElementById("leftCL");
-        var arr1=document.getElementById("leftXJ");
-        var rightCL=document.getElementById("rightCL");
-        var rightXJ=document.getElementById("rightXJ");
+        var arr = document.getElementById("leftCL");
+        var arr1 = document.getElementById("leftXJ");
+        var rightCL = document.getElementById("rightCL");
+        var rightXJ = document.getElementById("rightXJ");
         rightCL.classList.remove("none");
         rightXJ.classList.add("none");
         arr.classList.add("active");
         arr1.classList.remove("active");
     }
+
     function leftXJ() {
-        var arr=document.getElementById("leftCL");
-        var arr1=document.getElementById("leftXJ");
-        var rightCL=document.getElementById("rightCL");
-        var rightXJ=document.getElementById("rightXJ");
+        var arr = document.getElementById("leftCL");
+        var arr1 = document.getElementById("leftXJ");
+        var rightCL = document.getElementById("rightCL");
+        var rightXJ = document.getElementById("rightXJ");
         rightXJ.classList.remove("none");
         rightCL.classList.add("none");
         arr1.classList.add("active");
         arr.classList.remove("active");
     }
+
     function gncl() {
-        var arr=document.getElementById("gncl");
-        var arr1=document.getElementById("gjcl");
-        document.getElementById("CLtype1").value='true';
+        var arr = document.getElementById("gncl");
+        var arr1 = document.getElementById("gjcl");
+        document.getElementById("CLtype1").value = 'true';
         arr.classList.add("gnxjac");
         arr1.classList.remove("gnxjac");
     }
+
     function gjcl() {
-        var arr=document.getElementById("gncl");
-        var arr1=document.getElementById("gjcl");
-        document.getElementById("CLtype1").value='false';
+        var arr = document.getElementById("gncl");
+        var arr1 = document.getElementById("gjcl");
+        document.getElementById("CLtype1").value = 'false';
         arr.classList.remove("gnxjac");
         arr1.classList.add("gnxjac");
     }
+
     function gnxj() {
-        var arr=document.getElementById("gnxj");
-        var arr1=document.getElementById("gjxj");
-        document.getElementById("XJtype1").value='true';
+        var arr = document.getElementById("gnxj");
+        var arr1 = document.getElementById("gjxj");
+        document.getElementById("XJtype1").value = 'true';
         arr.classList.add("gnxjac");
         arr1.classList.remove("gnxjac");
     }
+
     function gjxj() {
-        var arr=document.getElementById("gnxj");
-        var arr1=document.getElementById("gjxj");
-        document.getElementById("XJtype1").value='false';
+        var arr = document.getElementById("gnxj");
+        var arr1 = document.getElementById("gjxj");
+        document.getElementById("XJtype1").value = 'false';
         arr.classList.remove("gnxjac");
         arr1.classList.add("gnxjac");
     }
-    !function(){
+
+    !function () {
         laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
         laydate({elem: '#demo1'});//绑定元素
         laydate({elem: '#demo2'});//绑定元素
@@ -558,33 +569,33 @@
     interlabelFromcity ['国际城市'] = new Array();
     var hotList = new Array(14, 15, 16, 17, 18, 19);
     $.ajax({
-        type : "post",
-        url : "selectCityType",
+        type: "post",
+        url: "selectCityType",
         data: {},
         dataType: "json",
-        async : false,
-        success : function(results){
+        async: false,
+        success: function (results) {
             console.log(results);
-            for(var i =0;i<results.rm.length;i++){
-                labelFromcity['热门城市'][i]=results.rm[i].cid;
+            for (var i = 0; i < results.rm.length; i++) {
+                labelFromcity['热门城市'][i] = results.rm[i].cid;
             }
-            for(var i =0;i<results.a_f.length;i++){
-                labelFromcity[['A-F']][i]=results.a_f[i].cid;
+            for (var i = 0; i < results.a_f.length; i++) {
+                labelFromcity[['A-F']][i] = results.a_f[i].cid;
             }
-            for(var i =0;i<results.g_j.length;i++){
-                labelFromcity[['G-J']][i]=results.g_j[i].cid;
+            for (var i = 0; i < results.g_j.length; i++) {
+                labelFromcity[['G-J']][i] = results.g_j[i].cid;
             }
-            for(var i =0;i<results.k_n.length;i++){
-                labelFromcity[['K-N']][i]=results.k_n[i].cid;
+            for (var i = 0; i < results.k_n.length; i++) {
+                labelFromcity[['K-N']][i] = results.k_n[i].cid;
             }
-            for(var i =0;i<results.o_w.length;i++){
-                labelFromcity[['O-W']][i]=results.o_w[i].cid;
+            for (var i = 0; i < results.o_w.length; i++) {
+                labelFromcity[['O-W']][i] = results.o_w[i].cid;
             }
-            for(var i =0;i<results.x_z.length;i++){
-                labelFromcity[['X-Z']][i]=results.x_z[i].cid;
+            for (var i = 0; i < results.x_z.length; i++) {
+                labelFromcity[['X-Z']][i] = results.x_z[i].cid;
             }
-            for(var i =0;i<results.gjcs.length;i++){
-                interlabelFromcity ['国际城市'][i]=results.gjcs[i].cid;
+            for (var i = 0; i < results.gjcs.length; i++) {
+                interlabelFromcity ['国际城市'][i] = results.gjcs[i].cid;
             }
         }
     });

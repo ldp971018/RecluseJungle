@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 用于其他无业务功能的页面跳转
@@ -17,7 +18,11 @@ public class pageController {
      * @return
      */
     @RequestMapping("/login")
-    public String login() {
+    public String login(String returnurl, String id, HttpSession session) {
+        System.out.println("跳转-" + returnurl + "-" + id);
+        session.setAttribute("returnurl", returnurl);
+        if (!"undefined".equals(id))
+            session.setAttribute("id", id);
         return "qiantai/login";
     }
 
@@ -186,6 +191,4 @@ public class pageController {
     public String userCPassword() {
         return "qiantai/UserCPassword";
     }
-
-
 }

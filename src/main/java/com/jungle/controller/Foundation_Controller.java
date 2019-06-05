@@ -56,7 +56,7 @@ public class Foundation_Controller {
     }
 
     /**
-     * 查询捐款总金额 爱心捐赠明细（基金会-我要查询）
+     * 查询捐款总金额 爱心捐赠明细（基金会-我要查询）（基金会-我要捐增）
      *
      * @return
      */
@@ -69,6 +69,7 @@ public class Foundation_Controller {
         for (int i = 0; i < money.length(); i++) {
             countMoney.add(money.substring(i, i + 1));
         }
+        System.out.println("总金额-" + countMoney.toString());
         map.put("msg", countMoney);
 
         return map;
@@ -176,6 +177,20 @@ public class Foundation_Controller {
     }
 
     /**
+     * 查询基金会支出总额（基金会-我要捐增）
+     *
+     * @return
+     */
+    @RequestMapping("/selExpenditure")
+    @ResponseBody
+    public Map<String, Object> selExpenditure() {
+        HashMap<String, Object> map = new HashMap<>();
+        Double expenditure = foundationServiceImpl.selExpenditure();
+        map.put("msg", expenditure);
+        return map;
+    }
+
+    /**
      * 公示列表（基金会-公示列表）
      *
      * @param applystatus 公示类型
@@ -234,7 +249,7 @@ public class Foundation_Controller {
         System.out.println("id-" + id);
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
-        List<Helpcomment> helpcomment = foundationServiceImpl.selRedisHelpcomment(id, page, limit,false);
+        List<Helpcomment> helpcomment = foundationServiceImpl.selRedisHelpcomment(id, page, limit, true);
         if (FoundationServiceImpl.helpcommentcount == null) {
             map.put("count", ((List<Object>) redisUtil.get("selRedisHelpcomment")).size());
             FoundationServiceImpl.helpcommentcount = null;

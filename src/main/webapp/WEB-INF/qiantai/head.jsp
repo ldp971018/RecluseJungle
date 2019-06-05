@@ -50,9 +50,47 @@
     <title>head</title>
     <link rel="stylesheet" href="<%=path%>/static/style/cy.css">
     <link rel="stylesheet" href="<%=path%>/static/style/style.css">
-
-
 </head>
+<script type="text/javascript">
+    //获取地址栏
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+            }
+        }
+        theRequest["url"] = window.location.pathname;
+        return theRequest;
+    }
+
+    function loginOut() {
+        alert(0)
+        var Request = new Object();
+        Request = GetRequest();
+        var returnUrl, requrl;
+        returnUrl = Request['id'];
+        requrl = Request['url'];
+        // alert("参数-" + returnUrl + "-" + requrl)
+        window.location.href = "<%=path%>/logout?returnurl=" + requrl + "&id=" + returnUrl;
+    }
+
+    function login() {
+        var Request = new Object();
+        Request = GetRequest();
+        var returnUrl, requrl;
+        returnUrl = Request['id'];
+        requrl = Request['url'];
+        // alert("参数-" + returnUrl + "-" + requrl)
+        if (returnUrl == 'undefined')
+            window.location.href = "<%=path%>/login?returnurl=" + requrl;
+        else
+            window.location.href = "<%=path%>/login?returnurl=" + requrl + "&id=" + returnUrl;
+    }
+</script>
 <body onload="dateTime()">
 <!--首页TOP-->
 <div class="index-top">
@@ -94,11 +132,11 @@
             </li>
         </ul>
         <c:if test="${regUser==null }">
-            <div class="dl"><a href="/login">登录</a><i>|</i><a href="/register">注册</a></div>
+            <div class="dl"><a href="javascript:void(0)" onclick="login()">登录</a><i>|</i><a href="/register">注册</a></div>
         </c:if>
         <c:if test="${regUser!=null }">
             <div class="index-grzx "><a href="userPersonal">个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;<i>|</i>&nbsp;&nbsp;&nbsp;&nbsp;<a
-                    href="/logout">退出</a></div>
+                href="javascript:void(0)" onclick="loginOut()">退出</a></div>
         </c:if>
     </div>
 </div>
