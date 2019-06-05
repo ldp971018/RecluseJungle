@@ -9,16 +9,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>丛林闲居</title>
-    <link rel="stylesheet" href="style/slider.css">
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="/static/style/slider.css">
+    <link rel="stylesheet" href="/static/style/cy.css">
+    <link rel="stylesheet" href="/static/style/style.css">
 </head>
 <body>
-<c:if test="${sessionUser==null }">
+<%--<c:if test="${regUser==null }">
 <script type="text/javascript">
-window.location.href = "<%=path%>/login.jsp";
+window.location.href = "/login";
 </script>
-</c:if>
+</c:if>--%>
 <!--首页TOP-->
     <div class="yc-txdd1">
          
@@ -30,7 +30,7 @@ window.location.href = "<%=path%>/login.jsp";
 		window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/clxjmain!Homepage.action";
 	}
  </script>
-<input type="hidden" id="uid" value="${sessionUser.id }"/>
+<input type="hidden" id="uid" value="${regUser.id }"/>
 <input type="hidden" id="clxjmainid" value="${clxjmainid }"/>
 <!--用车-填写订单-->
 <div class="yc-txdd">
@@ -57,9 +57,9 @@ window.location.href = "<%=path%>/login.jsp";
         </div>
             <div class="che-right">
                 <p class="qclx">${car.cartitle }</p>
-                <p class="hplg">好评率：${car.commentOk }%</p> 
+                <p class="hplg">好评率：${car.commentOk } %</p>
                 <p class="hours"><span><i>￥</i>${car.price }</span>/小时</p>
-                <p><a href="javascript:void(0)" onclick="getCarcomment(${car.id })" class="a1">查看评价</a> <a href="<%=path %>/carinfo!selCarOfid.action?carinfo.id=${car.id }" class="a2">点击预订</a> </p>
+                <p><a href="javascript:void(0)" onclick="getCarcomment(${car.id })" class="a1">查看评价</a> <a href="CarOrderById?id=${car.id }&commentOk=${car.commentOk }" class="a2">点击预订</a> </p>
             </div>
     </div>
     </c:forEach>
@@ -77,12 +77,12 @@ window.location.href = "<%=path%>/login.jsp";
 </div>    
  <%@ include  file="bottom.jsp"%>
     </div>
-<div class="tcc none">
+<div id="tcc" class="tcc none">
     <div class="cgxd5">
         <div class="cgxd-main">
-            <p class="xdcg"><i>共有评论<em id="count"></em>条</i> <img src="images/14_01.png" class="close"></p>
+            <p class="xdcg"><i>共有评论<em id="count"></em>条</i> <img src="/static/images/14_01.png" class="close" onclick="closeIndex()"></p>
             <div class="nb">
-                <div class="cam-list" id="carcomment">
+                <div class="cam-list" id="carcomment1">
                 
                 </div>
                 <div class="txpj" id="carComment" style="display: block;">
@@ -97,9 +97,9 @@ window.location.href = "<%=path%>/login.jsp";
 </div>
 
 </div>
-<script src="js/jquery.min.js"></script>
-<script src="../../js"></script>
-<script src="js/jquery.slides.js" type="text/javascript"></script>
+<script src="/static/js/jquery.min.js"></script>
+<%--<script src="../../js"></script>--%>
+<script src="/static/js/jquery.slides.js" type="text/javascript"></script>
 <script>
 //限制textarea输入长度
 function checkLength(obj,maxlength){
@@ -116,30 +116,49 @@ function checkLength(obj,maxlength){
     }
 </script>
 <script type="text/javascript">
+    function closeIndex() {
+        var arr=document.getElementById("tcc");
+        arr.classList.add("none");
+    }
+    //时间戳转换方法    date:时间戳数字
+    function formatDate(date) {
+        var date = new Date(date);
+        var YY = date.getFullYear() + '-';
+        var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+        var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+        var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+        var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+        return YY + MM + DD +" "+hh + mm + ss;
+    }
 //点击查看评论获取评论
 	function getCarcomment(carId){
-		showCarComment(carId); 
+		showCarComment(carId);
 		document.getElementById('cid').value=carId; 
 		var count = document.getElementById("count");
-		var carcomment = document.getElementById("carcomment");
+		var carcomment = document.getElementById("carcomment1");
 		count.innerHTML = ""; 
 		carcomment.innerHTML = ""; 
 		$.ajax({  
 	        type : "post",   
-	         url : "<%=path%>/carcomment!selCarcommentOfCid.action",   
-	         data: {"carinfo.id":carId}, 
+	         url : "carComment",
+	         data: {"cid":carId},
 	         dataType: "json",
 	         async : false,   
-	         success : function(results){ 
+	         success : function(results){
+	            console.log(results);
+                 console.log(results.count);
 	        	 count.innerHTML = results.count; 
 	        	 for(var i=0;i<results.count;i++){
 		        	 var uRealname = results.carcommentJsons[i].username;//评论人名字
 		        	 var content = results.carcommentJsons[i].content;//评论内容
 		        	 var commenttime = results.carcommentJsons[i].commenttime;//评论时间
-	        		 carcomment.innerHTML += "<p><span class='one'>"+uRealname+"</span><span class='two'>"+content+"</span><span class='three'>"+commenttime+"</span></p>";
+	        		 carcomment.innerHTML += "<p><span class='one'>"+uRealname+"</span><span class='two'>"+content+"</span><span class='three'>"+formatDate(commenttime)+"</span></p>";
 		        	 }
 	         }  
-	    }); 
+	    });
+            var arr=document.getElementById("tcc");
+            arr.classList.remove("none");
 		}
 	//增加评论
 	function saveComment(){
@@ -160,8 +179,8 @@ function checkLength(obj,maxlength){
             //执行增加评论
 			$.ajax({  
 		        type : "post",   
-		         url : "<%=path%>/carcomment!saveCarcoment.action",   
-		         data: {"carcomment.cid":cid,"carcomment.uid":uid,"carcomment.cflag":cflag,"carcomment.content":content},
+		         url : "addCarcoment",
+		         data: {"cid":cid,"uid":uid,"cflag":cflag,"content":content},
 		         dataType: "json",
 		         async : false,   
 		         success : function(results){ 
@@ -180,12 +199,12 @@ function checkLength(obj,maxlength){
 		var uid = $('#uid').val();//评论人id
 		$.ajax({  
 	        type : "post",  
-	         url : "<%=path%>/carcomment!showCarComment.action",   
-	         data: {"carcomment.cid":carId,"carcomment.uid":uid},
+	         url : "carComment",
+	         data: {"cid":carId},
 	         dataType: "json", 
 	         async : false,    
-	         success : function(results){  
-	        	 if(results.showComment){ 
+	         success : function(results){
+	        	 if(results){
 	        		document.getElementById("carComment").style.display = "block"; 
 	            }else{ 
 	            	document.getElementById("carComment").style.display = "none";  

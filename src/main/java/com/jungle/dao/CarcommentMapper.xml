@@ -70,6 +70,11 @@
   <sql id="Base_Column_List" >
     id, cid, uid, cflag, content, commenttime
   </sql>
+  <sql id="AndUser_Column_List" >
+    id, cid, uid,
+    (select realname from reguser where id=uid) as username,
+    cflag, content, commenttime
+  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jungle.bean.CarcommentExample" >
     select
     <if test="distinct" >
@@ -83,6 +88,14 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+  </select>
+
+
+  <select id="selectByCidWhereUser" resultMap="BaseResultMap">
+    select
+    <include refid="AndUser_Column_List" />
+    from carcomment
+    where cid = #{cid}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

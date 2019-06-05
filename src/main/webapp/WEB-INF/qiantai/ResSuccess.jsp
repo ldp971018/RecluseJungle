@@ -53,7 +53,7 @@ window.location.href = "<%=path%>/login.jsp";
             <div class="cgxd-main">
                 <p class="xdcg"><img src="/static/images/xdcg.png"> </p>
                 <p class="ddbh">订单编号：<i>${clxjorder.oid }</i> [请牢记您的订单编号]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单总价：<i>${clxjorder.total }</i> （该订单属于线下支付类型）</p>
-                <p class="fhdd">您可以：<a href="UserJAOrder.jsp" class="fh">返回我的订单</a><a href="carinfo!selCarofCid.action?clxjmain.id=${clxjmain.id }" class="jx">继续预定用车</a>（如有疑问请联系丛林闲居客服QQ:2897968708）</p>
+                <p class="fhdd">您可以：<a href="showAllClxjorderByUserid" class="fh">返回我的订单</a><a href="CarAllModels?uid=${clxjmain.id }" class="jx">继续预定用车</a>（如有疑问请联系丛林闲居客服QQ:2897968708）</p>
                 <p class="wxts"><i>*温馨提示：</i>IE6.0及更低版本浏览器用户请检查您的浏览器是否支持128位密钥长度，如果不支持，请升级您的浏览器。</p>
             </div>
         </div>

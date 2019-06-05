@@ -65,7 +65,7 @@ public class pageController {
      */
     @RequestMapping("clxjmain")
     public String clxjmain() {
-        return "qiantai/clxjmain";
+        return "redirect:selectCL_All";
     }
 
     /**
@@ -75,7 +75,7 @@ public class pageController {
      */
     @RequestMapping("JungleList")
     public String JungleList() {
-        return "qiantai/JungleList";
+        return "redirect:selectJungle_All";
     }
 
 
