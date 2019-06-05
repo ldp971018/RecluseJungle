@@ -9,11 +9,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>丛林闲居</title>
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/layui/layui.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-
 </head>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<link rel="stylesheet" href="/static/layui/css/layui.css">
 <style>
     .money {
         border-radius: 3px;
@@ -22,15 +21,9 @@
         height: 24px;
         width: 24px;
     }
-
-    /*.laydate-icon, .laydate-icon-default, .laydate-icon-danlan, .laydate-icon-dahong, .ts {*/
-    /*height: 30px;*/
-    /*border-radius: 3px;*/
-    /*margin-left: 6px;*/
-    /*}*/
 </style>
 
-<body onload="nowTime()">
+<body onload="nowTime();flush();">
 <div>
     <!--首页TOP-->
     <div class="yc-txdd1">
@@ -65,29 +58,18 @@
                                 <%--<input name="donationtime" class="laydate-icon" id="donationtime" style="width:210px;"/>--%>
                             </p>
                         </div>
-                        <div><input type="submit" value="开始查询" class="esg31" onclick="getDonations()"></div>
+                        <div><input type="submit" value="开始查询" class="esg31" onclick="getDonations()"/></div>
                     </div>
                     <div class="qxqz">
-                        <p>截止 <span id="nowTime"></span>&nbsp;捐款总额为（￥）:</p>
-                        <div id="mon" style="text-align: center">
-                            <%--<span class="money"><font color="white"--%>
-                            <%--size="3">&nbsp;1&nbsp;</font> </span>&nbsp;--%>
-                            <%--<span class="money"><font color="white"--%>
-                            <%--size="3">&nbsp;3&nbsp;</font> </span>&nbsp;--%>
-                            <%--<span class="money"><font color="white"--%>
-                            <%--size="3">&nbsp;4&nbsp;</font> </span>&nbsp;--%>
-                            <%--<span class="money"><font color="white"--%>
-                            <%--size="3">&nbsp;5&nbsp;</font> </span>&nbsp;--%>
-                            <%--<span class="money"><font color="white"--%>
-                            <%--size="3">&nbsp;.&nbsp;</font> </span>&nbsp;--%>
-                            <%--<span class="money"><font color="white"--%>
-                            <%--size="3">&nbsp;6&nbsp;</font> </span>&nbsp;--%>
-                            <%--<span class="money"><font color="white"--%>
-                            <%--size="3">&nbsp;2&nbsp;</font> </span>--%>
-                        </div>
+                        <p>截止 <span id="nowTime"></span>&nbsp;捐款总额为（￥）:&emsp;下次刷新倒计时:<span
+                                id="flushTime"></span>&nbsp;<input
+                                type="button" value="刷新" class="layui-btn layui-btn-normal layui-btn-xs"
+                                onclick="flush()"></p>
+                        <br>
+                        <div id="mon" style="text-align: center"></div>
 
                     </div>
-                    <div class="jzfj-gslb" style="text-align: center">
+                    <div class="jzfj-gslb" style="text-align: center;width: 885px">
                         <table class="layui-hide" id="table"></table>
                     </div>
 
@@ -114,7 +96,7 @@
                             <img src="<%=path%>/static/images/brower_07.jpg">
                         </div>
                     </a>
-                    <a href="/userPquery">
+                    <a href="showAllHelpinfo">
                         <div>
                             <img src="<%=path%>/static/images/brower_19.jpg" class="enheng" style="margin-top: 23px;">
                             <p>求助进度</p>
@@ -179,10 +161,9 @@
 </div>
 
 <script type="text/javascript">
-    function nowTime() {
-        var date = new Date();
-        var time = "" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        $("#nowTime").html("<font color='red'>&nbsp;" + time + "&nbsp;</font>");
+    var flushTime = 60;
+    var flush = function flush() {
+        flushTime = 60;
         $.ajax({
             url: "/selDonationLoveCount",
             async: false,
@@ -195,12 +176,25 @@
                 $("#mon").html(money);
             }
         })
+    }
+
+    function nowTime() {
+        var date = new Date();
+        var time = "" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        $("#nowTime").html("<font color='red'>&nbsp;" + time + "&nbsp;</font>");
+        if (flushTime <= 0) {
+            flushTime = 60;
+            flush();
+        }
+        $("#flushTime").html("&nbsp;<font color='red'>" + flushTime + "</font>&nbsp;")
+        flushTime--;
+
         setTimeout(nowTime, 1000);
     }
+
+
 </script>
-<script type="text/html" id="loginTime">
-    {{ dateFormat(d.loginTime) }}   // d是layui自带的
-</script>
+
 <script>
     var tableIns;
     layui.use(['table', 'laydate'], function () {

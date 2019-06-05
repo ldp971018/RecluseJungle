@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class AflUser {
+import java.io.Serializable;
+
+public class AflUser implements Serializable {
     private Integer id;
 
     private String username;

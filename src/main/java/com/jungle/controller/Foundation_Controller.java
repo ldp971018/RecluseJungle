@@ -1,10 +1,9 @@
 package com.jungle.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.jungle.bean.Donation;
-import com.jungle.bean.Helpinfo;
+import com.jungle.bean.*;
 import com.jungle.service.FoundationService;
 import com.jungle.serviceImpl.FoundationServiceImpl;
+import com.jungle.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.*;
 
 
@@ -24,6 +26,8 @@ import java.util.*;
  **/
 @Controller
 public class Foundation_Controller {
+    @Autowired
+    public RedisUtil redisUtil;
     @Autowired
     private FoundationService foundationServiceImpl;
 
@@ -60,7 +64,7 @@ public class Foundation_Controller {
     @ResponseBody
     public Map<String, Object> selDonation() {
         HashMap<String, Object> map = new HashMap<>();
-        String money = "" + foundationServiceImpl.selDonationCount();
+        String money = "" + foundationServiceImpl.selRedisDonationCount();
         List countMoney = new ArrayList();
         for (int i = 0; i < money.length(); i++) {
             countMoney.add(money.substring(i, i + 1));
@@ -73,8 +77,10 @@ public class Foundation_Controller {
     /**
      * 爱心捐赠明细（基金会-我要查询）
      *
-     * @param page  当前页
-     * @param limit 每页显示多少条数据
+     * @param page         当前页
+     * @param limit        每页显示多少条数据
+     * @param donationname 名称查询条件
+     * @param donationtime 时间条件查询
      * @return
      */
     @RequestMapping("/selDonation")
@@ -82,12 +88,185 @@ public class Foundation_Controller {
     public Map<String, Object> selDonation(@RequestParam(defaultValue = "") String donationname, @RequestParam(defaultValue = "") String donationtime, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
         System.out.println(page + "-" + limit);
         HashMap<String, Object> map = new HashMap<>();
-        PageInfo<Donation> pageInfo = foundationServiceImpl.selDonation(donationtime, donationname, page, limit);
-        System.out.println(pageInfo.getList().toString());
+        List<Donation> donations = null;
+        try {
+            donations = foundationServiceImpl.selRedisDonation(donationtime, donationname, page, limit);
+        } catch (ParseException e) {
+//            e.printStackTrace();
+        }
+        System.out.println(donations.toString());
         map.put("code", 0);
-        map.put("count", FoundationServiceImpl.donationCount);
-        map.put("data", pageInfo.getList());
+        System.out.println("返回的数量-" + FoundationServiceImpl.donationCount);
+        if (null == FoundationServiceImpl.donationCount) {
+            FoundationServiceImpl.donationCount = null;
+            map.put("count", ((List<Object>) redisUtil.get("selRedisDonation")).size());
+        } else {
+            map.put("count", FoundationServiceImpl.donationCount);
+            FoundationServiceImpl.donationCount = null;
+        }
+        map.put("data", donations);
         return map;
     }
+
+    /**
+     * 月底支出查询（基金会-我要查询）
+     *
+     * @param projectname 条件查询项目名
+     * @param paymoney    条件查询支出金额
+     * @param monthly     条件查询月度
+     * @param page        当前页
+     * @param limit       每页显示多少条数据
+     * @return
+     */
+    @RequestMapping("/selPList")
+    @ResponseBody
+    public Map<String, Object> selPList(String projectname, BigDecimal paymoney, String monthly, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        List<Payformonth> payformonths = null;
+        try {
+            payformonths = foundationServiceImpl.selRedisPList(projectname, paymoney, monthly, page, limit);
+        } catch (ParseException e) {
+//            e.printStackTrace();
+        }
+        if (null == FoundationServiceImpl.plistCount) {
+            FoundationServiceImpl.plistCount = null;
+            map.put("count", ((List<Object>) redisUtil.get("selRedisPList")).size());
+        } else {
+            map.put("count", FoundationServiceImpl.plistCount);
+            FoundationServiceImpl.plistCount = null;
+        }
+        map.put("data", payformonths);
+
+        return map;
+    }
+
+    /**
+     * 款物发放公示（基金会-我要查询）
+     *
+     * @param donationname 捐款人
+     * @param recipients   受助人
+     * @param donationTime 捐款时间
+     * @param page         当前页
+     * @param limit        每页的数量
+     * @return
+     */
+    @RequestMapping("/selPLpublicity")
+    @ResponseBody
+    public Map<String, Object> selPLpublicity(String donationname, String recipients, String donationTime, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        List<Grant> grants = null;
+        try {
+            grants = foundationServiceImpl.selRedisPLpublicity(donationname, recipients, donationTime, page, limit);
+        } catch (ParseException e) {
+//            e.printStackTrace();
+        }
+
+        if (null == FoundationServiceImpl.grantCount) {
+            FoundationServiceImpl.grantCount = null;
+            map.put("count", ((List<Object>) redisUtil.get("selRedisPLpublicity")).size());
+        } else {
+            map.put("count", FoundationServiceImpl.grantCount);
+            FoundationServiceImpl.grantCount = null;
+        }
+        map.put("data", grants);
+
+        return map;
+    }
+
+    /**
+     * 公示列表（基金会-公示列表）
+     *
+     * @param applystatus 公示类型
+     * @param name        申请人姓名
+     * @param applymoney1 申请金额1
+     * @param applymoney2 申请金额2
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("/selFoundJzfzlist")
+    @ResponseBody
+    public Map<String, Object> selFoundJzfzlist(Integer applystatus, String name, Long applymoney1, Long applymoney2, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
+        System.out.println(applystatus + "-" + name + "-" + applymoney1 + "-" + applymoney2);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        List<Helpinfo> helpinfo = foundationServiceImpl.selRedisFoundJzfzlist(applystatus, name, applymoney1, applymoney2, page, limit);
+        System.out.println(helpinfo.toString());
+        if (null == FoundationServiceImpl.helpinfoCount) {
+            map.put("count", ((List<Object>) redisUtil.get("selRedisFoundJzfzlist")).size());
+            FoundationServiceImpl.helpinfoCount = null;
+        } else {
+            map.put("count", FoundationServiceImpl.helpinfoCount);
+            FoundationServiceImpl.helpinfoCount = null;
+        }
+        map.put("data", helpinfo);
+        return map;
+    }
+
+    /**
+     * 查看详情（基金会-公示列表-数据）
+     *
+     * @param id 需要查询详情的id
+     * @return
+     */
+    @RequestMapping("/selJzfzDetailed")
+    @ResponseBody
+    public Map<String, Object> selJzfzDetailed(Integer id) {
+        System.out.println("id-" + id);
+        Map<String, Object> map = new HashMap<>();
+        Helpinfo helpinfo = foundationServiceImpl.selFoundJzfzDetailed(id);
+        System.out.println(helpinfo.toString());
+        map.put("data", helpinfo);
+        return map;
+    }
+
+    /**
+     * 查询评论（基金会-公示列表-查看详情）
+     *
+     * @param id 需要查询详情的id
+     * @return
+     */
+    @RequestMapping("/selHelpcomment")
+    @ResponseBody
+    public Map<String, Object> selHelpcomment(Integer id, Integer page, Integer limit) {
+        System.out.println("id-" + id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        List<Helpcomment> helpcomment = foundationServiceImpl.selRedisHelpcomment(id, page, limit,false);
+        if (FoundationServiceImpl.helpcommentcount == null) {
+            map.put("count", ((List<Object>) redisUtil.get("selRedisHelpcomment")).size());
+            FoundationServiceImpl.helpcommentcount = null;
+        } else {
+            map.put("count", FoundationServiceImpl.helpcommentcount);
+            FoundationServiceImpl.helpcommentcount = null;
+        }
+        map.put("data", helpcomment);
+        return map;
+    }
+
+    /**
+     * 添加评论（基金会-公示列表-查看详情）
+     *
+     * @param helpid
+     * @param uid
+     * @param content
+     * @return
+     */
+    @RequestMapping("/insHelpcomment")
+    @ResponseBody
+    public Map<String, Object> insHelpcomment(Integer helpid, Integer uid, String content) {
+        System.out.println("添加评论-" + helpid + "-" + uid + "-" + content);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        int i = foundationServiceImpl.insHelpcomment(helpid, uid, content);
+        if (i != 0)
+            map.put("msg", "评论成功！");
+        else
+            map.put("msg", "评论失败！");
+        return map;
+    }
+
 
 }

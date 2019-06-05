@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Joincar {
+import java.io.Serializable;
+
+public class Joincar implements Serializable {
     private Integer id;
 
     private String theowner;

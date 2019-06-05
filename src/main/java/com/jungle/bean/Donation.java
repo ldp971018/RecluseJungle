@@ -1,9 +1,10 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Donation {
+public class Donation implements Serializable {
     private Integer id;
 
     private String donationname;

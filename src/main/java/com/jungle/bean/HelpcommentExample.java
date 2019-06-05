@@ -175,52 +175,52 @@ public class HelpcommentExample {
         }
 
         public Criteria andHelpidEqualTo(Integer value) {
-            addCriterion("helpid =", value, "helpid");
+            addCriterion("helpid =", value, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidNotEqualTo(Integer value) {
-            addCriterion("helpid <>", value, "helpid");
+            addCriterion("helpid <>", value, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidGreaterThan(Integer value) {
-            addCriterion("helpid >", value, "helpid");
+            addCriterion("helpid >", value, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("helpid >=", value, "helpid");
+            addCriterion("helpid >=", value, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidLessThan(Integer value) {
-            addCriterion("helpid <", value, "helpid");
+            addCriterion("helpid <", value, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidLessThanOrEqualTo(Integer value) {
-            addCriterion("helpid <=", value, "helpid");
+            addCriterion("helpid <=", value, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidIn(List<Integer> values) {
-            addCriterion("helpid in", values, "helpid");
+            addCriterion("helpid in", values, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidNotIn(List<Integer> values) {
-            addCriterion("helpid not in", values, "helpid");
+            addCriterion("helpid not in", values, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidBetween(Integer value1, Integer value2) {
-            addCriterion("helpid between", value1, value2, "helpid");
+            addCriterion("helpid between", value1, value2, "helpinfo.id");
             return (Criteria) this;
         }
 
         public Criteria andHelpidNotBetween(Integer value1, Integer value2) {
-            addCriterion("helpid not between", value1, value2, "helpid");
+            addCriterion("helpid not between", value1, value2, "helpinfo.id");
             return (Criteria) this;
         }
 

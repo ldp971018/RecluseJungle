@@ -1,6 +1,10 @@
 package com.jungle.bean;
 
-public class Helpinfo {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
+public class Helpinfo implements Serializable {
     private Integer id;
 
     private String name;

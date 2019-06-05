@@ -8,12 +8,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>丛林闲居-公示列表-月度支出查询</title>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
-    <script src="js/laydate.js"></script>
-    <link rel="stylesheet" href="style/laydate.css">
-    <link rel="stylesheet" href="js/molv/laydate.css">
-
+    <%--<link rel="stylesheet" href="style/cy.css">--%>
+    <%--<link rel="stylesheet" href="style/style.css">--%>
+    <%--<script src="js/laydate.js"></script>--%>
+    <%--<link rel="stylesheet" href="style/laydate.css">--%>
+    <%--<link rel="stylesheet" href="js/molv/laydate.css">--%>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/layui/layui.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
     <style rel="stylesheet">
         #laydate_table {
             display: none;
@@ -92,37 +94,23 @@
                     <div class="kwff-p1">
                         <p class="kwff-p11">公示列表</p>
                         <p class="kwff-p12"><a href="/pLpublicity"><span>款物发放公示</span></a> <a
-                                href="/pLlist"><span class="qzfze">月底支出查询</span></a> <a href="donationLove"><span>爱心捐赠明细</span></a></p>
+                                href="/pLlist"><span class="qzfze">月底支出查询</span></a> <a
+                                href="donationLove"><span>爱心捐赠明细</span></a></p>
                     </div>
                     <div class="jjh-jzfz">
                         <p><span>项目名称：<input type="text" class="esg" id="projectname"
-                                             name="payformonth.projectname"><span style="margin-left:65px;">支出金额：<input
-                                type="text" class="esg" id="paymoney" name="payformonth.paymoney"></span></p>
-                        <p><span>支出月度：<input name="startTime" class="laydate-icon ts" id="demo1" value=""
-                                             style="width:95px;"> &nbsp;到 &nbsp;<input name="endTime"
-                                                                                       class="laydate-icon" id="demo2"
-                                                                                       value=""
-                                                                                       style="width:95px;"></span><span><input
-                                type="button" id="cx" value="开始查询" class="esg2"></span></p>
+                                             name="projectname"><span style="margin-left:65px;"/>支出金额：<input
+                                type="text" class="esg" id="paymoney" name="paymoney"/></span></p>
+                        <p><span style="float: left">支出月度：</span> <input type="text" class="layui-input" id="monthly"
+                                                                         name="monthly"
+                                                                         placeholder=" - "
+                                                                         style="width:228px;border-radius: 5px;float: left">
+                            <span>&emsp;<input
+                                    type="button" value="开始查询" class="layui-btn layui-btn-normal layui-btn-xm"
+                                    onclick="getPList()" style="margin-top: 0px"></span></p>
                     </div>
-                    <p class="zg">总计<span id="c4"></span>条数据
-                    <div class="jzfj-gslb">
-                        <table border="1px solid #cccccc" style="border-bottom:none">
-                            <thead>
-                            <td width="80">序号</td>
-                            <td>月度</td>
-                            <td>项目名称</td>
-                            <td>支出金额</td>
-                            <td>备注</td>
-                            </thead>
-
-                        </table>
-                        <table class="data-table" id="commentAll" border="1px solid #cccccc">
-
-                        </table>
-                    </div>
-                    <div class="fenye">
-                        <div id="pageNav"></div>
+                    <div class="jzfj-gslb" style="width: 885px;text-align: center">
+                        <table class="layui-hide" id="table"></table>
                     </div>
 
 
@@ -149,7 +137,7 @@
                             <img src="<%=path%>/static/images/brower_07.jpg">
                         </div>
                     </a>
-                    <a href="/userPquery">
+                    <a href="showAllHelpinfo">
                         <div>
                             <img src="<%=path%>/static/images/brower_19.jpg" class="enheng" style="margin-top: 23px;">
                             <p>求助进度</p>
@@ -174,9 +162,55 @@
 
 
 </div>
-<script src="js/jquery.min.js"></script>
-<script src="../../js"></script>
+
 <script type="text/javascript">
+    var tableIns;
+    layui.use(['table', 'laydate'], function () {
+        var table = layui.table;
+        var laydate = layui.laydate;
+        //日期范围
+        laydate.render({
+            elem: '#monthly'
+            , range: true
+        });
+        tableIns = table.render({
+            elem: '#table'
+            , url: '/selPList'
+            , cols: [[
+                {field: 'id', title: '序号', width: 100, sort: true}
+                , {field: 'monthly', align: 'center', title: '月度', sort: true}
+                , {field: 'projectname', align: 'center', title: '项目名称'}
+                , {field: 'paymoney', align: 'center', title: '支出金额', sort: true}
+                , {field: 'remarks', align: 'center', title: '备注'}
+            ]]
+            , method: "post"
+            , page: true
+            , limits: [10, 20, 30, 50, 80, 100]
+            , limit: 10
+        });
+    });
+
+    function getPList() {
+        var projectname = $("#projectname");
+        var paymoney = $("#paymoney");
+        var monthly = $("#monthly");
+        //执行重载
+        tableIns.reload({
+            page: {
+                curr: 1,
+                limit: 10
+            }
+            , where: {
+                projectname: projectname.val(),
+                paymoney: paymoney.val(),
+                monthly: monthly.val()
+            }
+
+        });
+    }
+</script>
+
+<%--<script type="text/javascript">
     !function () {
         laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
         laydate({elem: '#demo1', format: 'YYYY-MM'});//绑定元素
@@ -348,6 +382,6 @@
             document.getElementById("commentForm").submit();
         }
     }
-</script>
+</script>--%>
 </body>
 </html>

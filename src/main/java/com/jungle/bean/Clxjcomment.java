@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Clxjcomment {
+public class Clxjcomment implements Serializable {
     private Integer id;
 
     private Integer cid;

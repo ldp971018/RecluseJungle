@@ -2,6 +2,9 @@ package com.jungle.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 用于其他无业务功能的页面跳转
@@ -116,12 +119,12 @@ public class pageController {
      */
     @RequestMapping("/foundDonations")
     public String foundDonations() {
-        return "qiantai/foundDonations";
+        return "qiantai/FoundDonations";
     }
 
 
     /**
-     * 跳转到公司列表（基金会）
+     * 跳转到公示列表（基金会）
      *
      * @return
      */
@@ -148,6 +151,21 @@ public class pageController {
     @RequestMapping("/pLpublicity")
     public String pLpublicity() {
         return "qiantai/PLpublicity";
+    }
+
+    /**
+     * 跳转到查看详情（基金会-公示列表）
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/foundJzfzDetailed")
+    public String foundJzfzDetailed(Integer id, HttpServletRequest req) {
+        System.out.println("page-" + id);
+//        modelAndView.setViewName("qiantai/FoundJzfzDetailed");
+//        modelAndView.addObject("id", id);
+        req.setAttribute("id", id);
+        return "qiantai/FoundjzfzDetailed";
     }
 
 

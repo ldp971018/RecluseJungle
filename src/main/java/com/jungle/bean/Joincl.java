@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Joincl {
+import java.io.Serializable;
+
+public class Joincl implements Serializable {
     private Integer id;
 
     private String clname;

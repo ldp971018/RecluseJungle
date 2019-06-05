@@ -92,8 +92,15 @@
         </tx:attributes>
     </tx:advice>
 
+    <!--<bean id="myAop" class="com.jungle.aop.Aop"></bean>-->
+
     <aop:config>
-        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.jungle..*Service.*(..))"/>
+        <!--<aop:pointcut id="pointcut" expression="execution(* com.jungle.serviceImpl.sel*.*(..))"/>-->
+        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.jungle..*Service*.*(..))"/>
+        <!--<aop:aspect ref="myAop">-->
+        <!--<aop:around method="twiceAsOld" pointcut-ref="pointcut"/>-->
+        <!--</aop:aspect>-->
     </aop:config>
+
 
 </beans>

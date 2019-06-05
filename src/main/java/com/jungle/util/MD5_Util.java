@@ -1,4 +1,4 @@
-package com.util;
+package com.jungle.util;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 

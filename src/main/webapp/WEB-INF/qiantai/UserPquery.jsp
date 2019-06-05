@@ -13,21 +13,21 @@
     <link rel="stylesheet" href="<%=path %>/static/style/style.css">
 </head>
 <body style="background-color:#f6f6f6;">
-<c:if test="${regUser==null }">
-<script type="text/javascript">
-window.location.href = "<%=path%>/login";
-</script>
+<c:if test="${regUser==null}">
+    <script type="text/javascript">
+        window.location.href = "<%=path%>/login";
+    </script>
 </c:if>
 <c:if test="${saveHelp ==true}">
-<script type="text/javascript">
-	alert("求助成功");
-</script>
+    <script type="text/javascript">
+        alert("求助成功");
+    </script>
 </c:if>
 <div>
     <!--首页TOP-->
-     
+
     <!--首页banner-->
-     <jsp:include  page="head.jsp" />
+    <jsp:include page="head.jsp"/>
     <script type="text/javascript">
    function loginOut(){
 		window.location.href = "<%=path%>/logout";
