@@ -1,14 +1,12 @@
 package com.jungle.serviceImpl;
 
 import com.jungle.bean.*;
-import com.jungle.dao.CityMapper;
-import com.jungle.dao.CitygroupMapper;
-import com.jungle.dao.ClxjmainMapper;
-import com.jungle.dao.ClxjorderMapper;
+import com.jungle.dao.*;
 import com.jungle.service.Jungle_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +21,16 @@ public class Jungle_ServiceImpl implements Jungle_Service {
     @Autowired
     private ClxjorderMapper clxjorderMapper;
     @Autowired
+    private CarinfoMapper carinfoMapper;
+    @Autowired
+    private CarcommentMapper carcommentMapper;
+    @Autowired
+    private CarorderMapper carorderMapper;
+    @Autowired
     private CityMapper cityMapper;
     //查询地区并分类
     @Override
-    public Map<String, Object> selectCityType() {
+    public Map<String, Object> selRedisCityType() {
         List<Citygroup> list = citygroupMapper.selectMany();
         System.out.println("======>>>>>"+list.size());
         for (Citygroup citygroup:list){
@@ -91,7 +95,7 @@ public class Jungle_ServiceImpl implements Jungle_Service {
      * @return
      */
     @Override
-    public List<City> selectCityTypeAll() {
+    public List<City> selRedisCityTypeAll() {
         List<City> list = cityMapper.selectByExample(null);
         return list;
     }
@@ -142,5 +146,99 @@ public class Jungle_ServiceImpl implements Jungle_Service {
     public Clxjmain selectClxjmainById(Integer id) {
         Clxjmain clxjmain=clxjmainMapper.selectByPrimaryKey(id);
         return clxjmain;
+    }
+
+    /**
+     * 根据闲居id查询车辆信息
+     * @return
+     */
+    @Override
+    public List<Carinfo> selectCarInfo(Integer cid) {
+        CarinfoExample carinfoExample = new CarinfoExample();
+        CarinfoExample.Criteria criteria = carinfoExample.createCriteria();
+        criteria.andCidEqualTo(cid);
+        List<Carinfo> carinfo = carinfoMapper.selectByExample(carinfoExample);
+        commentOk(carinfo);
+        return carinfo;
+    }
+    /**
+     * 根据车辆id查询用户评论
+     * @param cid
+     * @return
+     */
+    @Override
+    public List<Carcomment> carComment(Integer cid) {
+        List<Carcomment> list=carcommentMapper.selectByCidWhereUser(cid);
+        return list;
+    }
+
+    /**
+     * 添加评论
+     * @param carcomment
+     * @return
+     */
+    @Override
+    public boolean addCarcoment(Carcomment carcomment) {
+        int flag=carcommentMapper.insert(carcomment);
+        if(flag==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 根据车辆id查询车辆详细信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Carinfo CarOrderById(Integer id) {
+        Carinfo carinfo=carinfoMapper.selectByPrimaryKey(id);
+        return carinfo;
+    }
+
+    /**
+     * 新增用车订单
+     * @param carorder
+     * @return
+     */
+    @Override
+    public boolean insCarorder(Carorder carorder) {
+        int flag=carorderMapper.insert(carorder);
+        if(flag==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 计算好评率的方法
+     * @param carinfo
+     */
+    public void commentOk(List<Carinfo> carinfo){
+        List<Carcomment> carcomment=carcommentMapper.selectByExample(null);
+        DecimalFormat df = new DecimalFormat("#.00");//保留两位小数
+        for(int i=0;i<carinfo.size();i++){
+            int count=0,count1=0;//统计评论总数量
+            for(int j=0;j<carcomment.size();j++){
+                if(carinfo.get(i).getId()==carcomment.get(j).getCid()){
+                    if(carcomment.get(j).getCflag()!=1){
+                        count++;//统计评论总数量（不包括中评）
+                    }
+                    if(carcomment.get(j).getCflag()==0){
+                        count1++;//统计好评数量
+                    }
+                }
+            }
+            if(count==0){
+                carinfo.get(i).setCommentOk("100");
+            }else {
+                Double d = (1.0 * count1 / count) * 100;//计算好评率
+                System.out.println("得到count1:" + count1 + "\t得到count:" + count + "\t得到f:" + d);
+                carinfo.get(i).setCommentOk(df.format(d));
+            }
+        }
     }
 }

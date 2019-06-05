@@ -47,4 +47,7 @@ public interface FoundationService {
     //添加评论（基金会-公示列表-查看详情）
     int insHelpcomment(Integer helpid, Integer uid, String content);
 
+    //爱心捐赠
+    boolean insDonation(Donation donation);
+
 }

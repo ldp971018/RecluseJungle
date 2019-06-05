@@ -24,11 +24,11 @@
 <!-- 表单验证stop -->
 </head>
 <body>
-<c:if test="${regUser==null }">
+<%--<c:if test="${regUser==null }">
 <script type="text/javascript">
-window.location.href = "<%=path%>/login.jsp";
+window.location.href = "/login";
 </script>
-</c:if>
+</c:if>--%>
 <div><!--首页TOP-->
 <div class="yc-txdd1"><!--首页banner--> 
 <jsp:include  page="head.jsp" />   
@@ -50,7 +50,7 @@ function loginOut(){
 	src="/static/images/tj_05.jpg"><i>完成订单</i></p>
 </div>
 <div class="yc-title">填写订单</div>
-<form action="<%=path %>/carorder!saveCarorder.action" method="post"
+<form action="insCarorder" method="post"
 	id="carorderForm"><input type="hidden" name="uid"
 	value="${regUser.id }" /> <input type="hidden" name="cid"
 	value="${carinfoJson.id }" /> <input type="hidden"
@@ -61,8 +61,8 @@ function loginOut(){
 <table class="one-tab">
 	<tr>
 		<td>用车日期&nbsp;&nbsp;&nbsp;</td>
-		<td class="ycrq"><input name="usetime" type="text"
-			id="d241" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+		<td class="ycrq"><input name="usetime"
+			id="d241" placeholder="年/月/日" class="laydate-icon"
 			class="Wdate" style="width: 300px" /></td>
 		<td a></td>
 	</tr>
@@ -134,7 +134,7 @@ function loginOut(){
 </div>
 <div class="ym-right">
 <div class="ym-r1">
-<p class="fhxg"><a href="#"> 返回修改</a></p>
+<p class="fhxg"><a href="javascript:history.back(-1)"> 返回修改</a></p>
 <p class="sxcx">所选车型</p>
 <ul>
 	<!--<li>车型：经济车型  东风日产天籁 银色</li>
@@ -168,7 +168,7 @@ function loginOut(){
 <p class="ddbh">订单编号：<i>${oid }</i>
 [请牢记您的订单编号]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单总价：<i>${total }</i>
 （该订单属于线下支付类型）</p>
-<p class="fhdd">您可以：<a href="UserCarOrder.jsp" class="fh">返回我的订单</a>（如有疑问请联系丛林闲居客服QQ:2897968708）</p>
+<p class="fhdd">您可以：<a href="showAllCarorderByUserid" class="fh">返回我的订单</a>（如有疑问请联系丛林闲居客服QQ:2897968708）</p>
 <p class="wxts"><i>*温馨提示：</i>IE6.0及更低版本浏览器用户请检查您的浏览器是否支持128位密钥长度，如果不支持，请升级您的浏览器（<span>查看如何检查和升级方案</span>）</p>
 </div>
 </div>
@@ -194,6 +194,10 @@ function loginOut(){
 </div>
 <script src="../../js"></script>
 <script type="text/javascript">
+	!function(){
+		laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+		laydate({elem: '#d241'});//绑定元素
+	}();
 function subForm(){
 	var sub = document.getElementById("sub");
 	var check = $("#carorderForm").valid();  

@@ -19,6 +19,16 @@ public class Carinfo implements Serializable {
 
     private Integer checkstatus;
 
+    private String commentOk;
+
+    public String getCommentOk() {
+        return commentOk;
+    }
+
+    public void setCommentOk(String commentOk) {
+        this.commentOk = commentOk;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -82,4 +92,5 @@ public class Carinfo implements Serializable {
     public void setCheckstatus(Integer checkstatus) {
         this.checkstatus = checkstatus;
     }
+
 }

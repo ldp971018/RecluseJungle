@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
 import java.io.Serializable;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Carorder implements Serializable {
@@ -17,7 +19,7 @@ public class Carorder implements Serializable {
     private String checkperson;
 
     private String checkphone;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date usetime;
 
     private Boolean useroption;

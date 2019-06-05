@@ -1,9 +1,6 @@
 package com.jungle.controller;
 
-import com.jungle.bean.City;
-import com.jungle.bean.Citygroup;
-import com.jungle.bean.Clxjmain;
-import com.jungle.bean.Clxjorder;
+import com.jungle.bean.*;
 import com.jungle.service.Jungle_Service;
 import com.jungle.util.GetTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +30,8 @@ public class Jungle_Controller {
      */
     @ResponseBody
     @RequestMapping("/selectCityType")
-    public Map<String, Object> selectCityType() {
-        Map<String, Object> map = jungle_service.selectCityType();
+    public Map<String,Object> selectCityType(){
+        Map<String,Object> map = jungle_service.selRedisCityType();
         return map;
     }
 
@@ -45,10 +42,10 @@ public class Jungle_Controller {
      */
     @ResponseBody
     @RequestMapping("/selectCityTypeAll")
-    public Map<String, Object> selectCityTypeAll() {
-        Map<String, Object> map = new HashMap<>();
-        List<City> list = jungle_service.selectCityTypeAll();
-        map.put("citys", list);
+    public Map<String,Object> selectCityTypeAll(){
+        Map<String,Object> map=new HashMap<>();
+        List<City> list= jungle_service.selRedisCityTypeAll();
+        map.put("citys",list);
         return map;
     }
 
@@ -60,12 +57,26 @@ public class Jungle_Controller {
      * @return
      */
     @RequestMapping("/selectCL")
-    public String selectCL(Clxjmain clxjmain, HttpServletRequest request) {
-        if (clxjmain.getBelongCity().equals("请选择城市"))
+    public String selectCL(Clxjmain clxjmain, HttpServletRequest request){
+        if(clxjmain.getBelongCity().equals("请选择城市"))
             clxjmain.setBelongCity("");
         List<Clxjmain> list = jungle_service.selectJungle(clxjmain);
         request.setAttribute("JungleList", list);
         request.setAttribute("clxjmain", clxjmain);
+        return "qiantai/clxjmain";
+    }
+
+    /**
+     * 查询全部丛林
+     * @param request
+     * @return
+     */
+    @RequestMapping("selectCL_All")
+    public String selectCL_All(HttpServletRequest request){
+        Clxjmain clxjmain=new Clxjmain();
+        clxjmain.setType2(true);
+        List<Clxjmain> list=jungle_service.selectJungle(clxjmain);
+        request.setAttribute("JungleList",list);
         return "qiantai/clxjmain";
     }
 
@@ -77,15 +88,27 @@ public class Jungle_Controller {
      * @return
      */
     @RequestMapping("/selectJungle")
-    public String selectJungle(Clxjmain clxjmain, HttpServletRequest request) {
-        if (clxjmain.getBelongCity().equals("请选择城市"))
+    public String selectJungle(Clxjmain clxjmain, HttpServletRequest request){
+        if(clxjmain.getBelongCity().equals("请选择城市"))
             clxjmain.setBelongCity("");
         List<Clxjmain> list = jungle_service.selectJungle(clxjmain);
         request.setAttribute("clxjmain", clxjmain);
         request.setAttribute("JungleList", list);
         return "qiantai/JungleList";
     }
-
+    /**
+     * 查询全部闲居
+     * @param request
+     * @return
+     */
+    @RequestMapping("selectJungle_All")
+    public String selectJungle_All(HttpServletRequest request){
+        Clxjmain clxjmain=new Clxjmain();
+        clxjmain.setType2(false);
+        List<Clxjmain> list=jungle_service.selectJungle(clxjmain);
+        request.setAttribute("JungleList",list);
+        return "qiantai/clxjmain";
+    }
     /**
      * 通过地址传参（城市名），进行查询闲居信息
      *
@@ -238,5 +261,92 @@ public class Jungle_Controller {
             System.out.println("添加订单失败！");
         }
         return "qiantai/ResSuccess";
+    }
+
+    /**
+     * 根据闲居id查询车辆信息
+     * @param request
+     * @param uid
+     * @return
+     */
+    @RequestMapping("CarAllModels")
+    public String CarOrder(HttpServletRequest request,Integer uid){
+        List<Carinfo> list=jungle_service.selectCarInfo(uid);
+        request.setAttribute("carinfoJsons",list);
+        request.setAttribute("clxjmainid",uid);
+        return "qiantai/CarAllModels";
+    }
+
+    /**
+     * 根据车辆id查询用户评论
+     * @param cid
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("carComment")
+    public Map<String,Object> carComment(Integer cid){
+        System.out.println("获取车辆id：");
+        List<Carcomment> list=jungle_service.carComment(cid);
+        Map<String,Object> map = new HashMap<>();
+        map.put("count",list.size());
+        map.put("carcommentJsons",list);
+        return map;
+    }
+
+    /**
+     * 添加评论
+     * @param carcomment
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("addCarcoment")
+    public Map<String,Object> addCarcoment(Carcomment carcomment){
+        System.out.println("评论内容："+carcomment.getContent());
+        Map<String,Object> map = new HashMap<>();
+        carcomment.setCommenttime(new Date());
+        boolean flag=jungle_service.addCarcoment(carcomment);
+        if(flag){
+            map.put("isOk","true");
+        }else{
+            map.put("isok","false");
+        }
+        return map;
+    }
+
+    /**
+     * 根据车辆id查询车辆详细信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("CarOrderById")
+    public String CarOrderById(HttpServletRequest request,Integer id,String commentOk){
+        Carinfo carinfo=jungle_service.CarOrderById(id);
+        carinfo.setCommentOk(commentOk);
+        request.setAttribute("carinfoJson",carinfo);
+        return "qiantai/CarOrder";
+    }
+
+    /**
+     * 添加用车订单
+     * @param carorder
+     * @return
+     */
+    @RequestMapping("insCarorder")
+    public String insCarorder(HttpServletRequest request,Carorder carorder){
+        String oid=GetTimestamp.getTimestamp()+"car";//根据时间戳生成订单id
+        carorder.setOid(oid);
+        carorder.setReservetime(new Date());
+        carorder.setState(1);
+        boolean flag=jungle_service.insCarorder(carorder);
+        if(flag){
+            System.out.println("用车订单添加成功");
+            request.setAttribute("carorderOk",1);//新增用车订单成功！
+            request.setAttribute("oid",oid);//订单号
+            request.setAttribute("total",carorder.getTotal());//订单总价
+        }else{
+            System.out.println("用车订单添加失败");
+            request.setAttribute("carorderOk",-1);//新增用车订单失败！
+        }
+        return "qiantai/CarOrder";
     }
 }

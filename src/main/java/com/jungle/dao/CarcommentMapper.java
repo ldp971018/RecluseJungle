@@ -18,6 +18,8 @@ public interface CarcommentMapper {
 
     List<Carcomment> selectByExample(CarcommentExample example);
 
+    List<Carcomment> selectByCidWhereUser(@Param("cid") Integer cid);
+
     Carcomment selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Carcomment record, @Param("example") CarcommentExample example);
