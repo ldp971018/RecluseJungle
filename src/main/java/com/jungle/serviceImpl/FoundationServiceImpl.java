@@ -283,5 +283,19 @@ public class FoundationServiceImpl implements FoundationService {
         return helpcommentMapper.insertSelective(helpcomment);
     }
 
+    /**
+     * 爱心捐赠
+     * @param donation
+     * @return
+     */
+    @Override
+    public boolean insDonation(Donation donation) {
+        int flag=donationMapper.insert(donation);
+        if(flag==1)
+            return true;
+        else
+            return false;
+    }
+
 
 }

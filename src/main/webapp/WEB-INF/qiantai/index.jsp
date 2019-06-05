@@ -19,6 +19,22 @@
     <script type='text/javascript' src='${path}/static/js/citylist.js'></script>
     <script type='text/javascript' src='${path}/static/js/querycity.js'></script>
     <link href='${path}/static/style/cityquery.css' rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="${path}/static/js/alertPopShow.js"></script>
+    <style type="text/css">
+        .web_toast{
+            position: fixed;
+            margin: 0 10px;
+            z-index: 9999;
+            display: none;
+            display: block;
+            padding: 10px;
+            color: red;
+            background: rgba(0, 0, 0, 0.7);
+            font-size: 1.4rem;
+            text-align: center;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 
 <body>
@@ -395,13 +411,13 @@
             <div class="rmtj3"><a href="javascript:void(0)">更多景点></a> </div>
         --></div>
         <div class="ic-left">
-            <div class="il-one">
-                <p class="title">爱心捐赠</p>
-                <p><input type="text" placeholder="请输入捐款人姓名"></p>
-                <p><input type="text" placeholder="请输入捐款金额"></p>
-                <p><a href="${path}/FoundDonations.jsp"><input type="submit" value="在线捐赠"></a></p>
-            </div>
-            <form action="${path}/DonationLove.jsp" method="post">
+                <div class="il-one">
+                    <p class="title">爱心捐赠</p>
+                    <p><input type="text" id="donationname" name="donationname" placeholder="请输入捐款人姓名"></p>
+                    <p><input type="text" id="money" name="money" placeholder="请输入捐款金额"></p>
+                    <p><a onclick="addDonation()"><input type="submit" value="在线捐赠"></a></p>
+                </div>
+            <form action="/donationLove" method="post">
                 <div class="il-two">
                     <p class="title">善款查询</p>
                     <p><input type="text" name="donationname" placeholder="要查找人姓名"></p>
@@ -415,8 +431,8 @@
             <p class="ckax"><img src="${path}/static/images/07.png">实时查看基金会总爱心金额</p>
             <p class="money">${moneyCountStr }</p>
             <p><img src="${path}/static/images/jk_03.jpg"></p>
-            <p class="xz"><span class="one"><a href="${path}/qiantai/PLpublicity.jsp">捐款支出细则</a> </span><span
-                    class="two"><a href="${path}/qiantai/FoundIndex.jsp">基金会简介</a> </span></p>
+            <p class="xz"><span class="one"><a href="/pLlist">捐款支出细则</a> </span><span
+                    class="two"><a href="/foundIndex">基金会简介</a> </span></p>
         </div>
         <div class="ic-right">
             <p>捐款方式 / pattern</p>
@@ -446,6 +462,31 @@
 <%--<script src="${path}/static/js"></script>--%>
 <script src="${path}/static/js/scorll.js"></script>
 <script type="text/javascript">
+    function addDonation() {
+        var re = /^[0-9]+.?[0-9](2)*$/; //判断字符串是否为合法金额
+        var nubmer = document.getElementById("money").value;
+        if (!re.test(nubmer)) {
+            webToast("对不起！请输入合法金额！","middle",2000);
+            document.getElementById("money").value = "";
+            document.getElementById("money").focus();
+        }else{
+            var donationname=$("#donationname").val();
+            var money=$("#money").val();
+            $.ajax({
+                type : "post",
+                url : "/insDonation",
+                data: {"donationname":donationname,"money":money},
+                dataType: "json",
+                async : false,
+                success : function(result){
+                    console.log(result);
+                    webToast(result.msg,"middle",2000);
+                    document.getElementById("money").value="";
+                    document.getElementById("donationname").value="";
+                }
+            });
+        }
+    }
     function TabGNCL() {
         var arr=document.getElementById("TabGNCL");
         var arr1=document.getElementById("TabGNXJ");

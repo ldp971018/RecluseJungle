@@ -29,7 +29,7 @@ public class Jungle_Controller {
     @ResponseBody
     @RequestMapping("selectCityType")
     public Map<String,Object> selectCityType(){
-        Map<String,Object> map = jungle_service.selectCityType();
+        Map<String,Object> map = jungle_service.selRedisCityType();
         return map;
     }
 
@@ -41,7 +41,7 @@ public class Jungle_Controller {
     @RequestMapping("selectCityTypeAll")
     public Map<String,Object> selectCityTypeAll(){
         Map<String,Object> map=new HashMap<>();
-        List<City> list= jungle_service.selectCityTypeAll();
+        List<City> list= jungle_service.selRedisCityTypeAll();
         map.put("citys",list);
         return map;
     }
@@ -51,7 +51,7 @@ public class Jungle_Controller {
      * @param request
      * @return
      */
-    @RequestMapping("selectCL")
+    @RequestMapping("/selectCL")
     public String selectCL(Clxjmain clxjmain, HttpServletRequest request){
         if(clxjmain.getBelongCity().equals("请选择城市"))
             clxjmain.setBelongCity("");
@@ -80,7 +80,7 @@ public class Jungle_Controller {
      * @param request
      * @return
      */
-    @RequestMapping("selectJungle")
+    @RequestMapping("/selectJungle")
     public String selectJungle(Clxjmain clxjmain, HttpServletRequest request){
         if(clxjmain.getBelongCity().equals("请选择城市"))
             clxjmain.setBelongCity("");

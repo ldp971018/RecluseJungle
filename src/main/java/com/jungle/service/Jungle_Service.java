@@ -9,8 +9,8 @@ import java.util.Map;
 public interface Jungle_Service {
 
     //查询地区并分类
-    Map<String,Object> selectCityType();
-    List<City> selectCityTypeAll();
+    Map<String,Object> selRedisCityType();
+    List<City> selRedisCityTypeAll();
     //根据条件搜索丛闲居信息
     List<Clxjmain> selectJungle(Clxjmain clxjmain);
     //根据id查询丛林闲居信息

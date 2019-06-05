@@ -51,10 +51,10 @@
                     </div>
                     <div class="jjh-jzfz1">
                         <div><p><span>捐款姓名：&nbsp; <input id="donationname" type="text" class="esg21"
-                                                         name="donationname" size=""></span></p>
+                                                         name="donationname" size="" value="${donationname}"></span></p>
                             <p style="text-align:left"><span style="float: left">捐款时间：&nbsp;&nbsp;</span>
                                 <input type="text" class="layui-input" id="donationtime" placeholder="yyyy-MM-dd"
-                                       name="donationtime" style="width:228px;border-radius: 5px;">
+                                       name="donationtime" style="width:228px;border-radius: 5px;"  value="${donationtime}">
                                 <%--<input name="donationtime" class="laydate-icon" id="donationtime" style="width:210px;"/>--%>
                             </p>
                         </div>
@@ -225,7 +225,12 @@
             , limit: 10
         });
     });
-
+    setTimeout(function(){
+        var name = $("#donationname").val();
+        var time = $("#donationtime").val();
+        if (name!=""||time!=""){
+            getDonations();
+        } }, 100);
     function getDonations() {
         var donationname = $("#donationname");
         var donationtime = $("#donationtime");

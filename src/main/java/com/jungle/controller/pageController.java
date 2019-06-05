@@ -2,6 +2,7 @@ package com.jungle.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,7 +109,9 @@ public class pageController {
      * @return
      */
     @RequestMapping("/donationLove")
-    public String donationLove() {
+    public String donationLove(HttpServletRequest request, @RequestParam(defaultValue = "") String donationname, @RequestParam(defaultValue = "") String donationtime) {
+        request.setAttribute("donationname",donationname);
+        request.setAttribute("donationtime",donationtime);
         return "qiantai/DonationLove";
     }
 
@@ -187,5 +190,21 @@ public class pageController {
         return "qiantai/UserCPassword";
     }
 
+    /**
+     * 联系我们
+     * @return
+     */
+    @RequestMapping("/ContactUs")
+    public String ContactUs(){
+        return "qiantai/ContactUs";
+    }
 
+    /**
+     * 丛林素斋
+     * @return
+     */
+    @RequestMapping("/clsz")
+    public String clsz(){
+        return "qiantai/clsz";
+    }
 }

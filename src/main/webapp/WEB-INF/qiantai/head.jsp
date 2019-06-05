@@ -82,13 +82,13 @@
     <div class="index-banner1">
         <ul>
             <li><a href="/index.jsp">首页</a></li>
-            <li><a href="clxjmain">丛林</a></li>
-            <li><a href="JungleList">闲居</a></li>
+            <li><a href="/clxjmain">丛林</a></li>
+            <li><a href="/JungleList">闲居</a></li>
             <li><a href="ConEntryPage.jsp">忏悔</a></li>
             <li><a href="/foundIndex">基金会</a></li>
             <li><a href="joincl.jsp">加盟</a></li>
-            <li><a href="ContactUs.jsp">联系我们</a></li>
-            <li><a href="clsz.jsp">丛林素斋</a></li>
+            <li><a href="/ContactUs">联系我们</a></li>
+            <li><a href="/clsz">丛林素斋</a></li>
             <li>
                 <div id="dateTime"></div>
             </li>

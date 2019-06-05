@@ -30,7 +30,7 @@ public class Jungle_ServiceImpl implements Jungle_Service {
     private CityMapper cityMapper;
     //查询地区并分类
     @Override
-    public Map<String, Object> selectCityType() {
+    public Map<String, Object> selRedisCityType() {
         List<Citygroup> list = citygroupMapper.selectMany();
         System.out.println("======>>>>>"+list.size());
         for (Citygroup citygroup:list){
@@ -95,7 +95,7 @@ public class Jungle_ServiceImpl implements Jungle_Service {
      * @return
      */
     @Override
-    public List<City> selectCityTypeAll() {
+    public List<City> selRedisCityTypeAll() {
         List<City> list = cityMapper.selectByExample(null);
         return list;
     }

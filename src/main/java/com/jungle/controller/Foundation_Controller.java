@@ -86,6 +86,7 @@ public class Foundation_Controller {
     @RequestMapping("/selDonation")
     @ResponseBody
     public Map<String, Object> selDonation(@RequestParam(defaultValue = "") String donationname, @RequestParam(defaultValue = "") String donationtime, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
+        System.out.println("donationname："+donationname+"\tdonationtime:"+donationtime);
         System.out.println(page + "-" + limit);
         HashMap<String, Object> map = new HashMap<>();
         List<Donation> donations = null;
@@ -268,5 +269,24 @@ public class Foundation_Controller {
         return map;
     }
 
+    /**
+     * 爱心捐赠
+     * @param donation
+     * @return
+     */
+    @RequestMapping("/insDonation")
+    @ResponseBody
+    public Map<String, Object> insDonation(Donation donation){
+        donation.setType("0");
+        donation.setDonationtime(new Date());
+        boolean flag=foundationServiceImpl.insDonation(donation);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        if(flag)
+            map.put("msg", "感谢捐赠！欢迎下次再来");
+        else
+            map.put("msg", "对不起！您的捐赠有误！");
+        return map;
+    }
 
 }
