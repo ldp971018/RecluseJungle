@@ -42,54 +42,49 @@ public class Jungle_ServiceImpl implements Jungle_Service {
         }
         Map<String,Object> map=new HashMap<>();
 
-        List<Citygroup> list1=new ArrayList<>();
+        List<Citygroup> list1=new ArrayList<>();//热门城市
+        List<Citygroup> list2=new ArrayList<>();//a_f字母的城市
+        List<Citygroup> list3=new ArrayList<>();//g_j字母的城市
+        List<Citygroup> list4=new ArrayList<>();//k_n字母的城市
+        List<Citygroup> list5=new ArrayList<>();//o_w字母的城市
+        List<Citygroup> list6=new ArrayList<>();//x_z字母的城市
+        List<Citygroup> list7=new ArrayList<>();//国际城市
         for(int i=0;i<list.size();i++){
+            //热门城市
             if(list.get(i).getGid()==1){
                 list1.add(list.get(i));
             }
-        }
-        map.put("rm",list1);
-        List<Citygroup> list2=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
+            //a_f字母的城市
             if(list.get(i).getGid()==2){
                 list2.add(list.get(i));
             }
-        }
-        map.put("a_f",list2);
-        List<Citygroup> list3=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
+            //g_j字母的城市
             if(list.get(i).getGid()==3){
                 list3.add(list.get(i));
             }
-        }
-        map.put("g_j",list3);
-        List<Citygroup> list4=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
+            //k_n字母的城市
             if(list.get(i).getGid()==4){
                 list4.add(list.get(i));
             }
-        }
-        map.put("k_n",list4);
-        List<Citygroup> list5=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
+            //o_w字母的城市
             if(list.get(i).getGid()==5){
                 list5.add(list.get(i));
             }
-        }
-        map.put("o_w",list5);
-        List<Citygroup> list6=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
+            //x_z字母的城市
             if(list.get(i).getGid()==6){
                 list6.add(list.get(i));
             }
-        }
-        map.put("x_z",list6);
-        List<Citygroup> list7=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
+            //国际城市
             if(list.get(i).getGid()==7){
                 list7.add(list.get(i));
             }
         }
+        map.put("rm",list1);
+        map.put("a_f",list2);
+        map.put("g_j",list3);
+        map.put("k_n",list4);
+        map.put("o_w",list5);
+        map.put("x_z",list6);
         map.put("gjcs",list7);
         return map;
     }
@@ -113,6 +108,16 @@ public class Jungle_ServiceImpl implements Jungle_Service {
     public List<Clxjmain> selectJungle(Clxjmain clxjmain){
         List<Clxjmain> list = clxjmainMapper.selectByWhere(clxjmain);
         commentOk(list);
+        return list;
+    }
+
+    /**
+     * 查询所有丛闲居信息
+     * @return
+     */
+    @Override
+    public List<Clxjmain> selredisJungleAll() {
+        List<Clxjmain> list = clxjmainMapper.selectByWhere(null);
         return list;
     }
 

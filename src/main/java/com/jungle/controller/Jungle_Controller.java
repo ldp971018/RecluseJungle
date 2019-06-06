@@ -15,10 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class Jungle_Controller {
@@ -174,27 +171,29 @@ public class Jungle_Controller {
     @RequestMapping("/loadIndex")
     public String loadIndex(HttpServletRequest request) {
         //查询全部
-        List<Clxjmain> listAll = jungle_service.selectJungle(null);
-        //国内丛林
-        Clxjmain clxjmainGNCL = new Clxjmain();
-        clxjmainGNCL.setType1(true);
-        clxjmainGNCL.setType2(true);
-        List<Clxjmain> listGNCL = jungle_service.selectJungle(clxjmainGNCL);
-        //国内闲居
-        Clxjmain clxjmainGNXJ = new Clxjmain();
-        clxjmainGNXJ.setType1(true);
-        clxjmainGNXJ.setType2(false);
-        List<Clxjmain> listGNXJ = jungle_service.selectJungle(clxjmainGNXJ);
-        //境外丛林
-        Clxjmain clxjmainGWCL = new Clxjmain();
-        clxjmainGWCL.setType1(false);
-        clxjmainGWCL.setType2(true);
-        List<Clxjmain> listGWCL = jungle_service.selectJungle(clxjmainGWCL);
-        //境外闲居
-        Clxjmain clxjmainGWXJ = new Clxjmain();
-        clxjmainGWXJ.setType1(false);
-        clxjmainGWXJ.setType2(false);
-        List<Clxjmain> listGWXJ = jungle_service.selectJungle(clxjmainGWXJ);
+        List<Clxjmain> listAll = jungle_service.selredisJungleAll();
+        List<Clxjmain> listGNCL=new ArrayList<>();
+        List<Clxjmain> listGNXJ=new ArrayList<>();
+        List<Clxjmain> listGWCL=new ArrayList<>();
+        List<Clxjmain> listGWXJ=new ArrayList<>();
+        for(int i=0;i<listAll.size();i++){
+            //国内丛林
+            if(listAll.get(i).getType1()==true&&listAll.get(i).getType2()==true){
+                listGNCL.add(listAll.get(i));
+            }
+            //国内闲居
+            if(listAll.get(i).getType1()==true&&listAll.get(i).getType2()==false){
+                listGNXJ.add(listAll.get(i));
+            }
+            //境外丛林
+            if(listAll.get(i).getType1()==false&&listAll.get(i).getType2()==true){
+                listGWCL.add(listAll.get(i));
+            }
+            //境外闲居
+            if(listAll.get(i).getType1()==false&&listAll.get(i).getType2()==false){
+                listGWXJ.add(listAll.get(i));
+            }
+        }
         request.setAttribute("listGNCL", listGNCL);
         request.setAttribute("listGNXJ", listGNXJ);
         request.setAttribute("listGWCL", listGWCL);

@@ -15,6 +15,8 @@ public interface Jungle_Service {
     List<City> selRedisCityTypeAll();
     //根据条件搜索丛闲居信息
     List<Clxjmain> selectJungle(Clxjmain clxjmain);
+    //查询所有丛闲居信息
+    List<Clxjmain> selredisJungleAll();
     //根据id查询丛林闲居信息
     Clxjmain JungleDetailsById(Integer id);
     //添加订单
