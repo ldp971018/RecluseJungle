@@ -116,7 +116,7 @@ public class Jungle_ServiceImpl implements Jungle_Service {
      * @return
      */
     @Override
-    public List<Clxjmain> selredisJungleAll() {
+    public List<Clxjmain> selRedisJungleAll() {
         List<Clxjmain> list = clxjmainMapper.selectByWhere(null);
         return list;
     }

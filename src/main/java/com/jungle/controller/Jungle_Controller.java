@@ -171,7 +171,7 @@ public class Jungle_Controller {
     @RequestMapping("/loadIndex")
     public String loadIndex(HttpServletRequest request) {
         //查询全部
-        List<Clxjmain> listAll = jungle_service.selredisJungleAll();
+        List<Clxjmain> listAll = jungle_service.selRedisJungleAll();
         List<Clxjmain> listGNCL=new ArrayList<>();
         List<Clxjmain> listGNXJ=new ArrayList<>();
         List<Clxjmain> listGWCL=new ArrayList<>();
