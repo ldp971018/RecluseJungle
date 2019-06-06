@@ -1,11 +1,13 @@
 package com.jungle.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.jungle.bean.*;
 import com.jungle.service.Jungle_Service;
 import com.jungle.util.GetTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +73,7 @@ public class Jungle_Controller {
      * @param request
      * @return
      */
-    @RequestMapping("selectCL_All")
+    @RequestMapping("selRedisCL_All")
     public String selectCL_All(HttpServletRequest request){
         Clxjmain clxjmain=new Clxjmain();
         clxjmain.setType2(true);
@@ -101,7 +103,7 @@ public class Jungle_Controller {
      * @param request
      * @return
      */
-    @RequestMapping("selectJungle_All")
+    @RequestMapping("selRedisJungle_All")
     public String selectJungle_All(HttpServletRequest request){
         Clxjmain clxjmain=new Clxjmain();
         clxjmain.setType2(false);
@@ -348,5 +350,31 @@ public class Jungle_Controller {
             request.setAttribute("carorderOk",-1);//新增用车订单失败！
         }
         return "qiantai/CarOrder";
+    }
+
+    /**
+     * 根据丛林闲居id查询所有点评（好评，差评的数量）
+     * @param cid 丛林闲居id
+     * @return
+     */
+    @RequestMapping("selClxjcommentCount")
+    @ResponseBody
+    public Map<String,Object> selClxjcommentCount(Integer cid){
+        Map<String,Object> map =jungle_service.selClxjcommentCount(cid);
+        return map;
+    }
+
+    /**
+     *  根据丛林闲居id查询所有点评详细信息
+     * @param cid 丛林闲居id
+     * @param pageIndexAll 从第几个索引开始page
+     * @param limit 查询多少条记录
+     * @return
+     */
+    @RequestMapping("selClxjcomment")
+    @ResponseBody
+    public PageInfo<Clxjcomment> selClxjcomment(Integer cid,Integer pageIndexAll,Integer limit,Integer cflag){
+        PageInfo<Clxjcomment> pageInfo=jungle_service.selClxjcomment(cid,pageIndexAll,limit,cflag);
+        return pageInfo;
     }
 }

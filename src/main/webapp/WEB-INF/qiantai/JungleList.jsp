@@ -112,7 +112,7 @@ function Allregister(){
                     <span>闲居评价</span>
                 </p>
                 <p class="two">
-                    <span><%--<i>${x.hpl }</i>--%></span>
+                    <span><i>${x.commentOk }</i></span>
                     <span>好评/10分</span>
                 </p>
                 <p class="yd">

@@ -46,6 +46,16 @@ public class Clxjmain implements Serializable {
 
     private String mobile;
 
+    private String commentOk;
+
+    public String getCommentOk() {
+        return commentOk;
+    }
+
+    public void setCommentOk(String commentOk) {
+        this.commentOk = commentOk;
+    }
+
     public Integer getId() {
         return id;
     }
