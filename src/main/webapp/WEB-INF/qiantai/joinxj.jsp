@@ -10,16 +10,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>丛林闲居-闲居加盟</title>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="<%=path%>/static/style/cy.css">
+    <link rel="stylesheet" href="<%=path%>/static/style/style.css">
 <!-- 表单验证start -->
-<script src="<%=path %>/js/jquery.js"></script>
-<script src="<%=path %>/js/jquery.validate.js"></script>
-<script src="<%=path%>/js/jquery.metadata.js"></script>
-<script type="text/javascript" src="<%=path%>/js/messagesx_cn.js"></script>
+<script src="<%=path%>/static/js/jquery.js"></script>
+<script src="<%=path%>/static/js/jquery.validate.js"></script>
+<script src="<%=path%>/static/js/jquery.metadata.js"></script>
+<script type="text/javascript" src="<%=path%>/static/js/messagesx_cn.js"></script>
 <!-- 表单验证stop -->
 <!-- 下载中文文件start -->
-<script src="<%=path %>/sheet/js/download.js"></script>
+<script src="<<%=path%>/static/sheet/js/download.js"></script>
 <!-- 下载中文文件stop -->
 </head>
 
@@ -71,11 +71,11 @@ function loginOut(){
     <div class="yc-mbx">
         <p>当前位置：<a href="index.jsp" class="ll">丛林闲居网</a> > <a href="#" class="xz">加盟</a></p>
     </div>
-    <div><img src="images/jm_03.jpg"></div>
+    <div><img src="<%=path%>/static/images/jm_03.jpg"></div>
     <div class="jm">
     <div class="kwff-p1">
           <p class="kwff-p11">加盟列表</p>
-           <p class="kwff-p12"><a href="joincl.jsp"><span>丛林加盟</span></a><span class="qzfze">闲居加盟</span><a href="joincar.jsp"> <span>车辆加盟</span> </a> </p>
+           <p class="kwff-p12"><a href="joincl"><span>丛林加盟</span></a><span class="qzfze">闲居加盟</span><a href="joincar"> <span>车辆加盟</span> </a> </p>
      </div>  
      <div class="qzsqb">
      <div class="qzsqb-one">
@@ -87,7 +87,7 @@ function loginOut(){
         <div class="jm-left">  
             <p class="xx">
             	<c:if test="${sessionUser ==null }"><em style="font-size: 10px;color: red">加盟首先要登录哦，点击<a href="login.jsp?returnurl=/joinxj.jsp">登录</a><br/></em></c:if>
-            	<img src="images/09.png">请填写加盟信息：
+            	<img src="<%=path%>/static/images/09.png">请填写加盟信息：
             	</p>
             <span class="rxxx">如果您是闲居，想加盟丛林闲居网，请填写如下信息（<i>* 为必填项</i>）</span>
            <form method="post" action="<%=path %>/joinxj!addJoinxj.action" id="joinxjForm" enctype="multipart/form-data">
@@ -120,12 +120,12 @@ function loginOut(){
                <p style="margin-top:20px;"><input type="button" id="sub" value="提交信息"></p>  
             </div> 
             </form>
-            <p class="xx"><img src="images/09.png">要求及流程说明</p>
+            <p class="xx"><img src="<%=path%>/static/images/09.png">要求及流程说明</p>
             <p class="ln">本着双赢的理念，丛林闲居已建立了一个遍及全国的完善代理商网络。无论是个人还是企业，只要符合丛林闲居的要求，都可
                 以成为丛林闲居的代理商，代理丛林闲居的国内、国外闲居预订的业务。 代理商将获得强大的品牌支持，良好的售后服务体系
                 同时获得丰厚的利润回报。</p>
             <div class="liucheng">
-                <img src="images/one_03.jpg">
+                <img src="<%=path%>/static/images/one_03.jpg">
             </div>
         </div>
         <!--<div class="jm-right">
@@ -152,7 +152,7 @@ function loginOut(){
 <c:if test="${show !=null}"> 
 <div class="tcc2">     
     <div class="tx-ydm" style="margin-top: 300px;">  
-            <p class="tx-sm"><span class="one"><img src="images/tx.png">提示</span><span class="two"><img src="images/14_01.png" class="close6"></span></p><br/><br/><br/>
+            <p class="tx-sm"><span class="one"><img src="<%=path%>/static/images/tx.png">提示</span><span class="two"><img src="images/14_01.png" class="close6"></span></p><br/><br/><br/>
             <p align="center"> 
             	<c:if test="${isOk ==true}">加盟成功，你的临时密码为${pwd }</c:if> 
             	<c:if test="${isOk ==false }">加盟失败</c:if></p><br/><br/><br/> 
@@ -163,8 +163,7 @@ function loginOut(){
     </div>
 </div>     
 </c:if>
-<script src="../../js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
 var wait=120;//倒计时获取验证码时间
 var checks = false; //一个全局变量，用来最终判断表单是否可以提交
 $("#sub").click(function() { 
