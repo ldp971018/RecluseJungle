@@ -80,7 +80,7 @@ function loginOut(){
      <div class="qzsqb">
      <div class="qzsqb-one">
                <ul> 
-                  <li><a href="javascript:void(0)"  onclick="goDownload('车辆加盟丛林闲居平台的协议.docx','3')">车辆加盟丛林闲居的合同</a> </li> 
+                  <li><a href="javascript:void(0)"  onclick="goDownload('车辆加盟丛林闲居平台的协议.docx')">车辆加盟丛林闲居的合同</a> </li>
                 </ul> 
       </div>      
       </div>  

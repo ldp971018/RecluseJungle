@@ -228,6 +228,21 @@ public class pageController {
         return "qiantai/joincl";
     }
 
+    /**
+     * 跳转加盟闲居
+     */
+    @RequestMapping("/joinxj")
+    public String joinxj(){
+        return "qiantai/joinxj";
+    }
+    /**
+     * 跳转加盟汽车
+     */
+    @RequestMapping("/joincar")
+    public String joincar(){
+        return "qiantai/joincar";
+    }
+
 
     /**
      * 丛林素斋

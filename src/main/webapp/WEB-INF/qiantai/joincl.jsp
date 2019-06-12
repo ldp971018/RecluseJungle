@@ -72,7 +72,7 @@ function loginOut(){
     <div class="jm">
     <div class="kwff-p1">
           <p class="kwff-p11">加盟列表</p>
-           <p class="kwff-p12"><span  class="qzfze">丛林加盟</span><a href="joinxj.jsp"><span>闲居加盟</span></a> <a href="joincar.jsp"><span>车辆加盟</span></a> </p>
+           <p class="kwff-p12"><span  class="qzfze">丛林加盟</span><a href="/joinxj"><span>闲居加盟</span></a> <a href="/joincar"><span>车辆加盟</span></a> </p>
      </div>
      <div class="qzsqb">
      <div class="qzsqb-one">
