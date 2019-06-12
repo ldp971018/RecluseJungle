@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -71,17 +71,17 @@ function loginOut(){
     <div><img src="<%=path%>/static/images/jm_03.jpg"></div>
     <div class="jm">
     <div class="kwff-p1">
-          <p class="kwff-p11">加盟列表</p> 
+          <p class="kwff-p11">加盟列表</p>
            <p class="kwff-p12"><span  class="qzfze">丛林加盟</span><a href="joinxj.jsp"><span>闲居加盟</span></a> <a href="joincar.jsp"><span>车辆加盟</span></a> </p>
-     </div>  
+     </div>
      <div class="qzsqb">
      <div class="qzsqb-one">
-               <ul> 
+               <ul>
                   <li><a href="javascript:void(0)" onclick="goDownload('闲居加盟丛林闲居的合同.docx')">闲居加盟丛林闲居的合同.docx</a> </li>
                 </ul>
       </div>
-      </div>   
-        <div class="jm-left">  
+      </div>
+        <div class="jm-left">
             <p class="xx">
             	<c:if test="${regUser ==null }"><em style="font-size: 10px;color: red">加盟首先要登录哦，点击<a href="Desk_login">登录</a><br/></em></c:if>
             	<img src="<%=path%>/static/images/09.png">请填写加盟信息：
@@ -100,26 +100,26 @@ function loginOut(){
                <p><input type="text" value="${joincl.legalidcard }"  name="legalidcard" id="legalidcard"  placeholder="法人代表身份证号" class="lxr "><i>*</i><span class="status" style="color: red" id="td6"></span></p>
                <p><input type="text" value="${joincl.contactsname }" name="contactsname" id="contactsname"  placeholder="联系人名字" class="lxr "><i>*</i><span class="status" style="color: red" id="td7"></span></p>
                <p><input type="text" value="${joincl.contactsmobile }"name="contactsmobile" id="contactsmobile"  placeholder="联系人固定电话（xxxx-xxxxxxx）" class="lxr "><i>*</i><span class="status" style="color: red" id="td8"></span></p>
-               <c:if test="${joincl==null }">  
+               <c:if test="${joincl==null }">
                <p><input type="text" maxlength="11" name="contactsphone" value="${regUser.username}" id="contactsphone"  placeholder="联系人手机（11位手机号码，作为后台管理员登录帐号）" class="lxr " onblur="checkContactsphone()"><i>*</i><span class="status" style="color: red" id="td9"></span></p>
                <p><input type="text"  id="email"  placeholder="输入正确邮箱,获取验证码" class="lxr " onblur="checkContactsphone()"><i>*</i><span class="status" style="color: red" ></span></p>
                <p><input type="text"  id="code"   placeholder="验证码" maxlength="6"  onblur="checkCode()" class="yzm">
                    <button type="button" id="random" onclick="getCodeGen()">获取验证码</button><i>*</i>
-               		<span class="status" style="color: red" id="td10"></span></p>  
-               		<input type="hidden" name="update" value=""  id="update"/> 
-                </c:if>   
-                <c:if test="${joincl!=null }"> 
+               		<span class="status" style="color: red" id="td10"></span></p>
+               		<input type="hidden" name="update" value=""  id="update"/>
+                </c:if>
+                <c:if test="${joincl!=null }">
                 	<input type="hidden" name="contactsphone" value="${joincl.contactsphone }"/>
                 	<input type="hidden" name="id" value="${joincl.id }"/>
                 	<input type="hidden" name="jointime" value="${joincl.jointime}" id="jointime"/>
-               		<input type="hidden" name="update" value="1" id="update"/> 
+               		<input type="hidden" name="update" value="1" id="update"/>
                 </c:if>
                <p><input value="${joincl.postcode }" type="text" name="postcode" id="postcode"  placeholder="邮编" class="lxr "><i>*</i><span class="status" style="color: red" id="td11"></span></p>
                <p id="more"><input type="file" name="hetongUpload"><i>合同上传&nbsp;&nbsp;&nbsp;*</i></p>
                <p><textarea  name="message" placeholder="寺院的简要介绍（500字以内）：">${joincl.message }</textarea></p>
                <p style="margin-top:20px;">
                    <input type="button" id="sub" value="提交信息"></p>
-            </div>     
+            </div>
             </form>
             <p class="xx"><img src="<%=path%>/static/images/09.png">要求及流程说明</p>
             <p class="ln">本着双赢的理念，丛林闲居已建立了一个遍及全国的完善代理商网络。无论是个人还是企业，只要符合丛林闲居的要求，都可
@@ -139,10 +139,10 @@ function loginOut(){
 <div class="tcc2">     
     <div class="tx-ydm" style="margin-top: 300px;">  
             <p class="tx-sm"><span class="one"><img src="<%=path%>/static/images/tx.png">提示</span><span class="two"><img src="<%=path%>/static/images/14_01.png" class="close5"></span></p><br/><br/><br/>
-            <p align="center"> 
+            <p align="center">
             	<c:if test="${isOk ==true}">加盟成功，你的临时密码为${pwd }</c:if>
-            	<c:if test="${isOk ==false }">加盟失败</c:if></p><br/><br/><br/> 
-            <p align="center">      
+            	<c:if test="${isOk ==false }">加盟失败</c:if></p><br/><br/><br/>
+            <p align="center">
             	<c:if test="${isOk ==true }">点击<a href="<%=path %>/showAllJoinclByUserid">查看</a>加盟进度</c:if>
             	<c:if test="${isOk ==false }">点击<a href="<%=path %>/joincl">加盟</a>重新加盟</c:if> <br/><br/><br/>
             </p>
@@ -210,13 +210,13 @@ var checks = false;
         }
     }
 
-$("#sub").click(function() { 
+$("#sub").click(function() {
 	var uid = document.getElementById("uid").value;
 	var update = document.getElementById("update").value;
 	//先判断是否登录
 	if(uid==null||uid==""){
-		alert("请先登录");   
-	}else{ 
+		alert("请先登录");
+	}else{
 		if(update==1){
 			 	document.getElementById("joinclForm").submit();
 		}else{
@@ -226,8 +226,8 @@ $("#sub").click(function() {
 	 		}else {
                 alert("验证码错误");
             }
-		} 
-	} 
+		}
+	}
 });
 
 

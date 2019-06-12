@@ -71,12 +71,31 @@
   <sql id="Base_Column_List" >
     id, cid, uid, cflag, content, photo, commenttime
   </sql>
+  <sql id="WithUser_Column_List" >
+    id, cid, uid,
+    (select realname from reguser where id=uid) as username,
+    cflag, content, photo, commenttime
+  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jungle.bean.ClxjcommentExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
+    from clxjcomment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithUser" resultMap="BaseResultMap" parameterType="com.jungle.bean.ClxjcommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="WithUser_Column_List" />
     from clxjcomment
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

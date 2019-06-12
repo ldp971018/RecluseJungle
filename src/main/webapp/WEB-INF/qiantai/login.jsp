@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%
@@ -83,6 +84,7 @@
             <ul>
                 <li class="yhdl1">用户登录<span id="error"
                                             style="border: none;color: red;margin-left: 30px;width: 180px;background-color:#fff;">${login}</span>
+                    <c:remove var="login" scope="session"></c:remove>
                 </li>
                 <li class="yhm"><input id="username" maxlength="11" type="text" placeholder="手机号"
                                        onblur="checkUsername()"><span></span></li>
@@ -96,7 +98,7 @@
                     </div>
                 </li>
                 <li class="mouth1"><span class="one"><a href="/retrievePassword">忘记密码</a> </span><span class="one"
-                                                                                                          style="margin-left: 200px;"><a
+                                                                                                       style="margin-left: 200px;"><a
                         href="/register">注册</a> </span></li>
                 <li class="dl"><input type="button" value="登录" onclick="yanzheng()"></li>
             </ul>
@@ -160,15 +162,14 @@
             error.text("请拖动滑块验证！");
         } else {
             if ((document.getElementById("pwd").value != "" && document.getElementById("pwd").value.length >= 6) && (document.getElementById("username").value != "" && /^1[3|4|5|7|8]\d{9}$/.test(document.getElementById("username").value))) {
-                window.location.href = "Desk_login?username=" + document.getElementById("username").value + "&pwd=" + document.getElementById("pwd").value;
+                window.location.href = "/Desk_login?username=" + document.getElementById("username").value + "&pwd=" + document.getElementById("pwd").value;
             } else {
                 error.text("输入信息有误！");
             }
         }
-
-
         return success;
     }
+
 
     //一、定义一个获取DOM元素的方法
     var $ = function (selector) {

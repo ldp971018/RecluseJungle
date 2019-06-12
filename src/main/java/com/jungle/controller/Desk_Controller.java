@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,23 +33,42 @@ public class Desk_Controller {
      * @return
      */
     @RequestMapping("Desk_login")
-    public String Desk_login(Reguser reguser, HttpSession session, HttpServletRequest req) {
-        System.out.println("Desk_login" + reguser);
-        if (reguser != null && reguser.getUsername() != null && !reguser.getUsername().equals("")
-                && reguser.getPwd() != null && !reguser.getPwd().equals("")) {
-            Reguser user = desk_Reguserservice.login(reguser);
-            System.out.println(user);
-            if (user != null) {
-                session.setAttribute("regUser", user);
-                return "redirect:/index.jsp";
+    public void Desk_login(Reguser reguser, HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+        try {
+            System.out.println("Desk_login" + reguser);
+            if (reguser != null && reguser.getUsername() != null && !reguser.getUsername().equals("")
+                    && reguser.getPwd() != null && !reguser.getPwd().equals("")) {
+                Reguser user = desk_Reguserservice.login(reguser);
+                System.out.println(user);
+                if (user != null) {
+                    session.setAttribute("regUser", user);
+                    String returnurl = (String) session.getAttribute("returnurl");
+                    String id = (String) session.getAttribute("id");
+                    System.out.println("需返回url-" + returnurl + "-id" + id);
+                    StringBuffer sb = new StringBuffer("forward:");
+                    if (id != null && (!"".equals(id) && !"undefined".equals(id)) && returnurl != null && !"".equals(returnurl)) {
+                        res.sendRedirect(returnurl + "?id=" + id);
+                    } else if ((id == null || "undefined".equals(id)) && returnurl != null && !"".equals(returnurl)) {
+                        res.sendRedirect(returnurl);
+                    } else {
+                        res.sendRedirect("qiantai/login");
+                    }
+                    session.removeAttribute("returnurl");
+                    session.removeAttribute("id");
+                } else {
+//                    req.setAttribute("login", "用户名或密码错误！");
+                    session.setAttribute("login", "用户名或密码错误！");
+                    res.sendRedirect("/login");
+                }
             } else {
-                req.setAttribute("login", "用户名或密码错误！");
-                return "qiantai/login";
+//                req.setAttribute("login", "用户名或密码错误！");
+                session.setAttribute("login", "用户名或密码错误！");
+                res.sendRedirect("/login");
             }
-        } else {
-            req.setAttribute("login", "用户名或密码错误！");
-            return "qiantai/login";
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     /**
@@ -155,7 +176,6 @@ public class Desk_Controller {
     }
 
 
-
     /**
      * 前台用户退出登录
      *
@@ -163,36 +183,48 @@ public class Desk_Controller {
      * @return
      */
     @RequestMapping("/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("regUser");
-        return "redirect:/index.jsp";
+    public void logout(String returnurl, String id, HttpSession session, HttpServletResponse res) {
+        try {
+            session.removeAttribute("regUser");
+            System.out.println("退出账号：" + returnurl + "-" + id);
+            if (id != null && !"".equals(id) && !"undefined".equals(id) && returnurl != null && !"".equals(returnurl)) {
+                res.sendRedirect(returnurl + "?id=" + id);
+            } else if (id == null && returnurl != null && !"".equals(returnurl)) {
+                res.sendRedirect(returnurl);
+            } else {
+                res.sendRedirect("/loadIndex");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     *  修改用户信息
+     * 修改用户信息
+     *
      * @param reguser
      */
     @RequestMapping("modifyUser")
-    public String modifyUser(Reguser reguser,HttpSession session) {
+    public String modifyUser(Reguser reguser, HttpSession session) {
         Reguser regUser = (Reguser) session.getAttribute("regUser");
         reguser.setPwd(regUser.getPwd());
         reguser.setRegtime(regUser.getRegtime());
         System.out.print(reguser);
         int i = desk_Reguserservice.updUser(reguser);
-        if(i != 0){
-            session.setAttribute("regUser",reguser);
+        if (i != 0) {
+            session.setAttribute("regUser", reguser);
             return "forward:userPersonal";
         }
         return null;
     }
 
     @RequestMapping("modifyUserPwd")
-    public String modifyUserPwd(Reguser reguser,HttpSession session,String oldpwd) {
+    public String modifyUserPwd(Reguser reguser, HttpSession session, String oldpwd) {
         Reguser regUser = (Reguser) session.getAttribute("regUser");
         //原密码
         String p = regUser.getPwd();
-        int i = desk_Reguserservice.updUserPwd(p,reguser,oldpwd);
-        if(i != 0){
+        int i = desk_Reguserservice.updUserPwd(p, reguser, oldpwd);
+        if (i != 0) {
             return "forward:/login";
         }
         return "forward:/userCPassword";

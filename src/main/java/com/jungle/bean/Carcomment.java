@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Carcomment {
+public class Carcomment implements Serializable {
     private Integer id;
 
     private Integer cid;
@@ -14,6 +15,16 @@ public class Carcomment {
     private String content;
 
     private Date commenttime;
+
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getId() {
         return id;

@@ -2,9 +2,10 @@ package com.jungle.bean;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Clxjorder {
+public class Clxjorder implements Serializable {
     private String oid;
 
     private Integer cid;

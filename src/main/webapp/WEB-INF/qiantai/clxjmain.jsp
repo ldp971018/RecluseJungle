@@ -25,16 +25,7 @@
 
 <!--首页banner-->
 <jsp:include  page="/WEB-INF/qiantai/head.jsp" />
-<script type="text/javascript">
-    function Alllogin(){
-        window.location.href = "login?returnurl=/clxjmain!selXjOfPage.action";
-    }
-    function loginOut(){
-        window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/clxjmain!selXjOfPage.action";
-    }
-    function Allregister(){
-    }
-</script>
+
 <!--首页轮播图-->
 <div class="index-lbt">
     <div id="scrollPics">
@@ -71,11 +62,11 @@
                                     <input type="hidden" name="clxjmain.belong_city" id="city10"  <c:if test="${clxjmain.belongCity!=null }">value="${clxjmain.belongCity }"</c:if>>
                                 </tr>
                                 <tr>
-                                    <td>入住</td>
-                                    <td><p><input placeholder="年/月/日" name="createtime" class="laydate-icon" id="demo1" value="${clxjmain.createtime }">
+                                    <td >入住</td>
+                                    <td style="float: left"><p><input placeholder="年/月/日" name="createtime" class="laydate-icon" id="demo1" style="width: 100px;text-align: center" value="${clxjmain.createtime }">
                                     </p>
 
-                                        <p>退房<input placeholder="年/月/日" name="endTime" class="laydate-icon" id="demo2" value="${endTime }">
+                                        <p>退房<input placeholder="年/月/日" name="endTime" class="laydate-icon" id="demo2" style="width: 100px;text-align: center" value="${endTime }">
                                         </p></td>
                                 </tr>
                                 <tr>
@@ -112,7 +103,7 @@
                         <span>闲居评价</span>
                     </p>
                     <p class="two">
-                        <span><%--<i>${x.hpl }</i>--%></span>
+                        <span><i>${x.commentOk }</i></span>
                         <span>好评/10分</span>
                     </p>
                     <p class="yd">

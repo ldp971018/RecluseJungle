@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ page import="com.util.DateUtils" %>
+<%@ page import="com.jungle.util.DateUtils" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:directive.page import="java.util.Calendar"/>
 <%
@@ -50,16 +50,54 @@
     <title>head</title>
     <link rel="stylesheet" href="<%=path%>/static/style/cy.css">
     <link rel="stylesheet" href="<%=path%>/static/style/style.css">
-
-
 </head>
+<script type="text/javascript">
+    //获取地址栏
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+            }
+        }
+        theRequest["url"] = window.location.pathname;
+        return theRequest;
+    }
+
+    function loginOut() {
+        alert(0)
+        var Request = new Object();
+        Request = GetRequest();
+        var returnUrl, requrl;
+        returnUrl = Request['id'];
+        requrl = Request['url'];
+        // alert("参数-" + returnUrl + "-" + requrl)
+        window.location.href = "<%=path%>/logout?returnurl=" + requrl + "&id=" + returnUrl;
+    }
+
+    function login() {
+        var Request = new Object();
+        Request = GetRequest();
+        var returnUrl, requrl;
+        returnUrl = Request['id'];
+        requrl = Request['url'];
+        // alert("参数-" + returnUrl + "-" + requrl)
+        if (returnUrl == 'undefined')
+            window.location.href = "<%=path%>/login?returnurl=" + requrl;
+        else
+            window.location.href = "<%=path%>/login?returnurl=" + requrl + "&id=" + returnUrl;
+    }
+</script>
 <body onload="dateTime()">
 <!--首页TOP-->
 <div class="index-top">
     <div class="index-top3">
         <div class="left">
             <span class="one"><a href=""><img width="158" height="64"
-                                                                 src="<%=path%>/static/images/logo1.png"></a></span>
+                                              src="<%=path%>/static/images/logo1.png"></a></span>
             <span class="two"><img src="<%=path%>/static/images/index_q.png"></span>
 
             <div class="three">
@@ -82,23 +120,23 @@
     <div class="index-banner1">
         <ul>
             <li><a href="/index.jsp">首页</a></li>
-            <li><a href="clxjmain">丛林</a></li>
-            <li><a href="JungleList">闲居</a></li>
-            <li><a href="ConEntryPage">忏悔</a></li>
+            <li><a href="/clxjmain">丛林</a></li>
+            <li><a href="/JungleList">闲居</a></li>
+            <li><a href="ConEntryPage.jsp">忏悔</a></li>
             <li><a href="/foundIndex">基金会</a></li>
-            <li><a href="/joincl">加盟</a></li>
-            <li><a href="ContactUs.jsp">联系我们</a></li>
-            <li><a href="clsz.jsp">丛林素斋</a></li>
+            <li><a href="joincl.jsp">加盟</a></li>
+            <li><a href="/ContactUs">联系我们</a></li>
+            <li><a href="/clsz">丛林素斋</a></li>
             <li>
                 <div id="dateTime"></div>
             </li>
         </ul>
         <c:if test="${regUser==null }">
-            <div class="dl"><a href="/login">登录</a><i>|</i><a href="/register">注册</a></div>
+            <div class="dl"><a href="javascript:void(0)" onclick="login()">登录</a><i>|</i><a href="/register">注册</a></div>
         </c:if>
         <c:if test="${regUser!=null }">
             <div class="index-grzx "><a href="userPersonal">个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;<i>|</i>&nbsp;&nbsp;&nbsp;&nbsp;<a
-                    href="/logout">退出</a></div>
+                href="javascript:void(0)" onclick="loginOut()">退出</a></div>
         </c:if>
     </div>
 </div>
@@ -108,7 +146,7 @@
     function dateTime() {
         var date = new Date();
         var time = "" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-        $("#dateTime").html("&emsp;&emsp;&emsp;<font color='white'>" + time + "</font>");
+        jQuery("#dateTime").html("&emsp;&emsp;&emsp;<font color='white'>" + time + "</font>");
         setTimeout(dateTime, 1000);
     }
 </script>

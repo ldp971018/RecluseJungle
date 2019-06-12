@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Citygroup {
+import java.io.Serializable;
+
+public class Citygroup implements Serializable {
     private Integer id;
 
     private Integer cid;

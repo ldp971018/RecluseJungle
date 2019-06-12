@@ -16,6 +16,8 @@ public interface HelpinfoMapper {
 
     int insertSelective(Helpinfo record);
 
+    Helpinfo selectByExpenditure();
+
     List<Helpinfo> selectByExample(HelpinfoExample example);
 
     Helpinfo selectByPrimaryKey(Integer id);

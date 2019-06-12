@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Carinfo {
+import java.io.Serializable;
+
+public class Carinfo implements Serializable {
     private Integer id;
 
     private Integer cid;
@@ -16,6 +18,16 @@ public class Carinfo {
     private Integer joinid;
 
     private Integer checkstatus;
+
+    private String commentOk;
+
+    public String getCommentOk() {
+        return commentOk;
+    }
+
+    public void setCommentOk(String commentOk) {
+        this.commentOk = commentOk;
+    }
 
     public Integer getId() {
         return id;
@@ -80,4 +92,5 @@ public class Carinfo {
     public void setCheckstatus(Integer checkstatus) {
         this.checkstatus = checkstatus;
     }
+
 }

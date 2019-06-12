@@ -27,4 +27,6 @@ public interface PayformonthMapper {
     int updateByPrimaryKeySelective(Payformonth record);
 
     int updateByPrimaryKey(Payformonth record);
+
+    Payformonth selExpenditure();
 }

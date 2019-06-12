@@ -4,9 +4,15 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!-- 包扫描只扫描添加了Controller注解的类 -->
     <context:component-scan base-package="com.jungle.*" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -15,6 +21,14 @@
     <!-- 加载静态资源 -->
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
+
+    <!-- 加载Redis配置文件 -->
+    <import resource="classpath:/redis/redis-config.xml"/>
+    <!--使Spring支持自动检测组件，如注解的Controller -->
+    <context:component-scan base-package="com.jungle.*"/>
+    <!--*************** 支持aop **************** -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,6 +44,5 @@
         <property name="maxUploadSize" value="2097152"/>
         <property name="resolveLazily" value="true"/>
     </bean>
-
 
 </beans>

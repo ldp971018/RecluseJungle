@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Payformonth {
+public class Payformonth implements Serializable {
     private Integer id;
 
     private String monthly;

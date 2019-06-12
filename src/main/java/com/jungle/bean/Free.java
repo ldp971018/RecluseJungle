@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Free {
+public class Free implements Serializable {
     private Integer id;
 
     private Integer confessionid;

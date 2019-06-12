@@ -4,7 +4,7 @@ import com.jungle.bean.Reguser;
 import com.jungle.bean.ReguserExample;
 import com.jungle.dao.ReguserMapper;
 import com.jungle.service.Desk_ReguserService;
-import com.util.MD5_Util;
+import com.jungle.util.MD5_Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,13 +105,13 @@ public class Desk_ReguserServiceImpl implements Desk_ReguserService {
     @Override
     public int updUserPwd(String p, Reguser reguser, String oldpwd) {
         int i = 0;
-        boolean b = MD5_Util.MD5_Verify(p, oldpwd, reguser.getUsername());
-        System.out.println("原密码"+p);
+        boolean b = MD5_Util.MD5_Verify(p, reguser.getUsername(), oldpwd);
+        System.out.println("原密码" + p);
         System.out.println(reguser);
-        if(b){
+        if (b) {
             System.out.print("====原密码匹配成功");
             i = updatePwd(reguser);
-        }else{
+        } else {
             System.out.print("====原密码不正确");
         }
         return i;

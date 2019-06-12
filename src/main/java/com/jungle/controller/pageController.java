@@ -2,6 +2,11 @@ package com.jungle.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 用于其他无业务功能的页面跳转
@@ -14,7 +19,11 @@ public class pageController {
      * @return
      */
     @RequestMapping("/login")
-    public String login() {
+    public String login(String returnurl, String id, HttpSession session) {
+        System.out.println("跳转-" + returnurl + "-" + id);
+        session.setAttribute("returnurl", returnurl);
+        if (!"undefined".equals(id))
+            session.setAttribute("id", id);
         return "qiantai/login";
     }
 
@@ -65,7 +74,7 @@ public class pageController {
      */
     @RequestMapping("clxjmain")
     public String clxjmain() {
-        return "qiantai/clxjmain";
+        return "redirect:selRedisCL_All";
     }
 
     /**
@@ -75,7 +84,7 @@ public class pageController {
      */
     @RequestMapping("JungleList")
     public String JungleList() {
-        return "qiantai/JungleList";
+        return "redirect:selRedisJungle_All";
     }
 
 
@@ -105,7 +114,9 @@ public class pageController {
      * @return
      */
     @RequestMapping("/donationLove")
-    public String donationLove() {
+    public String donationLove(HttpServletRequest request, @RequestParam(defaultValue = "") String donationname, @RequestParam(defaultValue = "") String donationtime) {
+        request.setAttribute("donationname",donationname);
+        request.setAttribute("donationtime",donationtime);
         return "qiantai/DonationLove";
     }
 
@@ -116,12 +127,12 @@ public class pageController {
      */
     @RequestMapping("/foundDonations")
     public String foundDonations() {
-        return "qiantai/foundDonations";
+        return "qiantai/FoundDonations";
     }
 
 
     /**
-     * 跳转到公司列表（基金会）
+     * 跳转到公示列表（基金会）
      *
      * @return
      */
@@ -150,6 +161,21 @@ public class pageController {
         return "qiantai/PLpublicity";
     }
 
+    /**
+     * 跳转到查看详情（基金会-公示列表）
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/foundJzfzDetailed")
+    public String foundJzfzDetailed(Integer id, HttpServletRequest req) {
+        System.out.println("page-" + id);
+//        modelAndView.setViewName("qiantai/FoundJzfzDetailed");
+//        modelAndView.addObject("id", id);
+        req.setAttribute("id", id);
+        return "qiantai/FoundjzfzDetailed";
+    }
+
 
     /**
      * 跳转个人中心
@@ -169,6 +195,14 @@ public class pageController {
         return "qiantai/UserCPassword";
     }
 
+    /**
+     * 联系我们
+     * @return
+     */
+    @RequestMapping("/ContactUs")
+    public String ContactUs(){
+        return "qiantai/ContactUs";
+    }
     /**
      * 跳转到忏悔页面
      * @return
@@ -195,4 +229,12 @@ public class pageController {
     }
 
 
+    /**
+     * 丛林素斋
+     * @return
+     */
+    @RequestMapping("/clsz")
+    public String clsz(){
+        return "qiantai/clsz";
+    }
 }

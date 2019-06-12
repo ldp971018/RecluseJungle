@@ -1,6 +1,8 @@
 package com.jungle.bean;
 
-public class Joins {
+import java.io.Serializable;
+
+public class Joins implements Serializable {
     private Integer id;
 
     private String name;

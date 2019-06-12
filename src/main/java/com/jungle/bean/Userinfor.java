@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Userinfor {
+public class Userinfor implements Serializable {
     private Integer userId;
 
     private String userName;

@@ -1,8 +1,9 @@
 package com.jungle.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Clxjmain {
+public class Clxjmain implements Serializable {
     private Integer id;
 
     private String name;
@@ -44,6 +45,16 @@ public class Clxjmain {
     private String createtime;
 
     private String mobile;
+
+    private String commentOk;
+
+    public String getCommentOk() {
+        return commentOk;
+    }
+
+    public void setCommentOk(String commentOk) {
+        this.commentOk = commentOk;
+    }
 
     public Integer getId() {
         return id;

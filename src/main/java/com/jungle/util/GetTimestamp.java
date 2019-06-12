@@ -1,4 +1,4 @@
-package com.util;
+package com.jungle.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
