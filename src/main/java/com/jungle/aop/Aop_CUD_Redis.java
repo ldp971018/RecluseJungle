@@ -46,7 +46,7 @@ public class Aop_CUD_Redis {
             method = name.split("ins")[1];
         }
 
-        method = "selRedis" + method;
+        method = "selRedis" + method+"*";
         System.out.println(method + redisUtil.hasKey(method));
         if (redisUtil.hasKey(method)) {
             redisUtil.delete(method);

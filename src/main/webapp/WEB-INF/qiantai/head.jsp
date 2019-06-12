@@ -68,13 +68,11 @@
     }
 
     function loginOut() {
-        alert(0)
         var Request = new Object();
         Request = GetRequest();
         var returnUrl, requrl;
         returnUrl = Request['id'];
         requrl = Request['url'];
-        // alert("参数-" + returnUrl + "-" + requrl)
         window.location.href = "<%=path%>/logout?returnurl=" + requrl + "&id=" + returnUrl;
     }
 
@@ -84,7 +82,6 @@
         var returnUrl, requrl;
         returnUrl = Request['id'];
         requrl = Request['url'];
-        // alert("参数-" + returnUrl + "-" + requrl)
         if (returnUrl == 'undefined')
             window.location.href = "<%=path%>/login?returnurl=" + requrl;
         else

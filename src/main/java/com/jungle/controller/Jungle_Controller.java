@@ -29,7 +29,7 @@ public class Jungle_Controller {
      */
     @ResponseBody
     @RequestMapping("/selectCityType")
-    public Map<String,Object> selectCityType(){
+    public Map<String,Object> selRedisCityType(){
         Map<String,Object> map = jungle_service.selRedisCityType();
         return map;
     }
@@ -41,7 +41,7 @@ public class Jungle_Controller {
      */
     @ResponseBody
     @RequestMapping("/selectCityTypeAll")
-    public Map<String,Object> selectCityTypeAll(){
+    public Map<String,Object> selRedisCityTypeAll(){
         Map<String,Object> map=new HashMap<>();
         List<City> list= jungle_service.selRedisCityTypeAll();
         map.put("citys",list);
@@ -59,6 +59,7 @@ public class Jungle_Controller {
     public String selectCL(Clxjmain clxjmain, HttpServletRequest request){
         if(clxjmain.getBelongCity().equals("请选择城市"))
             clxjmain.setBelongCity("");
+
         List<Clxjmain> list = jungle_service.selectJungle(clxjmain);
         request.setAttribute("JungleList", list);
         request.setAttribute("clxjmain", clxjmain);
@@ -70,7 +71,7 @@ public class Jungle_Controller {
      * @param request
      * @return
      */
-    @RequestMapping("selRedisCL_All")
+    @RequestMapping("/selRedisCL_All")
     public String selectCL_All(HttpServletRequest request){
         Clxjmain clxjmain=new Clxjmain();
         clxjmain.setType2(true);

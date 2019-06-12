@@ -14,14 +14,7 @@
 <body>
 <!--首页banner-->
  <jsp:include  page="head.jsp" />   
-         <script type="text/javascript">
-function Alllogin(){
-	window.location.href = "login.jsp?returnurl=/ContactUs.jsp";
-} 
-function loginOut(){
-	window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/ContactUs.jsp";
-}
- </script>
+
 <div class="contact">
 	<p style="line-height: 35px;">当前位置：<a href="index.jsp" style="color:#2064c8;">丛林闲居网</a>&nbsp;>&nbsp;联系我们</p>
     <br/>

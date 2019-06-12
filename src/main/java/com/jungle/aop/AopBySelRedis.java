@@ -122,10 +122,18 @@ public class AopBySelRedis {
                 if (((MethodSignature) signature).getReturnType().toString().split(" ")[1].equals("java.lang.String"))
                     return proceed;
                 //判断业务方法返回值是否为空
+                String methodName = thisJoinPoint.getSignature().getName();
+                if (!s.equals("java.util.List")) {
+                    for (int i = 0; i < parameterNames.length; i++) {
+                        if (!"page".equals(parameterNames[i]) && !"limit".equals(parameterNames[i]) && !"redis".equals(parameterNames[i])){
+                            methodName += args[i];
+                        }
+                    }
+                }
                 if (proceed != null && proceed.toString() != null && !"".equals(proceed.toString())) {
                     //设置Redis缓存key为方法名
                     System.out.println("设置Redis-" + signature.getName());
-                    redisUtil.set(thisJoinPoint.getSignature().getName(), proceed);
+                    redisUtil.set(methodName, proceed);
                 }
                 //判断是否带有分页参数
                 if (page != null && limit != null) {
