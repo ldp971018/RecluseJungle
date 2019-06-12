@@ -92,11 +92,8 @@
         <ul class="seek-ii">
             <li class="seek-ii-one"><em id="em1"></em></li>
             <li class="seek-ii-two">绑定邮箱<span class="dness" id="div2phone"></span></li>
-            <li class="seek-ii-three">验证码<input onblur="checkCode()" id="code" maxlength="6" type="text"
-                                                placeholder="请输入6位数的验证码"/><input type="button" id="random"
-                                                                                 value="免费获取验证码"
-                                                                                 onclick="getCodeGen()"/><em id="em2"
-                                                                                                             style="margin-left:20px;color:red;"></em>
+            <li class="seek-ii-three">验证码<input onblur="checkCode()" id="code" maxlength="6" type="text" placeholder="请输入6位数的验证码"/>
+                <input type="button" id="random" value="免费获取验证码" onclick="getCodeGen()"/><em id="em2" style="margin-left:20px;color:red;"></em>
             </li>
             <li class="seek-ii-four"><input type="button" value="下一步" onclick="checkdiv2()"/></li>
         </ul>

@@ -157,7 +157,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+    <select id="selFreeOfPwd" parameterType="java.lang.Integer" resultType="com.jungle.bean.Free">
+      select * from free where confessionid=#{confessionid}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
     update free
     <set >
       <if test="record.id != null" >

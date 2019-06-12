@@ -9,36 +9,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>丛林闲居-忏悔-阅读脱解文</title>
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
+    <script type="text/javascript" src="<%=path%>/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=path%>/static/style/cy.css">
+    <link rel="stylesheet" href="<%=path%>/static/style/style.css">
 </head>
 <body style="background-color: #f6f6f6;">
-
 <!--首页TOP-->
 <div class="yc-txdd1">
-    
     <!--首页banner-->
     <jsp:include  page="head.jsp" />   
 <script type="text/javascript">     
-function Alllogin(){
-	window.location.href = "login.jsp?returnurl=/ConRead.jsp";
-} 
-function loginOut(){
-	window.location.href = "<%=path%>/reguser!loginOut.action?returnurl=/ConRead.jsp";
-}
- </script>
+</script>
     <!--忏悔-忏悔室-->
     <div class="yc-txdd">
-        <img src="images/ydtjw03.jpg" style="margin-top:10px;">
+        <img src="<%=path%>/static/images/ydtjw03.jpg" style="margin-top:10px;">
         <div class="ch-chs1">
             <div class="ch">
                 <p>忏悔:</p>
                 <p>
                 	<c:if test="${confession.type ==true}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${confession.content }</c:if>
                 	<c:if test="${confession.type ==false}">
-                	<div id="chxx"></div>
+                	   <div id="chxx">
+                                <audio controls autoplay src="<%=path%>/${confession.content}"></audio>
+                       </div>
                 	</c:if>
                 </p>
             </div>
@@ -46,14 +39,17 @@ function loginOut(){
             <div class="tjw">
                 <p>解脱文：</p>
                 <p class="tjw1">
-                	<c:if test="${free.type ==true}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${free.content }</c:if>
+                	    <c:if test="${free.type ==true}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${free.content}</c:if>
                     	<c:if test="${free.type ==false}">
-                    	<div id="jtxx" style="margin-left:20px;"></div>
+                    	<div id="jtxx" style="margin-left:20px;">
+                                 <audio controls autoplay src="<%=path%>/${free.content}"></audio>
+                         </div>
                         </c:if>
                 </p>
             </div> 
             <div class="tjw-bottom">
-                <p class="yyd">已阅读：<i>${free.readnum }</i>次</p><p class="fhsy"><a href="ConEntryPage.jsp">返回首页</a> </p>
+                <p class="yyd">已阅读：<i>${free.readnum }</i>次</p>
+                <p class="fhsy"><a href="/ConEntryPage">返回首页</a> </p>
             </div>
         </div>
     </div>
@@ -65,15 +61,15 @@ function loginOut(){
 <div class="tcc none">
     <div class="cgxd3">
         <div class="cgxd-main">
-            <p class="xdcg"><img src="images/chw.png">  <img src="images/14_01.png" class="close"></p>
+            <p class="xdcg"><img src="<%=path%>/static/images/chw.png"> <img src="<%=path%>/static/images/14_01.png" class="close"></p>
             <p class="ddbh">您的“忏悔”内容已提交，阅读解脱文密码为 <i>WO2012</i> ！</p>
             <p class="fhdd"><a href="index,jsp" class="fh">返回首页</a>（牢记上6位数字码，方便您阅读解脱文）</p>
         </div>
     </div>
 </div>
-<script src="../../js"></script>
 </body>
 <script type="text/javascript">
+/*
 function playSound1()
 {
 	
@@ -131,8 +127,7 @@ function playSound2()
     //audio.play();
   }
 }
-
 playSound1();
-playSound2();
+playSound2();*/
 </script>
 </html>

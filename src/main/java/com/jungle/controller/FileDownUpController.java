@@ -19,6 +19,13 @@ import java.net.URLDecoder;
  **/
 @Controller
 public class FileDownUpController {
+    /**
+     * 文件下载
+     * @param fileName
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     @RequestMapping("/download")
     public void download(String fileName, HttpServletRequest req, HttpServletResponse resp) throws IOException {
         fileName = URLDecoder.decode(fileName, "UTF-8");

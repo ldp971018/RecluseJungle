@@ -7,18 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-     <title>丛林闲居</title>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <link rel="stylesheet" href="style/cy.css">
-    <link rel="stylesheet" href="style/style.css">
+    <title>丛林闲居</title>
+    <script type="text/javascript" src="<%=path%>/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=path%>/static/style/cy.css">
+    <link rel="stylesheet" href="<%=path%>/static/style/style.css">
 </head>
 <body style="background-color: #f6f6f6;">
-
 <!--首页TOP-->
     <div class="yc-txdd1">
-        
-        <!--首页banner-->
-        <jsp:include  page="head.jsp" />   
+<!--首页banner-->
+<jsp:include  page="head.jsp" />
 <script type="text/javascript">
 function Alllogin(){
 	window.location.href = "login.jsp?returnurl=/ConEntryPage.jsp";
@@ -28,80 +26,102 @@ function loginOut(){
 }
 </script>
 <!--用车-填写订单-->
-
-
     <div class="yc-mbx">
         <div class="yc-mbx2">
-        <p>当前位置：<a href="index.jsp" class="ll">丛林闲居网</a> >  <a href="#" class="xz">忏悔</a></p>
+        <p>当前位置：<a href="index.jsp" class="ll">丛林闲居网</a> <a href="#" class="xz">忏悔</a></p>
         </div>
     </div>
         <div class="yc-txdd">
     <div class="ch-jry">
-    <div><img src="images/ch_03.jpg"></div>
+    <div><img src="<%=path%>/static/images/ch_03.jpg"></div>
     <div class="ch-jry1">
-        <p><a href="ConRoom.jsp">进入忏悔室</a><a href="javascript:void(0)" class="ydtjw">阅读解脱文</a></p>
+        <p><a href="ConRoom">进入忏悔室</a><a href="#" class="ydtjw">阅读解脱文</a></p>
     </div>
     </div>
 </div>
  <!--忏悔-进入页-->
-
- <%@ include  file="bottom.jsp"%>
-    </div>
-<div class="tcc none">
+        <%@ include  file="bottom.jsp"%>
+</div>
+<div class="tcc none" id="jd_pass">
     <div class="tx-ydm">
-    		<form action="<%=path %>/free!selFreeOfPwd.action" method="post" id="myForm">
-            <p class="tx-sm"><span class="one"><img src="images/tx.png">提示</span><span class="two"><img src="images/14_01.png" class="close2"></span></p><br/><br/><br/>
-            <p><div style="text-align: center;color: red;" id="message"><input type="hidden" id="hidden"/></div></p>
-            <p class="ydm">请输入阅读码：<input type="text" name="confession.pwd" id="pwd" > </p><!-- onmouseout="checkPwd()" onfocus="resetPwd()" -->
-            <p><input   type="button" value="确&nbsp;&nbsp;认" onclick="checkPwd()" id="button" class="safe" ></p>
+    		<form action="<%=path %>/free/selFreeOfPwd" method="post" id="myForm">
+            <p class="tx-sm">
+                <span class="one"><img src="<%=path%>/static/images/tx.png">提示信息</span>
+                <span class="two"><img src="<%=path%>/static/images/14_01.png"class="close2"></span>
+            </p><br/><br/><br/>
+            <p>
+                <div style="text-align: center;color: red;" id="message">
+                  <input type="hidden" name="id" id="confessionid"/>
+                </div>
+            </p>
+            <p class="ydm">
+                请输入阅读码：
+                <input type="text" name="pwd" id="pwd">
+            </p>
+            <p><input  type="button" value="确&nbsp;&nbsp;认" onclick="checkPwd()" id="button" class="safe" ></p>
             </form>
     </div>
 </div>
 <script type="text/javascript">
 	function checkPwd(){
+
 		//判断表单的客户端验证是否通过
 		var pwd = document.getElementById("pwd").value;
 		var button = document.getElementById("button");
+
 		var valid = false;
 		if(pwd==""||pwd==null){
 			valid = false;
 		}else{
 			valid=true;
 		}
+
 		if (valid) {
-			$.post("<%=path %>/free!checkPwd.action",
-				  {"confession.pwd":pwd},
+			$.post("<%=path %>/confession/checkPwd",
+				  {"pwd":pwd},
 				  function(result){
-					  if(result == null){
-						 /*  button.disabled=true; */
-						  $("#message").html(result.message);
+                      /*解脱码不存在*/
+					  if(result.code ==200){
+						  $("#message").html(result.extend.message);
 						  return false;
 					  }
-					  if(result.status=="true"||result.status==true){
+                      /*解脱码存在但是的没有回复*/
+					  if(result.code==100&&result.extend.status==true){
 						  /* button.disabled=false; */
-					  	  $("#message").html(result.message);
-					  	  $("#hidden").value="1";
-					  	document.getElementById("myForm").submit();
+					  	  $("#message").html(result.extend.message);
+                              $("#confessionid").val(result.extend.id);
+					  	  document.getElementById( "myForm").submit();
 					  }else{
-						 /*  button.disabled=true; */
-						  $("#message").html(result.message);
-						  /* document.getElementById("pwd").value = "" */;
+					      //没有进行回复
+                          button.disabled=false;
+						  $("#message").html(result.extend.message);
 					  }
 				  },"json");
 		}else{
 			 $("#message").html("请输入正确的密码格式");
-			 /* document.getElementById("pwd").value = "" */;
 		}
 	}
+
 	function resetPwd(){
 		if(document.getElementById("hidden").value!=1){
-		/* document.getElementById("pwd").value = "" */;
-		$("#message").html("");
+		    $("#message").html("");
 		}
 	}
+
 	function subForm(){
 		/* document.getElementById("myForm").submit(); */
 	}
+
+    $(".ydtjw").click(function () {
+        var jd_pass = document.getElementById("jd_pass");
+        jd_pass.style.display = "block";
+    });
+
+    $(".close2").click(function () {
+        var jd_pass = document.getElementById("jd_pass");
+        jd_pass.style.display = "none";
+    });
+
 </script>
 <script src="../../js"></script>
 

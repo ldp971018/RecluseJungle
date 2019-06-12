@@ -169,5 +169,30 @@ public class pageController {
         return "qiantai/UserCPassword";
     }
 
+    /**
+     * 跳转到忏悔页面
+     * @return
+     */
+    @RequestMapping("ConEntryPage")
+    public String ConEntryPage(){
+        return "qiantai/ConEntryPage";
+    }
+
+    /**
+     * 进入忏悔
+     */
+    @RequestMapping("/ConRoom")
+    public String ConRoom(){
+        return "qiantai/ConRoom";
+    }
+
+    /**
+     * 跳转加盟丛林
+     */
+    @RequestMapping("/joincl")
+    public String joincl(){
+        return "qiantai/joincl";
+    }
+
 
 }

@@ -70,7 +70,7 @@ public class SendController {
                 msg.setFrom(from);
                 msg.setSubject("丛林闲居");
                 msg.setSentDate(new Date());
-                msg.setContent("<p>您《忘记密码》验证码为：<font color='red'>" + codeGen + "</font>，有效时间为30分钟，请妥善保管！</p>",
+                msg.setContent("<p>您的验证码为：<font color='red'>" + codeGen + "</font>，有效时间为30分钟，请妥善保管！</p>",
                         "text/html;charset=utf-8");
                 msg.setRecipient(RecipientType.TO, to);
                 Transport.send(msg);

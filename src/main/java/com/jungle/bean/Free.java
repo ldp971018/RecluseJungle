@@ -62,4 +62,16 @@ public class Free {
     public void setReadnum(Integer readnum) {
         this.readnum = readnum;
     }
+
+    @Override
+    public String toString() {
+        return "Free{" +
+                "id=" + id +
+                ", confessionid=" + confessionid +
+                ", type=" + type +
+                ", content='" + content + '\'' +
+                ", ftime=" + ftime +
+                ", readnum=" + readnum +
+                '}';
+    }
 }

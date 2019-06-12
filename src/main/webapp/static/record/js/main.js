@@ -29,7 +29,7 @@ $(function () {
         var width = parseInt(arguments[1]);
         var height = parseInt(arguments[2]);
         FWRecorder.uploadFormId = "#uploadForm";
-        FWRecorder.uploadFieldName = "upload_file[filename]";
+        FWRecorder.uploadFieldName = "record_file";
         FWRecorder.connect("recorderApp", 0);
         FWRecorder.recorderOriginalWidth = width;
         FWRecorder.recorderOriginalHeight = height;
@@ -117,18 +117,19 @@ $(function () {
         break;
 
       case "saved":
-        name = arguments[1];
-        var data = $.parseJSON(arguments[2]);
-        var pwd = data.pwd;
-        if (data.saved) {
-          $('#upload_status').css({'color': '#0F0'}).text("忏悔已经成功上传");
+          //上传的时候的名字
+           name = arguments[1];
+          //获取返回的json数据
+          var data = jQuery.parseJSON(arguments[2]);
+          if (data.code==100) {
+          $('#upload_status').css({'color': '#0F0'}).text("忏悔文件已经成功上传");
           $('#qrecordId').val(data.id);
-          $("#pwd").html("提交忏悔成功，您的忏悔密码为:"+pwd);  
+          $("#pwd").html("提交忏悔录音成功，您的忏悔密码为:"+data.extend.pwd);
           var okok = document.getElementById("okok"); 
-	  		okok.style.display = "block";   
-        } else {
-          $('#upload_status').css({'color': '#F00'}).text(name + " was not saved");
-        }
+          okok.style.display = "block";
+         } else {
+           $('#upload_status').css({'color': '#F00'}).text(name + " was not saved");
+          }
         break;
 
       case "save_failed":

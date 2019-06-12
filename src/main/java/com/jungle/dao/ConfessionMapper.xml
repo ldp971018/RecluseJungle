@@ -164,7 +164,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+    <select id="checkPwd"  parameterType="java.lang.String" resultType="com.jungle.bean.Confession">
+      select * from confession where pwd=#{pwd}
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
     update confession
     <set >
       <if test="record.id != null" >

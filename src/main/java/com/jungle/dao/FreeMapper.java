@@ -27,4 +27,6 @@ public interface FreeMapper {
     int updateByPrimaryKeySelective(Free record);
 
     int updateByPrimaryKey(Free record);
+
+    Free selFreeOfPwd(Integer confessionid);
 }

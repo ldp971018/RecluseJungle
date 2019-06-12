@@ -17,6 +17,8 @@ public class Confession {
 
     private Integer returnuid;
 
+
+
     public Integer getId() {
         return id;
     }
@@ -71,5 +73,18 @@ public class Confession {
 
     public void setReturnuid(Integer returnuid) {
         this.returnuid = returnuid;
+    }
+
+    @Override
+    public String toString() {
+        return "Confession{" +
+                "id=" + id +
+                ", type=" + type +
+                ", content='" + content + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", ctime=" + ctime +
+                ", returnflag=" + returnflag +
+                ", returnuid=" + returnuid +
+                '}';
     }
 }

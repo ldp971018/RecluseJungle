@@ -160,4 +160,26 @@ public class Joincl {
     public void setFileurl(String fileurl) {
         this.fileurl = fileurl == null ? null : fileurl.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Joincl{" +
+                "id=" + id +
+                ", clname='" + clname + '\'' +
+                ", permitno='" + permitno + '\'' +
+                ", address='" + address + '\'' +
+                ", legalname='" + legalname + '\'' +
+                ", legalphone='" + legalphone + '\'' +
+                ", legalidcard='" + legalidcard + '\'' +
+                ", contactsname='" + contactsname + '\'' +
+                ", contactsmobile='" + contactsmobile + '\'' +
+                ", contactsphone='" + contactsphone + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", message='" + message + '\'' +
+                ", uid=" + uid +
+                ", jointime='" + jointime + '\'' +
+                ", joinstatus=" + joinstatus +
+                ", fileurl='" + fileurl + '\'' +
+                '}';
+    }
 }

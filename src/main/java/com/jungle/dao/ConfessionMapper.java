@@ -27,4 +27,6 @@ public interface ConfessionMapper {
     int updateByPrimaryKeySelective(Confession record);
 
     int updateByPrimaryKey(Confession record);
+
+    Confession checkPwd(String pwd);
 }
