@@ -1,5 +1,6 @@
 package com.jungle.service;
 
+import com.github.pagehelper.PageInfo;
 import com.jungle.bean.*;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +10,14 @@ import java.util.Map;
 public interface Jungle_Service {
 
     //查询地区并分类
-    Map<String, Object> selRedisCityType();
-
+    Map<String,Object> selRedisCityType();
+    //查询所有地区
     List<City> selRedisCityTypeAll();
 
     //根据条件搜索丛闲居信息
     List<Clxjmain> selectJungle(Clxjmain clxjmain);
-
+    //查询所有丛闲居信息
+    List<Clxjmain> selRedisJungleAll();
     //根据id查询丛林闲居信息
     Clxjmain JungleDetailsById(Integer id);
 
@@ -39,5 +41,8 @@ public interface Jungle_Service {
 
     //新增用车订单
     boolean insCarorder(Carorder carorder);
-
+    //根据丛林闲居id查询所有点评（好评，差评的数量）
+    Map<String,Object> selClxjcommentCount(Integer cid);
+    //根据丛林闲居id查询所有点评详细信息
+    PageInfo<Clxjcomment> selClxjcomment(Integer cid, Integer pageIndexAll, Integer limit,Integer cflag);
 }

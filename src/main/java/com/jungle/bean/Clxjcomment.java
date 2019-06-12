@@ -10,6 +10,8 @@ public class Clxjcomment implements Serializable {
 
     private Integer uid;
 
+    private String username;
+
     private Integer cflag;
 
     private String content;
@@ -17,6 +19,14 @@ public class Clxjcomment implements Serializable {
     private String photo;
 
     private Date commenttime;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getId() {
         return id;

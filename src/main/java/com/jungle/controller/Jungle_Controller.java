@@ -1,11 +1,13 @@
 package com.jungle.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.jungle.bean.*;
 import com.jungle.service.Jungle_Service;
 import com.jungle.util.GetTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class Jungle_Controller {
@@ -72,7 +71,7 @@ public class Jungle_Controller {
      * @param request
      * @return
      */
-    @RequestMapping("/selectCL_All")
+    @RequestMapping("/selRedisCL_All")
     public String selectCL_All(HttpServletRequest request){
         Clxjmain clxjmain=new Clxjmain();
         clxjmain.setType2(true);
@@ -102,7 +101,7 @@ public class Jungle_Controller {
      * @param request
      * @return
      */
-    @RequestMapping("selectJungle_All")
+    @RequestMapping("selRedisJungle_All")
     public String selectJungle_All(HttpServletRequest request){
         Clxjmain clxjmain=new Clxjmain();
         clxjmain.setType2(false);
@@ -173,27 +172,29 @@ public class Jungle_Controller {
     @RequestMapping("/loadIndex")
     public String loadIndex(HttpServletRequest request) {
         //查询全部
-        List<Clxjmain> listAll = jungle_service.selectJungle(null);
-        //国内丛林
-        Clxjmain clxjmainGNCL = new Clxjmain();
-        clxjmainGNCL.setType1(true);
-        clxjmainGNCL.setType2(true);
-        List<Clxjmain> listGNCL = jungle_service.selectJungle(clxjmainGNCL);
-        //国内闲居
-        Clxjmain clxjmainGNXJ = new Clxjmain();
-        clxjmainGNXJ.setType1(true);
-        clxjmainGNXJ.setType2(false);
-        List<Clxjmain> listGNXJ = jungle_service.selectJungle(clxjmainGNXJ);
-        //境外丛林
-        Clxjmain clxjmainGWCL = new Clxjmain();
-        clxjmainGWCL.setType1(false);
-        clxjmainGWCL.setType2(true);
-        List<Clxjmain> listGWCL = jungle_service.selectJungle(clxjmainGWCL);
-        //境外闲居
-        Clxjmain clxjmainGWXJ = new Clxjmain();
-        clxjmainGWXJ.setType1(false);
-        clxjmainGWXJ.setType2(false);
-        List<Clxjmain> listGWXJ = jungle_service.selectJungle(clxjmainGWXJ);
+        List<Clxjmain> listAll = jungle_service.selRedisJungleAll();
+        List<Clxjmain> listGNCL=new ArrayList<>();
+        List<Clxjmain> listGNXJ=new ArrayList<>();
+        List<Clxjmain> listGWCL=new ArrayList<>();
+        List<Clxjmain> listGWXJ=new ArrayList<>();
+        for(int i=0;i<listAll.size();i++){
+            //国内丛林
+            if(listAll.get(i).getType1()==true&&listAll.get(i).getType2()==true){
+                listGNCL.add(listAll.get(i));
+            }
+            //国内闲居
+            if(listAll.get(i).getType1()==true&&listAll.get(i).getType2()==false){
+                listGNXJ.add(listAll.get(i));
+            }
+            //境外丛林
+            if(listAll.get(i).getType1()==false&&listAll.get(i).getType2()==true){
+                listGWCL.add(listAll.get(i));
+            }
+            //境外闲居
+            if(listAll.get(i).getType1()==false&&listAll.get(i).getType2()==false){
+                listGWXJ.add(listAll.get(i));
+            }
+        }
         request.setAttribute("listGNCL", listGNCL);
         request.setAttribute("listGNXJ", listGNXJ);
         request.setAttribute("listGWCL", listGWCL);
@@ -349,5 +350,31 @@ public class Jungle_Controller {
             request.setAttribute("carorderOk",-1);//新增用车订单失败！
         }
         return "qiantai/CarOrder";
+    }
+
+    /**
+     * 根据丛林闲居id查询所有点评（好评，差评的数量）
+     * @param cid 丛林闲居id
+     * @return
+     */
+    @RequestMapping("selClxjcommentCount")
+    @ResponseBody
+    public Map<String,Object> selClxjcommentCount(Integer cid){
+        Map<String,Object> map =jungle_service.selClxjcommentCount(cid);
+        return map;
+    }
+
+    /**
+     *  根据丛林闲居id查询所有点评详细信息
+     * @param cid 丛林闲居id
+     * @param pageIndexAll 从第几个索引开始page
+     * @param limit 查询多少条记录
+     * @return
+     */
+    @RequestMapping("selClxjcomment")
+    @ResponseBody
+    public PageInfo<Clxjcomment> selClxjcomment(Integer cid,Integer pageIndexAll,Integer limit,Integer cflag){
+        PageInfo<Clxjcomment> pageInfo=jungle_service.selClxjcomment(cid,pageIndexAll,limit,cflag);
+        return pageInfo;
     }
 }

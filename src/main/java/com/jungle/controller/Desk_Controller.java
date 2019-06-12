@@ -51,7 +51,7 @@ public class Desk_Controller {
                     } else if ((id == null || "undefined".equals(id)) && returnurl != null && !"".equals(returnurl)) {
                         res.sendRedirect(returnurl);
                     } else {
-                        res.sendRedirect("qiantai/login");
+                        res.sendRedirect("/loadIndex");
                     }
                     session.removeAttribute("returnurl");
                     session.removeAttribute("id");

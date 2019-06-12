@@ -18,6 +18,8 @@ public interface ClxjcommentMapper {
 
     List<Clxjcomment> selectByExample(ClxjcommentExample example);
 
+    List<Clxjcomment> selectByExampleWithUser(ClxjcommentExample example);
+
     Clxjcomment selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Clxjcomment record, @Param("example") ClxjcommentExample example);

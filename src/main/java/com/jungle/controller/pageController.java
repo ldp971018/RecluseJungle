@@ -74,7 +74,7 @@ public class pageController {
      */
     @RequestMapping("clxjmain")
     public String clxjmain() {
-        return "redirect:selectCL_All";
+        return "redirect:selRedisCL_All";
     }
 
     /**
@@ -84,7 +84,7 @@ public class pageController {
      */
     @RequestMapping("JungleList")
     public String JungleList() {
-        return "redirect:selectJungle_All";
+        return "redirect:selRedisJungle_All";
     }
 
 

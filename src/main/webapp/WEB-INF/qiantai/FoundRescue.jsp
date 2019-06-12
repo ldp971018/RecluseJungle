@@ -29,7 +29,29 @@
 
         }
     }
+</script>
+<script type="text/javascript">
+    //获取地址栏
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
 
+    function Alllogin() {
+        var Request = new Object();
+        Request = GetRequest();
+        var returnUrl;
+        returnUrl = Request['id'];
+        window.location.href = "/login?returnurl=/foundRescue&id=" + returnUrl;
+    }
 </script>
 <body>
 <div>
@@ -99,7 +121,7 @@
                                 <p class="fzym-p21">提交申请 </p>
                                 <p><c:if test="${regUser ==null }"><em
                                         style="font-size: 10px;color: red;margin-left: 200px;">申请救助首先要登录哦，点击<a
-                                        href="/login">登录</a></em></c:if></p>
+                                        href="javascript:void(0)" onclick="Alllogin()">登录</a></em></c:if></p>
                             </div>
                             <div class="fzym-table">
                                 <div class="fzymt-one">

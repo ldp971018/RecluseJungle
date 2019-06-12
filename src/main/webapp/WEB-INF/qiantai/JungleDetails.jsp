@@ -161,9 +161,9 @@ height:22px;line-height:22px;margin:0 3px 0 0;text-align:center;vertical-align:m
                 <p class="wzyzb">用户点评</p>
                 <div class="yhdp">
                     <div class="yhdp-top">
-                        <p class="xqy-dc"><label onclick="selTable(4)" style="cursor: pointer;">全部点评<em id="c4" class="sszyyqx"></em>条</label></p>
-                        <p><label  onclick="selTable(0)" style="cursor: pointer;">推荐<em id="c0" class="sszyyqx"></em></label>条</p>  
-                        <p><label  onclick="selTable(2)" style="cursor: pointer;">不推荐<em id="c2" class="sszyyqx"></em>条</label></p>
+                        <p id="all" class="xqy-dc"><label onclick="selTable(4)" style="cursor: pointer;">全部点评<em id="c4" class="sszyyqx"></em>条</label></p>
+                        <p id="ok"><label  onclick="selTable(0)" style="cursor: pointer;">推荐<em id="c0" class="sszyyqx"></em></label>条</p>
+                        <p id="no"><label  onclick="selTable(2)" style="cursor: pointer;">不推荐<em id="c2" class="sszyyqx"></em>条</label></p>
                         <div id="comment1" style="display: none; "><span onclick="pj()">+ 我来点评</span></div>
                     </div>
       					<div class="xxy-mian"> 
@@ -306,46 +306,69 @@ var countNo;
 function getCount(){
 	$.ajax({  
         type : "post",  
-         url : "<%=path%>/clxjcomment!SelClxjcommentCount.action",  
-         data: {"clxjcomment.cid":$("#cid").val()},
+         url : "selClxjcommentCount",
+         data: {"cid":$("#cid").val()},
          dataType: "json",
          async : false,   
          success : function(results){  
-        	 countAll = results.clxjcommentCount.count;   
-			 countOk = results.clxjcommentCount.ok;  
-			 countNo = results.clxjcommentCount.no;   
+        	 countAll = results.count;
+			 countOk = results.ok;
+			 countNo = results.no;
 			 document.getElementById("c4").innerHTML = countAll; 
 			 document.getElementById("c0").innerHTML = countOk; 
 			 document.getElementById("c2").innerHTML = countNo; 
 			 testPage(1); 
          }  
     });
-}        
+}
+//时间戳转换方法    date:时间戳数字
+function formatDate(date) {
+    var date = new Date(date);
+    var YY = date.getFullYear() + '-';
+    var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+    var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+    var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+    return YY + MM + DD +" "+hh + mm + ss;
+}
+function OkNo(cflag) {
+    if (cflag==0){
+        return "好评";
+    }
+    if (cflag==1){
+        return "中评";
+    }
+    if (cflag==2){
+        return "差评";
+    }
+}
 function InitTable(pageIndex,cflag) { 
 	document.getElementById("commentAll").innerHTML = ""; 
 	$.ajax({  
         type : "post",  
-         url : "<%=path%>/clxjcomment!SelClxjcomment.action",   
-         data : {"clxjcomment.cid":$("#cid").val(),"pageIndexAll":+pageIndex,"cflag":+cflag},   
+         url : "selClxjcomment",
+         data : {"cid":$("#cid").val(),"pageIndexAll":+pageIndex,"cflag":+cflag,"limit":5},
          dataType: "json",   
          async : false,   
-         success : function(results){ 
-             if(results.clxjcommentAll.length>0){
-               for(var i=0;i<results.clxjcommentAll.length;i++){
+         success : function(results){
+            console.log(results);
+             if(results.list.length>0){
+               for(var i=0;i<results.list.length;i++){
             	   var img;
-            	   if(results.clxjcommentAll[i].photo!=null&&results.clxjcommentAll[i].photo!=""&&results.clxjcommentAll[i].photo!="<%=path%>null"){ 
-                	   img = "<p style='padding-left:60px;'><img height='50' width='50' src='"+results.clxjcommentAll[i].photo+"' onmouseover='fdtp(this)' onmouseout='sxtp(this)'>&nbsp;&nbsp;</p>"; 
+            	   if(results.list[i].photo!=null&&results.list[i].photo!=""&&results.list[i].photo!="<%=path%>null"){
+                	   img = "<p style='padding-left:60px;'><img height='50' width='50' src='"+results.list[i].photo+"' onmouseover='fdtp(this)' onmouseout='sxtp(this)'>&nbsp;&nbsp;</p>";
                    }else{
 					img = "";
                        }  
-            	   document.getElementById("commentAll").innerHTML += "<div class='xm-right'> <div class='pl'><p class='pl-left'><i>"+results.clxjcommentAll[i].username+"</i> <span>"+results.clxjcommentAll[i].cflag+"</span>"+results.clxjcommentAll[i].commenttime+"</p></div> <p class='pl-wz'>"+results.clxjcommentAll[i].content+"</p> "+img+" </div>";
+            	   document.getElementById("commentAll").innerHTML += "<div class='xm-right'> <div class='pl'><p class='pl-left'><i>"+results.list[i].username+"</i> <span>"+OkNo(results.list[i].cflag)+"</span>"+formatDate(results.list[i].commenttime)+"</p></div> <p class='pl-wz'>"+results.list[i].content+"</p> "+img+" </div>";
                }   
          }else{
         	 document.getElementById("commentAll").innerHTML ="&nbsp;&nbsp;&nbsp;&nbsp;暂时无评论"; 
              }   
         } 
     });     
-} 
+}
 function selTable(sel){
 	switch (sel) {
 	case 4:
@@ -359,11 +382,13 @@ function selTable(sel){
 	break;
 	}
 }
-function testPage(curPage){ 
+function testPage(curPage){
+        all();
         supage('pageNav','testPage','',curPage,countAll,5);   
         InitTable(curPage,4); 
 }
-function testPage0(curPage){ 
+function testPage0(curPage){
+    ok();
 	if(countOk==0){
 		document.getElementById("pageNav").innerHTML="";
 		document.getElementById("commentAll").innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;暂时无评论";
@@ -371,7 +396,8 @@ function testPage0(curPage){
     supage('pageNav','testPage0','',curPage,countOk,5);   
     InitTable(curPage,0); }
 } 
-function testPage2(curPage){ 
+function testPage2(curPage){
+    no();
 	if(countNo==0){
 		document.getElementById("pageNav").innerHTML="";
 		document.getElementById("commentAll").innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;暂时无评论";
@@ -542,6 +568,31 @@ function showComment(){
              }
          }  
     });
+}
+
+function all() {
+    var all = document.getElementById("all");
+    var ok = document.getElementById("ok");
+    var no = document.getElementById("no");
+    all.classList.add("xqy-dc");
+    ok.classList.remove("xqy-dc");
+    no.classList.remove("xqy-dc");
+}
+function ok() {
+    var all = document.getElementById("all");
+    var ok = document.getElementById("ok");
+    var no = document.getElementById("no");
+    all.classList.remove("xqy-dc");
+    ok.classList.add("xqy-dc");
+    no.classList.remove("xqy-dc");
+}
+function no() {
+    var all = document.getElementById("all");
+    var ok = document.getElementById("ok");
+    var no = document.getElementById("no");
+    all.classList.remove("xqy-dc");
+    ok.classList.remove("xqy-dc");
+    no.classList.add("xqy-dc");
 }
 </script>
 </body>
